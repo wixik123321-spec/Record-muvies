@@ -406,8 +406,8 @@ def render(story_path: Path, out: Path, preview: bool = False) -> Path:
     total = int(st.duration * fps)
     video_tmp = out / f"{name}.video.mp4"
     cmd = ["ffmpeg", "-y", "-v", "error", "-f", "rawvideo", "-pix_fmt", "rgb24", "-s", f"{W}x{H}",
-           "-r", str(fps), "-i", "-", "-vf", "noise=alls=9:allf=t+u",
-           "-c:v", "libx264", "-preset", "ultrafast" if preview else "slow", "-crf", "17",
+           "-r", str(fps), "-i", "-", "-vf", "noise=alls=7:allf=t+u",
+           "-c:v", "libx264", "-preset", "ultrafast" if preview else "slow", "-crf", "23", "-tune", "grain",
            "-pix_fmt", "yuv420p", str(video_tmp)]
     proc = subprocess.Popen(cmd, stdin=subprocess.PIPE)
     print(f"Rendering {total} frames…", flush=True)
@@ -443,7 +443,7 @@ def render(story_path: Path, out: Path, preview: bool = False) -> Path:
     for i, sc in enumerate(st.d.get("scenes", []), 1):
         slug = "".join(ch if ch.isalnum() else "_" for ch in sc["name"]).strip("_").lower()
         subprocess.run(["ffmpeg", "-y", "-v", "error", "-ss", str(sc["start"]), "-i", str(final),
-                        "-t", str(sc["end"] - sc["start"]), "-c:v", "libx264", "-crf", "18",
+                        "-t", str(sc["end"] - sc["start"]), "-c:v", "libx264", "-crf", "23", "-tune", "grain",
                         "-preset", "medium", "-c:a", "aac", "-b:a", "192k",
                         str(sc_dir / f"scene_{i:02d}_{slug}.mp4")], check=True)
 
