@@ -8,6 +8,7 @@ Strategy (to avoid downloading whole 8-hour VODs in 1080p):
 
 from __future__ import annotations
 
+import os
 from dataclasses import dataclass, field
 from pathlib import Path
 
@@ -49,6 +50,19 @@ def _ydl_opts(cfg: Config, **extra) -> dict:
         opts["cookiesfrombrowser"] = (cfg.cookies_from_browser,)
     opts.update(extra)
     return opts
+
+
+def _ffmpeg_proxy_setup() -> list[str]:
+    """Let FFmpeg (used for range downloads) work behind an HTTPS proxy.
+
+    FFmpeg reads ``http_proxy`` only, and needs a CA file when the proxy
+    re-signs TLS. Returns extra FFmpeg input arguments.
+    """
+    proxy = os.environ.get("HTTPS_PROXY") or os.environ.get("https_proxy")
+    if proxy and not os.environ.get("http_proxy"):
+        os.environ["http_proxy"] = proxy
+    ca = os.environ.get("SSL_CERT_FILE") or os.environ.get("REQUESTS_CA_BUNDLE")
+    return ["-ca_file", ca] if proxy and ca and Path(ca).exists() else []
 
 
 def _require_ytdlp() -> None:
@@ -130,6 +144,9 @@ def fetch_clip(src: Source, start: float, end: float, cfg: Config, pad: float = 
             download_ranges=download_range_func(None, [(a, b)]),
             merge_output_format="mp4",
         )
+        ff_in = _ffmpeg_proxy_setup()
+        if ff_in:
+            opts["external_downloader_args"] = {"ffmpeg_i": ff_in}
         with yt_dlp.YoutubeDL(opts) as ydl:
             ydl.download([src.url])
         if not out.exists():  # yt-dlp may pick another container
