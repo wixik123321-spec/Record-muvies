@@ -10,6 +10,10 @@ Per-clip options in clips.json (all optional):
            blur  = whole frame in the middle over a blurred copy of itself
            brand = whole frame in the middle over a solid colour
            card  = hook text on top, the video in a tall rounded card, over a solid colour
+           split = streamer's webcam on top, the gameplay/screen below (for streams with a facecam overlay).
+                   The webcam box is found automatically and cached in DIR/facecam.json (edit it to correct);
+                   "cam": {"x","y","w","h"} (fractions of the frame) on a clip overrides it.
+  gx       split only: horizontal centre of the gameplay crop, 0-1 (default 0.5)
   zoom     1.0-1.6, how far to zoom in for fill and card (default 1.0)
   xpos,ypos  pin the crop to one spot, 0-1. Leave out to follow the speaker's face automatically
   bg       background colour for brand and card, e.g. "#FED50C" (default)
@@ -21,9 +25,10 @@ from pathlib import Path
 from PIL import Image, ImageDraw
 from common import run, need, load, save
 from captions import build_track, build_line_track, hook_png
-from face import track_face, x_expr
+from face import track_face, x_expr, facecam_for_video
 
 CAP_Y = 1360                      # top of the 300 px caption strip
+SPLIT_TOP = 640                   # height of the webcam panel in the split layout
 CARD_W, CARD_H, CARD_X, CARD_Y = 900, 1150, 90, 520
 HOOK_SECONDS = 4.5
 
@@ -59,6 +64,26 @@ def fillcrop(w, h, zoom, fx, fy):
             f"crop={w}:{h}:'min(max(iw*{fx}-{w / 2},0),iw-{w})':'min(max(ih*{fy}-{h * 0.38:.0f},0),ih-{h})'")
 
 
+def split_filter(meta, cam, gx):
+    """Webcam box (trimmed to the panel's shape) on top, a centred gameplay crop below."""
+    W, H = int(meta.get("width") or 1920), int(meta.get("height") or 1080)
+    x, y, w, h = cam["x"] * W, cam["y"] * H, cam["w"] * W, cam["h"] * H
+    want = 1080 / SPLIT_TOP
+    if w / h > want:                        # too wide: trim the sides around the centre
+        nw = h * want
+        x, w = x + (w - nw) / 2, nw
+    else:                                   # too tall: trim top/bottom, keep the head in view
+        nh = w / want
+        y, h = y + (h - nh) * 0.4, nh
+    gh = H
+    gw = min(W, gh * 1080 / (1920 - SPLIT_TOP))
+    gxp = min(max(0, gx * W - gw / 2), W - gw)
+    e = lambda v: int(v) // 2 * 2  # noqa: E731
+    return (f"[0:v]split=2[sa][sb];[sa]crop={e(w)}:{e(h)}:{e(x)}:{e(y)},scale=1080:{SPLIT_TOP}:flags=lanczos,setsar=1[cam];"
+            f"[sb]crop={e(gw)}:{e(gh)}:{e(gxp)}:0,scale=1080:{1920 - SPLIT_TOP}:flags=lanczos,setsar=1[game];"
+            f"[cam][game]vstack=inputs=2[base]")
+
+
 def render(d, c, words, meta, quiet=False):
     out, work = d / "clips", d / "work" / c["id"]
     out.mkdir(exist_ok=True)
@@ -68,8 +93,15 @@ def render(d, c, words, meta, quiet=False):
     layout = c.get("layout", "fill")
     if layout == "crop":      # old name
         layout = "fill"
-    if meta.get("height", 0) > meta.get("width", 1) and layout in ("blur", "brand"):
+    if meta.get("height", 0) > meta.get("width", 1) and layout in ("blur", "brand", "split"):
         layout = "fill"       # already vertical: nothing to letterbox
+    cam = None
+    if layout == "split":
+        cam = c.get("cam") or facecam_for_video(d / "source.mp4", [c], d / "facecam.json")
+        if not cam:
+            if not quiet:
+                print("    no webcam found: using fill (set \"cam\" on the clip or edit facecam.json)")
+            layout = "fill"
     zoom = min(1.6, max(1.0, float(c.get("zoom", 1.0))))
     fx, fy = c.get("xpos"), c.get("ypos")
     if layout in ("fill", "card") and (fx is None or fy is None):
@@ -111,6 +143,8 @@ def render(d, c, words, meta, quiet=False):
         m = add(["-loop", "1", "-framerate", "30", "-t", f"{dur:.2f}", "-i", str(work / "card-mask.png")])
         parts.append(f"[0:v]{fillcrop(CARD_W, CARD_H, zoom, fx_val, fy)},format=yuva420p[cv];[{m}:v]format=gray[m];"
                      f"[cv][m]alphamerge[card];[{i}:v][card]overlay={CARD_X}:{CARD_Y}[base]")
+    elif layout == "split":
+        parts.append(split_filter(meta, cam, float(c.get("gx", 0.5))))
     else:  # fill
         parts.append(f"[0:v]{fillcrop(1080, 1920, zoom, fx_val, fy)}[base]")
     last = "base"
@@ -137,7 +171,8 @@ def render(d, c, words, meta, quiet=False):
             track = build_line_track(lines, c["start"], c["end"], work)
     if track:
         k = add(["-f", "concat", "-safe", "0", "-i", str(track)])
-        parts.append(f"[{k}:v]fps=30,format=rgba[cap];[{last}][cap]overlay=0:{CAP_Y}:shortest=1,format=yuv420p[v]")
+        cap_y = SPLIT_TOP - 40 if layout == "split" else CAP_Y  # on the seam, under the face
+        parts.append(f"[{k}:v]fps=30,format=rgba[cap];[{last}][cap]overlay=0:{cap_y}:shortest=1,format=yuv420p[v]")
     else:
         parts.append(f"[{last}]format=yuv420p[v]")
 
@@ -155,8 +190,11 @@ if __name__ == "__main__":
     ap.add_argument("--only")
     a = ap.parse_args()
     need("ffmpeg", "brew install ffmpeg")
-    d = Path(a.dir)
+    d = Path(a.dir).resolve()  # relative paths break the caption concat list
     clips, words, meta = load(d / "clips.json"), load(d / "words.json", []), load(d / "meta.json", {})
+    if any(c.get("layout") == "split" and not c.get("cam") for c in clips):
+        box = facecam_for_video(d / "source.mp4", clips, d / "facecam.json")  # one box for the whole stream
+        print("webcam:", box if box else "not found (split clips fall back to fill)", flush=True)
     only = set(a.only.split(",")) if a.only else None
     for i, c in enumerate(clips, 1):
         if only and c["id"] not in only:

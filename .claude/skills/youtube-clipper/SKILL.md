@@ -31,6 +31,7 @@ Round 1, one AskUserQuestion call. Always ask the layout and the caption languag
    - **Card with hook on top**: a headline above, the video in a tall rounded card, on a colour background.
    - **Whole frame on a colour**: the full frame in the middle, on a colour background. Best when the video shows slides or graphics.
    - **Whole frame on blur**: the full frame over a blurred copy. Safest, but the most generic.
+   - **Webcam on top, gameplay below** (Recommended for gaming streams with a facecam overlay): the streamer's webcam box fills the top third, a centred crop of the game fills the rest, captions sit on the seam. The webcam box is found automatically once per video and saved in `<folder>/facecam.json`; look at the first rendered clip, and if the box is wrong, edit that file (fractions of the frame: x, y, w, h) and re-render. If no webcam is found the clip falls back to Fill.
 3. **Captions** (this is the only place the language is chosen, so ask it every time): Spoken words as said, word by word with the spoken word in yellow (Recommended) / English / Hinglish (Hindi in Roman letters) / No captions. You write the English or Hinglish lines yourself in Step 4; they show a line at a time. The clip page can switch between what exists but cannot make new languages.
 4. **Hook headline on the clips?** Yes, in English / Yes, in the spoken language / Yes, in Hinglish / No. The card layout always has one, so for it skip the "No" and still ask the language.
 
@@ -74,7 +75,7 @@ Write `<folder>/clips.json`, best first:
 ```
 `start`/`end` are seconds from the transcript timestamps (read the exact word times from `words.json` when you need precision). Rendering snaps the cut to word edges.
 
-`layout` is `fill`, `card`, `brand` or `blur` (the user's round-1 answer). `bg` only matters for `card` and `brand`. Leave `xpos`/`ypos` out: the render follows the speaker's face on its own.
+`layout` is `fill`, `card`, `brand`, `blur` or `split` (the user's round-1 answer). For `split`, `gx` (0-1, default 0.5) moves the gameplay crop left or right, and `"cam": {"x":…, "y":…, "w":…, "h":…}` on a clip overrides the detected webcam box. `bg` only matters for `card` and `brand`. Leave `xpos`/`ypos` out: the render follows the speaker's face on its own.
 
 **Hook headline (when on, and always for `card`).** Write 3 options per clip in the language the user chose in round 1, each at most 8 words: a claim, a question or a number that makes someone stop scrolling, true to what the clip says, no false promises. Show the user every clip with its options and ask which to use per clip (one AskUserQuestion call, up to 4 clips each; for more clips list them in text and let the user answer in one message). They may pick one, write their own, or pick none for a layout that does not need it. Put the approved text in `hook` and keep the options in `hook_options` (the clip page offers them as one-tap suggestions). Layouts other than `card` show the hook for the first 4.5 seconds; `card` shows it throughout.
 
