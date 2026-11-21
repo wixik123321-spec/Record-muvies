@@ -86,6 +86,15 @@ def find_candidates(sources: list[Source], cfg: Config,
     return cands, profiles
 
 
+def _dump_candidates(cands: list[Candidate], cfg: Config) -> None:
+    """Save every candidate with its transcript for review (output/_tmp/candidates.json)."""
+    import json
+    data = [{"source": c.source.id, "peak": round(c.peak, 1), "start": round(c.start, 1),
+             "end": round(c.end, 1), "score": c.score, "title": c.title,
+             "text": c.text(c.window_start, c.window_end)} for c in cands]
+    (cfg.temp_dir / "candidates.json").write_text(json.dumps(data, indent=1), encoding="utf-8")
+
+
 def rank(cands: list[Candidate], profiles: dict[str, AudioProfile], cfg: Config) -> list[Candidate]:
     used_llm = False
     if cands and llm.llm_available(cfg):
@@ -98,6 +107,7 @@ def rank(cands: list[Candidate], profiles: dict[str, AudioProfile], cfg: Config)
     for c in cands:
         if not c.title:
             heuristic_metadata(c, cfg)
+    _dump_candidates(cands, cfg)
     ranked = dedupe(cands)
     ranked = [c for c in ranked if c.score > 0]
     ranked.sort(key=lambda c: c.score, reverse=True)

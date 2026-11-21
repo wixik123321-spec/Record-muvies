@@ -10,7 +10,7 @@ from dataclasses import dataclass, field
 from pathlib import Path
 
 DEFAULT_CHANNEL_URL = "https://www.twitch.tv/kaicenat/videos?filter=archives&sort=time"
-DEFAULT_TITLE_KEYWORDS = ("gta 6", "gta vi", "gta6", "gtavi", "gta")
+DEFAULT_TITLE_KEYWORDS = ("gta 6", "gta vi", "gta6", "gtavi")
 
 
 @dataclass
