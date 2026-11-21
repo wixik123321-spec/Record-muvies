@@ -24,6 +24,10 @@ from .transcribe import Transcriber
 from .utils import fmt_ts, log, require_binaries, video_size
 
 WINDOW_BEFORE, WINDOW_AFTER = 50.0, 25.0
+# A streamer's facecam stays in the same place for the whole VOD: once it is
+# found in one clip, reuse it for clips where the face was not detected
+# (looking away, dark scene, cutscene).
+_FACECAM_BY_SOURCE: dict = {}
 
 
 def _confirm_overwrite(path: Path, cfg: Config) -> bool:
@@ -138,6 +142,13 @@ def produce(c: Candidate, rank_no: int, profile: AudioProfile, cfg: Config,
     w, h = video_size(clip.path)
     layout = plan_layout(str(clip.path), c.start - clip.offset, c.end - clip.offset, w, h,
                          cfg.width, cfg.height)
+    known = _FACECAM_BY_SOURCE.get(c.source.id)
+    if layout.kind == "split" and layout.exact:
+        _FACECAM_BY_SOURCE[c.source.id] = layout
+    elif known and (known.src_w, known.src_h) == (w, h) and (
+            layout.kind == "blur" or not layout.exact):
+        log.info("Layout: reusing facecam position found earlier in this VOD")
+        layout = known
     if use_llm:
         llm.fix_captions(c, cfg)
     pieces = build_timeline(c, profile, cfg)
@@ -162,6 +173,23 @@ def produce(c: Candidate, rank_no: int, profile: AudioProfile, cfg: Config,
     return row
 
 
+def prime_facecam(picked: list[Candidate], cfg: Config) -> None:
+    """Find each VOD's facecam once up front so every clip uses the same layout."""
+    for c in picked:
+        if c.source.id in _FACECAM_BY_SOURCE:
+            continue
+        try:
+            clip = fetch_clip(c.source, c.start, c.end, cfg)
+            w, h = video_size(clip.path)
+            layout = plan_layout(str(clip.path), c.start - clip.offset, c.end - clip.offset,
+                                 w, h, cfg.width, cfg.height)
+        except Exception as exc:  # noqa: BLE001 - handled again per clip
+            log.debug("facecam priming failed: %s", exc)
+            continue
+        if layout.kind == "split" and layout.exact:
+            _FACECAM_BY_SOURCE[c.source.id] = layout
+
+
 def run_pipeline(cfg: Config) -> int:
     require_binaries("ffmpeg", "ffprobe")
     cfg.output_dir.mkdir(parents=True, exist_ok=True)
@@ -181,6 +209,7 @@ def run_pipeline(cfg: Config) -> int:
         log.info("Dry run: not rendering.")
         return 0
 
+    prime_facecam(picked, cfg)
     use_llm = llm.llm_available(cfg)
     rows = []
     for i, c in enumerate(tqdm(picked, desc="render", unit="clip"), 1):

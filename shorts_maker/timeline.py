@@ -32,13 +32,21 @@ def _quiet_gaps(c: Candidate, profile: AudioProfile, cfg: Config) -> list[tuple[
     """Silent stretches between words that can be shortened."""
     words = c.words_in()
     clip_db = profile.mean_db(c.start, c.end)
+    edges = [(a.end, b.start) for a, b in zip(words, words[1:])]
+    # only truly quiet stretches (no loud gameplay), longest first
+    quiet = sorted((e for e in edges if e[1] - e[0] > cfg.max_pause
+                    and profile.mean_db(*e) < clip_db - 8),
+                   key=lambda e: e[1] - e[0], reverse=True)
+    # never trim more than 20% of the clip or below the minimum length
+    budget = min(0.2 * c.duration, max(0.0, c.duration - cfg.min_clip_seconds))
+    keep = cfg.keep_pause / 2
     gaps = []
-    edges = [(c.start, words[0].start)] if words else []
-    edges += [(a.end, b.start) for a, b in zip(words, words[1:])]
-    for a, b in edges:
-        if b - a > cfg.max_pause and profile.mean_db(a, b) < clip_db - 4:
-            keep = cfg.keep_pause / 2
-            gaps.append((a + keep, b - keep))
+    for a, b in quiet:
+        cut = (b - a) - cfg.keep_pause
+        if cut <= 0 or cut > budget:
+            continue
+        budget -= cut
+        gaps.append((a + keep, b - keep))
     return gaps
 
 

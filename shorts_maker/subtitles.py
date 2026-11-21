@@ -115,8 +115,14 @@ Format: Layer, Start, End, Style, Name, MarginL, MarginR, MarginV, Effect, Text
                     parts.append(word)
             intro = "\\fad(60,0)" if i == 0 else ""
             start, end = s, min(max(nxt, s + 0.1), clip_duration)
-            if end > start:
-                events.append(f"Dialogue: 0,{_ts(start)},{_ts(end)},Cap,,0,0,0,,"
-                              f"{{{pos}{intro}}}{' '.join(parts)}")
-    out.write_text(header + "\n".join(events) + "\n", encoding="utf-8")
-    return len(events)
+            events.append((start, end, f"{{{pos}{intro}}}{' '.join(parts)}"))
+    # one caption on screen at a time
+    events.sort(key=lambda e: e[0])
+    lines = []
+    for k, (start, end, text) in enumerate(events):
+        if k + 1 < len(events):
+            end = min(end, events[k + 1][0])
+        if end - start >= 0.04:
+            lines.append(f"Dialogue: 0,{_ts(start)},{_ts(end)},Cap,,0,0,0,,{text}")
+    out.write_text(header + "\n".join(lines) + "\n", encoding="utf-8")
+    return len(lines)

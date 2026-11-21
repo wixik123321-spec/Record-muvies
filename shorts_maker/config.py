@@ -58,8 +58,8 @@ class Config:
     x264_preset: str = "medium"
     audio_bitrate: str = "192k"
     remove_pauses: bool = True
-    max_pause: float = 0.7             # silent gaps longer than this get shortened
-    keep_pause: float = 0.25           # ...down to this
+    max_pause: float = 1.2             # silent gaps longer than this get shortened
+    keep_pause: float = 0.4            # ...down to this
     hook_teaser: bool = True           # 1-2 s cold open of the peak, then the full clip
     teaser_seconds: float = 1.8
     punch_zoom: float = 1.12           # zoom factor on peak reactions (1.0 = off)
