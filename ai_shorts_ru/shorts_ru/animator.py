@@ -79,7 +79,7 @@ class SceneArt:
     def _big_text(text: str, color) -> np.ndarray:
         size = 190
         f = font("Inter:style=Black", size)
-        while f.getlength(text.upper()) > W - 140 and size > 70:
+        while f.getlength(text.upper()) > W - 200 and size > 70:
             size -= 10
             f = font("Inter:style=Black", size)
         img = Image.new("RGBA", (W, int(size * 1.5)), (0, 0, 0, 0))
@@ -195,8 +195,9 @@ class Animator:
         if art.big is not None:
             a = back_out((lt - 0.15) / 0.35)
             if a > 0:
+                # крупный текст в экранных координатах: камера не должна его обрезать
                 frame = self._place(frame, art.big, W / 2, 360 + math.sin(t * 2) * 6, 0.6 + 0.4 * a,
-                                    z=z, ox=ox, oy=oy, alpha=min(1, a))
+                                    alpha=min(1, a))
         # предметы
         slots = [(prop_x, 700), (prop_x + (-150 if side == "left" else 150), 1000), (prop_x, 400)]
         if not has_char:

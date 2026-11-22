@@ -207,6 +207,13 @@ def mix(voice: np.ndarray, script, cfg, out: Path, music_file: str | None = None
         w.setsampwidth(2)
         w.setframerate(SR)
         w.writeframes((np.clip(mix_, -1, 1) * 32767).astype("<i2").tobytes())
-    run(["ffmpeg", "-y", "-v", "error", "-i", str(wav), "-af",
-         f"loudnorm=I={float(a.loudness_lufs)}:TP=-1.5:LRA=11", "-ar", str(SR), "-ac", "2", str(out)])
+    # двухпроходная нормализация громкости: точное попадание в целевые LUFS
+    target = float(a.loudness_lufs)
+    first = run(["ffmpeg", "-hide_banner", "-i", str(wav), "-af",
+                 f"loudnorm=I={target}:TP=-1.5:LRA=11:print_format=json", "-f", "null", "-"]).stderr
+    import json as _json
+    m = _json.loads(first[first.rindex("{"):first.rindex("}") + 1])
+    af = (f"loudnorm=I={target}:TP=-1.5:LRA=11:measured_I={m['input_i']}:measured_TP={m['input_tp']}:"
+          f"measured_LRA={m['input_lra']}:measured_thresh={m['input_thresh']}:offset={m['target_offset']}:linear=true")
+    run(["ffmpeg", "-y", "-v", "error", "-i", str(wav), "-af", af, "-ar", str(SR), "-ac", "2", str(out)])
     return out

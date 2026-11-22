@@ -5,7 +5,7 @@ video:
   height: 1920
   fps: 30
   duration: 45            # целевая длительность, 30–60 с (можно переопределить --duration)
-  crf: 19                 # качество H.264 (меньше = лучше и тяжелее)
+  crf: 21                 # качество H.264 (меньше = лучше и тяжелее)
 
 script:
   provider: claude        # claude | text (свой текст через --text / --script)
@@ -22,7 +22,7 @@ visuals:
     shirt: "#3D7BFF"
     pants: "#2A2E45"
   particles: true
-  film_grain: 6           # 0 = выключено
+  film_grain: 3           # 0 = выключено (зерно увеличивает размер файла)
   transitions: [fade, slide, zoom, flash, whip]
 
 voice:
