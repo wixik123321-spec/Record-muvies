@@ -1,0 +1,14 @@
+# ядро
+numpy>=1.26
+scipy>=1.11
+Pillow>=10.0
+opencv-python-headless>=4.9
+PyYAML>=6.0
+requests>=2.31
+pydantic>=2.6
+# русская озвучка (офлайн)
+piper-tts>=1.3
+# сценарий через Claude (нужен ANTHROPIC_API_KEY)
+anthropic>=2.12
+# точная синхронизация субтитров (необязательно, модель ~480 МБ скачивается при align_with_whisper: yes)
+faster-whisper>=1.1

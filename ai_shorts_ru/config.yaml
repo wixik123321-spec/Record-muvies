@@ -1,0 +1,55 @@
+# Стиль и параметры роликов. Любой ключ можно не указывать — будет значение по умолчанию.
+
+video:
+  width: 1080
+  height: 1920
+  fps: 30
+  duration: 45            # целевая длительность, 30–60 с (можно переопределить --duration)
+  crf: 19                 # качество H.264 (меньше = лучше и тяжелее)
+
+script:
+  provider: claude        # claude | text (свой текст через --text / --script)
+  model: claude-opus-5-5
+  effort: medium
+  words_per_second: 2.6   # темп речи для расчёта длины сценария
+
+visuals:
+  provider: procedural    # procedural (встроенная 2D-анимация) | openai (картинки через OpenAI Images API)
+  openai_model: gpt-image-1
+  character:              # главный персонаж (один на весь ролик)
+    skin: "#F2C29B"
+    hair: "#2B1B14"
+    shirt: "#3D7BFF"
+    pants: "#2A2E45"
+  particles: true
+  film_grain: 6           # 0 = выключено
+  transitions: [fade, slide, zoom, flash, whip]
+
+voice:
+  provider: piper         # piper (бесплатно, офлайн) | elevenlabs (ключ ELEVENLABS_API_KEY)
+  piper_voice: ru_RU-dmitri-medium   # ru_RU-dmitri-medium | ru_RU-denis-medium | ru_RU-ruslan-medium | ru_RU-irina-medium
+  speed: 1.0              # >1 быстрее
+  sentence_pause: 0.25    # пауза между сценами, с
+  elevenlabs_voice_id: ""  # ID голоса из библиотеки ElevenLabs
+  elevenlabs_model: eleven_multilingual_v2
+  align_with_whisper: auto  # auto | yes | no — уточнять тайминги слов через faster-whisper
+
+captions:
+  font: "Inter:style=Black"   # имя шрифта fontconfig или путь к .ttf/.otf (нужна кириллица)
+  size: 88
+  y: 1540                 # центр строки субтитров по вертикали (ниже лица персонажа, выше интерфейса YouTube)
+  max_words: 3
+  max_chars: 18
+  color: "#FFFFFF"
+  active_color: "#FFE14D"   # слово, которое звучит сейчас
+  keyword_color: "#3CF0FF"  # ключевые слова
+  stroke: 9
+  uppercase: true
+
+audio:
+  music: true
+  music_mood: auto        # auto | mystery | epic | calm | tense | upbeat
+  music_volume_db: -20    # громкость музыки относительно голоса
+  duck_db: -9             # насколько приглушать музыку под голосом
+  sfx: true
+  loudness_lufs: -14

@@ -6,3 +6,6 @@ output_run*.log
 output_*.log
 projects/*/build/
 projects/*/render.log
+ai_shorts_ru/output/
+ai_shorts_ru/.env
+ai_shorts_ru/.venv/
