@@ -27,6 +27,10 @@ def _norm(w: str) -> str:
     return re.sub(r"[^\wё]", "", w.lower().replace("ё", "е"))
 
 
+SHORT = {"и", "а", "в", "во", "с", "со", "к", "ко", "о", "об", "у", "на", "но", "не", "по", "за", "из",
+         "от", "до", "что", "как", "же", "ли", "бы", "то"}
+
+
 def build_phrases(scenes, max_words: int, max_chars: int) -> list[Phrase]:
     phrases: list[Phrase] = []
     for sc in scenes:
@@ -34,8 +38,12 @@ def build_phrases(scenes, max_words: int, max_chars: int) -> list[Phrase]:
         for w in sc.words:
             text_len = len(" ".join(x["w"] for x in cur + [w]))
             if cur and (len(cur) >= max_words or text_len > max_chars or w["s"] - cur[-1]["e"] > 0.35):
+                carry = []
+                # не оставлять предлог/союз висеть в конце фразы — он уходит в следующую
+                if len(cur) > 1 and _norm(cur[-1]["w"]) in SHORT and not re.search(r"[.!?…,;:—]$", cur[-1]["w"]):
+                    carry = [cur.pop()]
                 phrases.append(Phrase(cur, cur[0]["s"], cur[-1]["e"]))
-                cur = []
+                cur = carry
             cur.append(w)
             if re.search(r"[.!?…,;:—]$", w["w"]):
                 phrases.append(Phrase(cur, cur[0]["s"], cur[-1]["e"]))
