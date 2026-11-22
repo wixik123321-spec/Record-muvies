@@ -29,8 +29,14 @@ def make_script(args, cfg) -> Script:
     if args.script:
         return Script.load(Path(args.script))
     if args.text:
-        p = Path(args.text)
-        text = p.read_text(encoding="utf-8") if p.exists() else args.text
+        text = args.text
+        if len(text) < 260 and "\n" not in text:  # похоже на путь к файлу
+            try:
+                p = Path(text)
+                if p.is_file():
+                    text = p.read_text(encoding="utf-8")
+            except OSError:
+                pass
         return script_from_text(text, topic=args.topic or "", mood=args.mood or "mystery")
     if not args.topic:
         raise ShortsError("Укажите тему: python -m shorts_ru \"тема ролика\" (или --text / --script)")
