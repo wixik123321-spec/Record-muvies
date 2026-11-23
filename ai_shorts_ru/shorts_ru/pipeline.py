@@ -48,7 +48,7 @@ def fit_duration(script: Script, voice: np.ndarray, cfg, work: Path) -> np.ndarr
     target = float(cfg.video.duration)
     length = len(voice) / tts.SR
     lo, hi = max(30.0, target - 8), min(60.0, target + 8)
-    if lo <= length <= hi or cfg.voice.provider != "piper":
+    if lo <= length <= hi or cfg.voice.provider not in ("piper", "vosk"):
         if not 30 <= length <= 60:
             log.warning("Длительность %.1f с вне диапазона 30–60 с — поправьте длину сценария", length)
         return voice

@@ -26,8 +26,11 @@ visuals:
   transitions: [fade, slide, zoom, flash, whip]
 
 voice:
-  provider: piper         # piper (бесплатно, офлайн) | elevenlabs (ключ ELEVENLABS_API_KEY)
+  provider: vosk          # vosk (лучшее качество, офлайн) | piper (легче) | elevenlabs (ключ ELEVENLABS_API_KEY)
+  vosk_voice: male_1      # male_1 (низкий выразительный) | male_0 | female_0 | female_1 | female_2
   piper_voice: ru_RU-dmitri-medium   # ru_RU-dmitri-medium | ru_RU-denis-medium | ru_RU-ruslan-medium | ru_RU-irina-medium
+  polish: true            # студийная обработка голоса (EQ, де-эссер, компрессор, лёгкая комната)
+  dramatic_pacing: true   # темп по эмоциям, паузы после хука и перед развязкой
   speed: 1.0              # >1 быстрее
   sentence_pause: 0.25    # пауза между сценами, с
   elevenlabs_voice_id: ""  # ID голоса из библиотеки ElevenLabs

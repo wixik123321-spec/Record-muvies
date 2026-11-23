@@ -34,7 +34,8 @@ def main(argv=None) -> int:
     p.add_argument("--text", help="свой текст сценария (строка или путь к .txt) — без Claude API")
     p.add_argument("--script", help="готовый script.json (например, отредактированный после прошлого запуска)")
     p.add_argument("--mood", choices=["mystery", "epic", "calm", "tense", "upbeat"], help="настроение для --text")
-    p.add_argument("--voice", help="голос Piper: ru_RU-dmitri-medium | ru_RU-denis-medium | ru_RU-ruslan-medium | ru_RU-irina-medium")
+    p.add_argument("--voice", help="голос: male_1 | male_0 | female_0 | female_1 | female_2 (Vosk) "
+                                   "или ru_RU-dmitri-medium и др. (Piper)")
     p.add_argument("--music", help="свой музыкальный файл вместо сгенерированной музыки")
     p.add_argument("--images", choices=["procedural", "openai"], help="источник картинок")
     p.add_argument("--preview-frames", type=float, nargs="+", metavar="T",
@@ -49,7 +50,10 @@ def main(argv=None) -> int:
                 raise ShortsError("--duration должна быть от 30 до 60 секунд")
             cfg["video"]["duration"] = a.duration
         if a.voice:
-            cfg["voice"]["piper_voice"] = a.voice
+            if a.voice.startswith("ru_RU-"):
+                cfg["voice"]["provider"], cfg["voice"]["piper_voice"] = "piper", a.voice
+            else:
+                cfg["voice"]["provider"], cfg["voice"]["vosk_voice"] = "vosk", a.voice
         if a.images:
             cfg["visuals"]["provider"] = a.images
         from .pipeline import render

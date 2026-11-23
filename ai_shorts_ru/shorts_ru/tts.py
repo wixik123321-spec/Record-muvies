@@ -1,7 +1,10 @@
 """Русская озвучка и тайминги слов.
 
-* piper (по умолчанию): нейросетевые голоса Piper, работают офлайн и бесплатно.
-  Голос (~63 МБ) один раз скачивается с Hugging Face в ~/.cache/shorts_ru/voices.
+* vosk (по умолчанию): Vosk TTS 0.9 от alphacep — выразительные русские голоса со словарём
+  ударений, офлайн и бесплатно (Apache 2.0, можно для монетизируемых роликов).
+  Модель (~750 МБ) один раз скачивается с alphacephei.com в ~/.cache/shorts_ru/vosk.
+* piper: нейросетевые голоса Piper — легче (63 МБ), но интонация беднее и бывают ошибки ударений.
+  Голос один раз скачивается с Hugging Face в ~/.cache/shorts_ru/voices.
 * elevenlabs: облачные голоса ElevenLabs (ключ ELEVENLABS_API_KEY, elevenlabs.io → Profile → API Keys).
 
 Каждая сцена озвучивается отдельно, поэтому границы сцен точные. Время каждого
@@ -101,8 +104,8 @@ class PiperTTS:
                                   f"Скачайте вручную {url} в {VOICE_DIR}") from exc
         return model
 
-    def synth(self, text: str, out: Path) -> tuple[np.ndarray, list[float]]:
-        cfg = self.SynthesisConfig(length_scale=1.0 / max(0.5, self.speed), noise_scale=0.6, noise_w_scale=0.75)
+    def synth(self, text: str, out: Path, rate: float = 1.0) -> tuple[np.ndarray, list[float]]:
+        cfg = self.SynthesisConfig(length_scale=1.0 / max(0.5, self.speed * rate), noise_scale=0.6, noise_w_scale=0.75)
         chunks = list(self.voice.synthesize(text, syn_config=cfg))
         if not chunks:
             raise ShortsError(f"Piper не озвучил текст: {text!r}")
@@ -123,6 +126,100 @@ class PiperTTS:
         return max(1.0, ph) + pause
 
 
+
+VOSK_DIR = Path(os.environ.get("SHORTS_RU_VOSK", Path.home() / ".cache" / "shorts_ru" / "vosk"))
+VOSK_MODEL = "vosk-model-tts-ru-0.9-multi"
+VOSK_SPEAKERS = {"female_0": 0, "female_1": 1, "female_2": 2, "male_0": 3, "male_1": 4}
+
+
+class VoskTTS:
+    """Vosk TTS: многоголосая русская модель с ударениями из словаря (alphacep, Apache 2.0)."""
+
+    def __init__(self, voice: str, speed: float = 1.0):
+        try:
+            from vosk_tts import Model, Synth
+        except ImportError as exc:
+            raise ShortsError("Не установлен vosk-tts: pip install -r requirements.txt") from exc
+        if voice not in VOSK_SPEAKERS:
+            raise ShortsError(f"Неизвестный голос Vosk: {voice}. Доступны: {', '.join(VOSK_SPEAKERS)}")
+        path = self._ensure()
+        log.info("Голос Vosk: %s", voice)
+        self.synth_ = Synth(Model(model_path=str(path)))
+        self.sid, self.speed = VOSK_SPEAKERS[voice], speed
+
+    @staticmethod
+    def _ensure() -> Path:
+        path = VOSK_DIR / VOSK_MODEL
+        if (path / "model.onnx").exists():
+            return path
+        import zipfile
+        VOSK_DIR.mkdir(parents=True, exist_ok=True)
+        url = f"https://alphacephei.com/vosk/models/{VOSK_MODEL}.zip"
+        tmp = VOSK_DIR / f"{VOSK_MODEL}.zip.part"
+        log.info("Скачиваю модель озвучки Vosk (~750 МБ, один раз)…")
+        try:
+            urllib.request.urlretrieve(url, tmp)
+            with zipfile.ZipFile(tmp) as z:
+                z.extractall(VOSK_DIR)
+        except Exception as exc:  # noqa: BLE001
+            raise ShortsError(f"Не удалось скачать модель Vosk: {exc}\nСкачайте вручную {url} "
+                              f"и распакуйте в {VOSK_DIR}") from exc
+        finally:
+            tmp.unlink(missing_ok=True)
+        return path
+
+    def synth(self, text: str, out: Path, rate: float = 1.0) -> tuple[np.ndarray, list[float]]:
+        audio = self.synth_.synth_audio(text, speaker_id=self.sid, speech_rate=self.speed * rate)
+        x = np.asarray(audio)
+        x = x.astype(np.float32) / 32768 if x.dtype == np.int16 else x.astype(np.float32)
+        x = _resample(x, 22050)
+        _write_wav(out, x)
+        return x, [_syllable_weight(w) for w in text.split()]
+
+
+def _syllable_weight(word: str) -> float:
+    """Длительность слова ~ число слогов (гласных) + паузы у знаков препинания."""
+    vowels = len(re.findall(r"[аеёиоуыэюяaeiouy]", word.lower()))
+    letters = len(re.sub(r"[^\wёЁ]", "", word))
+    pause = 2.0 if re.search(r"[,;:—]$", word) else (3.0 if re.search(r"[.!?…]$", word) else 0.0)
+    return max(0.6, vowels + letters * 0.12) + pause
+
+
+def _movavg(x: np.ndarray, n: int) -> np.ndarray:
+    c = np.cumsum(np.concatenate([[0.0], x]))
+    out = (c[n:] - c[:-n]) / n
+    return np.pad(out, (n // 2, len(x) - len(out) - n // 2), mode="edge")
+
+
+def polish(x: np.ndarray, sr: int = SR) -> np.ndarray:
+    """Обработка голоса как в студии: срез гула, теплота, «присутствие», компрессия, лёгкая комната."""
+    from scipy.signal import butter, sosfilt
+    if len(x) < sr // 10:
+        return x
+    y = sosfilt(butter(2, 80, "high", fs=sr, output="sos"), x)
+    # мягкий низ (теплота) и подъём разборчивости 2–5 кГц
+    low = sosfilt(butter(2, [120, 300], "band", fs=sr, output="sos"), y)
+    pres = sosfilt(butter(2, [2200, 5000], "band", fs=sr, output="sos"), y)
+    y = y + low * 0.25 + pres * 0.35
+    # лёгкий де-эссер: приглушаем резкие «с/ш» выше 6 кГц, когда их много
+    hi = sosfilt(butter(2, 6000, "high", fs=sr, output="sos"), y)
+    hop = int(sr * 0.01)
+    env_hi = np.sqrt(_movavg(hi ** 2, hop)) + 1e-6
+    env_all = np.sqrt(_movavg(y ** 2, hop)) + 1e-6
+    y = y - hi * np.clip((env_hi / env_all - 0.35) * 1.5, 0, 0.6)
+    # компрессор (RMS, 3:1 выше -20 dBFS), чтобы голос звучал ровно и «в лицо»
+    rms = np.sqrt(_movavg(y ** 2, hop * 3)) + 1e-9
+    db = 20 * np.log10(rms)
+    gain_db = np.where(db > -20, (-20 - db) * (1 - 1 / 3), 0.0)
+    gain = 10 ** (_movavg(gain_db, hop * 2) / 20)
+    y = y * gain
+    # очень лёгкая «комната» (ранние отражения), чтобы голос не был сухим
+    for d_ms, g in ((11, 0.10), (23, 0.07), (37, 0.05)):
+        d = int(sr * d_ms / 1000)
+        y[d:] += y[:-d] * g
+    return (y / (np.max(np.abs(y)) + 1e-9) * 0.9).astype(np.float32)
+
+
 class ElevenLabsTTS:
     """Облачный TTS ElevenLabs (модель eleven_multilingual_v2 говорит по-русски)."""
 
@@ -136,7 +233,7 @@ class ElevenLabsTTS:
             raise ShortsError("Укажите voice.elevenlabs_voice_id в config.yaml (ID голоса из библиотеки ElevenLabs)")
         self.voice_id, self.model = voice_id, model
 
-    def synth(self, text: str, out: Path) -> tuple[np.ndarray, list[float]]:
+    def synth(self, text: str, out: Path, rate: float = 1.0) -> tuple[np.ndarray, list[float]]:
         r = self.requests.post(
             f"https://api.elevenlabs.io/v1/text-to-speech/{self.voice_id}?output_format=mp3_44100_128",
             headers={"xi-api-key": self.key, "Content-Type": "application/json"},
@@ -222,11 +319,17 @@ class WhisperAligner:
 
 def make_engine(cfg):
     v = cfg.voice
+    if v.provider == "vosk":
+        try:
+            return VoskTTS(str(v.vosk_voice), float(v.speed))
+        except ShortsError as exc:
+            log.warning("%s — переключаюсь на Piper", exc)
+            return PiperTTS(v.piper_voice, float(v.speed))
     if v.provider == "piper":
         return PiperTTS(v.piper_voice, float(v.speed))
     if v.provider == "elevenlabs":
         return ElevenLabsTTS(v.elevenlabs_voice_id, v.elevenlabs_model)
-    raise ShortsError(f"Неизвестный voice.provider: {v.provider} (piper | elevenlabs)")
+    raise ShortsError(f"Неизвестный voice.provider: {v.provider} (vosk | piper | elevenlabs)")
 
 
 def voice_script(script, cfg, work: Path) -> np.ndarray:
@@ -235,15 +338,35 @@ def voice_script(script, cfg, work: Path) -> np.ndarray:
     engine = make_engine(cfg)
     aligner = WhisperAligner(str(cfg.voice.align_with_whisper))
     pause = float(cfg.voice.sentence_pause)
+    dramatic = bool(cfg.voice.get("dramatic_pacing", True))
+    do_polish = bool(cfg.voice.get("polish", True))
     lead = 0.15
     parts, t = [np.zeros(int(lead * SR), np.float32)], lead
+    n = len(script.scenes)
     for i, sc in enumerate(script.scenes):
         path = work / f"voice_{i:02d}.wav"
-        x, weights = engine.synth(sc.text, path)
+        rate = 1.0
+        if dramatic:
+            # темп по эмоции: волнение быстрее, раздумье и грусть медленнее, финал — весомее
+            rate = {"excited": 1.06, "scared": 1.05, "surprised": 1.03, "sad": 0.94,
+                    "thinking": 0.96}.get(sc.character_emotion or "", 1.0)
+            if i == n - 1:
+                rate *= 0.94
+        x, weights = engine.synth(sc.text, path, rate)
+        if do_polish:
+            x = polish(x)
+            _write_wav(path, x)
         words = proportional_words(sc.text, weights, x, SR, t)
         words = aligner.refine(words, x, SR, t)
         sc.start, sc.end, sc.audio, sc.words = t, t + len(x) / SR, str(path), words
-        gap = pause if i < len(script.scenes) - 1 else 0.6
+        gap = pause if i < n - 1 else 0.6
+        if dramatic and i < n - 1:
+            if i == 0:
+                gap += 0.2             # пауза после хука
+            if i == n - 2:
+                gap += 0.35            # пауза перед развязкой
+            if sc.text.rstrip().endswith("?"):
+                gap += 0.15            # дать вопросу «повиснуть»
         parts += [x, np.zeros(int(gap * SR), np.float32)]
         t = sc.end + gap
         log.info("  сцена %d: %.1f с — %s", i + 1, sc.end - sc.start, sc.text[:60])
