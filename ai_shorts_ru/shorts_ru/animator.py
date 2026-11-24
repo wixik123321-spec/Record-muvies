@@ -154,16 +154,17 @@ class CardArt:
             num = f"{scene.chapter + 1:02d}"
             fn = font("Inter:style=Black", int(330 * u))
             img = Image.new("RGBA", (int(fn.getlength(num) + 60), int(400 * u)), (0, 0, 0, 0))
-            ImageDraw.Draw(img).text((30, img.height / 2), num, font=fn, anchor="lm", fill=acc + (70,),
-                                     stroke_width=int(6 * u), stroke_fill=acc + (255,))
-            self.layers.append((_rgba(img), W * (0.30 if landscape() else 0.5), H * (0.40 if landscape() else 0.34), 0.0))
+            ImageDraw.Draw(img).text((30, img.height / 2), num, font=fn, anchor="lm", fill=acc + (45,),
+                                     stroke_width=int(6 * u), stroke_fill=acc + (150,))
+            # крупный номер — фоном по центру, подпись «ГЛАВА N» над ним, название — под ним
+            self.layers.append((_rgba(img), W * 0.5, H * (0.40 if landscape() else 0.34), 0.0))
             fl = font("Inter:style=Bold", int(46 * u))
             img = Image.new("RGBA", (W, int(80 * u)), (0, 0, 0, 0))
             ImageDraw.Draw(img).text((W / 2, img.height / 2), f"ГЛАВА {scene.chapter + 1}", font=fl, anchor="mm",
                                      fill=acc + (255,))
-            self.layers.append((_rgba(img), W / 2, H * (0.30 if landscape() else 0.45), 0.15))
+            self.layers.append((_rgba(img), W / 2, H * (0.17 if landscape() else 0.22), 0.15))
             self.layers.append((self._title(title.upper(), int(112 * u), (255, 255, 255)), W / 2,
-                                H * (0.56 if landscape() else 0.56), 0.3))
+                                H * (0.62 if landscape() else 0.52), 0.3))
         elif self.kind == "title":
             if script.channel:
                 fl = font("Inter:style=Bold", int(44 * u))
@@ -184,7 +185,7 @@ class CardArt:
                                         width=int(6 * u), fill=(10, 10, 20, 120))
                     d.text((bw / 2, bh / 2), "СМОТРИ ДАЛЬШЕ", font=font("Inter:style=Bold", int(40 * u)),
                            anchor="mm", fill=(255, 255, 255, 200))
-                    self.layers.append((_rgba(img), cx, H * 0.50, 0.25))
+                    self.layers.append((_rgba(img), cx, H * 0.45, 0.25))
             r = int(H * 0.1 if landscape() else W * 0.14)
             img = Image.new("RGBA", (r * 6, r * 2 + 20), (0, 0, 0, 0))
             d = ImageDraw.Draw(img)
@@ -193,7 +194,7 @@ class CardArt:
                                 fill=(230, 33, 23, 255))
             d.text((r * 3, r + 10), "ПОДПИСАТЬСЯ", font=font("Inter:style=Black", int(r * 0.42)), anchor="mm",
                    fill=(255, 255, 255, 255))
-            self.layers.append((_rgba(img), W / 2, H * (0.84 if landscape() else 0.62), 0.45))
+            self.layers.append((_rgba(img), W / 2, H * (0.73 if landscape() else 0.62), 0.45))
 
     @staticmethod
     def _title(text: str, size: int, color) -> np.ndarray:
@@ -405,7 +406,7 @@ class Animator:
         if sc.card == "chapter":  # растущая линия под названием главы
             u = H / 1080 if landscape() else W / 1080
             w = int(W * 0.5 * ease((lt - 0.45) / 0.6))
-            y = int(H * (0.67 if landscape() else 0.64))
+            y = int(H * (0.73 if landscape() else 0.60))
             if w > 2:
                 frame[y:y + int(8 * u), W // 2 - w // 2:W // 2 + w // 2] = accent
         return frame

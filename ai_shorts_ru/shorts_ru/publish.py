@@ -130,6 +130,41 @@ def make_kit(script, cfg, video: Path, srt: Path, kit: Path, duration: float) ->
 """
     (kit / "UPLOAD_CHECKLIST.md").write_text(checklist, encoding="utf-8")
 
+    # сценарий по главам с таймкодами (для правок, перевода, будущих монтажей)
+    lines = [f"# {script.title}", "", f"Длительность: {ts(duration)} · сцен: {len(script.scenes)}", ""]
+    cur = None
+    for sc in script.scenes:
+        head = ("Вступление" if sc.chapter == -1 and sc.start < 60 else "Финал") if sc.chapter < 0 else \
+            f"Глава {sc.chapter + 1}. {script.chapters[sc.chapter]['title']}"
+        if sc.card == "end":
+            head = "Конечная заставка"
+        if head != cur:
+            lines += ["", f"## {head}", ""]
+            cur = head
+        mark = {"title": " *(титульная карточка)*", "chapter": " *(карточка главы)*",
+                "end": " *(конечная заставка)*"}.get(sc.card, "")
+        lines.append(f"- `{ts(sc.start)}` {sc.text}{mark}")
+    if script.sources:
+        lines += ["", "## Источники", ""] + [f"- {x}" for x in script.sources]
+    (kit / "script.md").write_text("\n".join(lines) + "\n", encoding="utf-8")
+
+    files = sorted(p.relative_to(kit).as_posix() for p in kit.rglob("*") if p.is_file())
+    readme = [f"# Пакет для публикации: «{titles[0]}»", "",
+              f"Видео {cfg.video.width}x{cfg.video.height}, {ts(duration)}, {len(chs)} глав(ы) в описании.", "",
+              "Начните с `UPLOAD_CHECKLIST.md` — там пошагово, что и куда загружать.", "", "## Файлы", ""]
+    about = {"video.mp4": "готовое видео", "subtitles_ru.srt": "субтитры для загрузки в YouTube",
+             "description.txt": "описание с таймкодами и источниками", "titles.txt": "варианты названия",
+             "tags.txt": "теги", "pinned_comment.txt": "комментарий для закрепления",
+             "chapters.txt": "только таймкоды глав", "end_screen.md": "настройка конечной заставки",
+             "UPLOAD_CHECKLIST.md": "пошаговый чек-лист загрузки", "metadata.json": "все метаданные в JSON",
+             "script.md": "сценарий с таймкодами", "channel/banner.jpg": "шапка канала 2560x1440",
+             "channel/banner_safe_area.png": "шапка с разметкой безопасной зоны (не загружать)",
+             "channel/avatar.png": "фото профиля 800x800"}
+    for f in files + ["README.md"]:
+        desc = about.get(f, "превью 1280x720" if f.startswith("thumbnail_") else "")
+        readme.append(f"- `{f}`" + (f" — {desc}" if desc else ""))
+    (kit / "README.md").write_text("\n".join(readme) + "\n", encoding="utf-8")
+
     meta = {"title": titles[0], "title_options": titles, "description": description, "tags": tags,
             "hashtags": script.hashtags, "chapters": [{"time": ts(t), "title": n} for t, n in chs],
             "duration_sec": round(duration, 1), "channel": script.channel, "category": "Education",
