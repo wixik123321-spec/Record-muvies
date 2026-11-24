@@ -84,6 +84,7 @@ def thumbnail(spec: dict, cfg, out: Path, size=(1280, 720)) -> Path:
     _glow_text(img, (int(W * 0.045), int(H * 0.40)), top, f1, (255, 255, 255), 10)
     _glow_text(img, (int(W * 0.045), int(H * 0.62)), bottom, f2, (255, 225, 60), 10, glow=(255, 140, 0))
     # бейдж
+    badge_end = 0
     if spec.get("badge"):
         fb = font("Inter:style=Black", 44)
         tw = fb.getlength(spec["badge"].upper())
@@ -91,10 +92,12 @@ def thumbnail(spec: dict, cfg, out: Path, size=(1280, 720)) -> Path:
         x0, y0 = int(W * 0.045), int(H * 0.08)
         d.rounded_rectangle((x0, y0, x0 + tw + 48, y0 + 72), radius=36, fill=(230, 33, 23))
         d.text((x0 + 24, y0 + 36), spec["badge"].upper(), font=fb, anchor="lm", fill=(255, 255, 255))
+        badge_end = x0 + tw + 48
     # стрелка от текста к главному предмету (над текстом, чтобы не перекрывать буквы)
     if spec.get("arrow", True):
         d = ImageDraw.Draw(img)
-        (x0, y0), (x1, y1) = (W * 0.33, H * 0.27), (W * 0.47, H * 0.16)
+        sx = max(W * 0.33, badge_end + 30)          # стрелка начинается после бейджа, а не поверх него
+        (x0, y0), (x1, y1) = (sx, H * 0.27), (sx + W * 0.14, H * 0.16)
         import math
         ang = math.atan2(y1 - y0, x1 - x0)
         for col, wd in (((255, 255, 255), 30), ((230, 33, 23), 18)):
