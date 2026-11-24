@@ -1,0 +1,246 @@
+{
+  "topic": "эффект Зейгарник: почему мозг не отпускает незаконченное",
+  "title": "Почему ты не можешь забыть недосмотренный сериал",
+  "mood": "upbeat",
+  "ending": "cut",
+  "description": "Эффект Зейгарник: почему незаконченные дела крутятся в голове и как сериалы этим пользуются.",
+  "hashtags": [
+    "#shorts",
+    "#психология",
+    "#факты",
+    "#мозг"
+  ],
+  "scenes": [
+    {
+      "text": "Почему ты помнишь недосмотренный сериал, но забываешь тот, что досмотрел?",
+      "setting": "room",
+      "character_emotion": "thinking",
+      "character_pose": "think",
+      "character_side": "left",
+      "props": [
+        "phone",
+        "question"
+      ],
+      "big_text": "",
+      "keywords": [
+        "недосмотренный"
+      ],
+      "camera": "zoom_in",
+      "transition": "fade",
+      "sfx": "whoosh"
+    },
+    {
+      "text": "Впервые это заметили почти сто лет назад в обычном кафе в Берлине.",
+      "setting": "city_day",
+      "character_emotion": "neutral",
+      "character_pose": "point",
+      "character_side": "right",
+      "props": [
+        "clock"
+      ],
+      "big_text": "",
+      "keywords": [
+        "Берлине"
+      ],
+      "camera": "pan_left",
+      "transition": "slide",
+      "sfx": "none"
+    },
+    {
+      "text": "Официант помнил все заказы, пока их не оплатили.",
+      "setting": "city_day",
+      "character_emotion": "surprised",
+      "character_pose": "hands_up",
+      "character_side": "left",
+      "props": [
+        "book",
+        "coin"
+      ],
+      "big_text": "",
+      "keywords": [
+        "помнил"
+      ],
+      "camera": "zoom_in",
+      "transition": "zoom",
+      "sfx": "pop"
+    },
+    {
+      "text": "Но стоило гостю расплатиться, и заказ тут же вылетал из головы.",
+      "setting": "city_day",
+      "character_emotion": "excited",
+      "character_pose": "shrug",
+      "character_side": "right",
+      "props": [
+        "coin"
+      ],
+      "big_text": "",
+      "keywords": [
+        "вылетал"
+      ],
+      "camera": "pan_right",
+      "transition": "whip",
+      "sfx": "whoosh"
+    },
+    {
+      "text": "Молодая учёная Блюма Зейгарник решила проверить это в эксперименте.",
+      "setting": "lab",
+      "character_emotion": "thinking",
+      "character_pose": "think",
+      "character_side": "left",
+      "props": [
+        "magnifier",
+        "book"
+      ],
+      "big_text": "",
+      "keywords": [
+        "Зейгарник"
+      ],
+      "camera": "zoom_out",
+      "transition": "fade",
+      "sfx": "none"
+    },
+    {
+      "text": "Людей прерывали посреди простых заданий.",
+      "setting": "lab",
+      "character_emotion": "neutral",
+      "character_pose": "point",
+      "character_side": "right",
+      "props": [
+        "clock"
+      ],
+      "big_text": "",
+      "keywords": [
+        "прерывали"
+      ],
+      "camera": "push_up",
+      "transition": "slide",
+      "sfx": "click"
+    },
+    {
+      "text": "И незаконченные задания они вспоминали заметно лучше законченных.",
+      "setting": "brain",
+      "character_emotion": "excited",
+      "character_pose": "hands_up",
+      "character_side": "left",
+      "props": [
+        "brain",
+        "lightbulb"
+      ],
+      "big_text": "",
+      "keywords": [
+        "незаконченные"
+      ],
+      "camera": "zoom_in",
+      "transition": "zoom",
+      "sfx": "pop"
+    },
+    {
+      "text": "Так в психологии появился эффект Зейгарник.",
+      "setting": "abstract",
+      "character_emotion": "happy",
+      "character_pose": "point",
+      "character_side": "right",
+      "props": [
+        "star"
+      ],
+      "big_text": "эффект Зейгарник",
+      "keywords": [
+        "эффект",
+        "Зейгарник"
+      ],
+      "camera": "zoom_out",
+      "transition": "flash",
+      "sfx": "ding"
+    },
+    {
+      "text": "Мозг держит открытую задачу в фоне, как вкладку в браузере.",
+      "setting": "brain",
+      "character_emotion": "thinking",
+      "character_pose": "think",
+      "character_side": "left",
+      "props": [
+        "brain",
+        "phone"
+      ],
+      "big_text": "",
+      "keywords": [
+        "вкладку"
+      ],
+      "camera": "pan_left",
+      "transition": "slide",
+      "sfx": "none"
+    },
+    {
+      "text": "Поэтому сериалы и обрываются на самом интересном месте.",
+      "setting": "room",
+      "character_emotion": "surprised",
+      "character_pose": "hands_up",
+      "character_side": "right",
+      "props": [
+        "phone",
+        "exclamation"
+      ],
+      "big_text": "",
+      "keywords": [
+        "обрываются"
+      ],
+      "camera": "zoom_in",
+      "transition": "whip",
+      "sfx": "whoosh"
+    },
+    {
+      "text": "А отложенные дела крутятся в голове прямо перед сном.",
+      "setting": "night_city",
+      "character_emotion": "sad",
+      "character_pose": "idle",
+      "character_side": "left",
+      "props": [
+        "moon",
+        "clock"
+      ],
+      "big_text": "",
+      "keywords": [
+        "перед",
+        "сном"
+      ],
+      "camera": "push_up",
+      "transition": "fade",
+      "sfx": "none"
+    },
+    {
+      "text": "Хорошая новость: запиши чёткий план, и мозгу становится легче отпустить задачу.",
+      "setting": "city_day",
+      "character_emotion": "happy",
+      "character_pose": "wave",
+      "character_side": "right",
+      "props": [
+        "book",
+        "lightbulb"
+      ],
+      "big_text": "",
+      "keywords": [
+        "план"
+      ],
+      "camera": "zoom_out",
+      "transition": "zoom",
+      "sfx": "ding"
+    },
+    {
+      "text": "А теперь проверим на тебе: если я не договорю, ты запомнишь это видео лучше, чем",
+      "setting": "abstract",
+      "character_emotion": "excited",
+      "character_pose": "point",
+      "character_side": "left",
+      "props": [
+        "question"
+      ],
+      "big_text": "",
+      "keywords": [
+        "проверим"
+      ],
+      "camera": "zoom_in",
+      "transition": "flash",
+      "sfx": "riser"
+    }
+  ]
+}

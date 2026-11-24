@@ -32,6 +32,8 @@ SYSTEM = """Ты — сценарист вирусных YouTube Shorts на р�
 крупную надпись big_text (число или 1–2 слова, необязательно), движение камеры, переход и звук.
 keywords — 1–2 слова из текста сцены (точно как в тексте), которые стоит подсветить в субтитрах.
 image_prompt — короткое описание кадра на английском (для генератора картинок).
+ending: "cut", если последняя фраза специально обрывается на полуслове, чтобы ролик
+зациклился (приём для удержания), иначе "normal".
 """
 
 
@@ -59,6 +61,7 @@ class ScriptOut(BaseModel):
     mood: _lit(MOODS)
     description: str
     hashtags: list[str]
+    ending: Literal["normal", "cut"] = "normal"
     scenes: list[SceneOut]
 
 
@@ -98,7 +101,8 @@ def write_with_claude(topic: str, duration: float, cfg) -> Script:
         raise ShortsError("Сценарий не получен полностью, попробуйте ещё раз.")
     out: ScriptOut = msg.parsed_output
     script = Script(topic=topic, title=out.title, mood=out.mood, description=out.description,
-                    hashtags=out.hashtags, scenes=[Scene(**s.model_dump()) for s in out.scenes])
+                    hashtags=out.hashtags, ending=out.ending,
+                    scenes=[Scene(**s.model_dump()) for s in out.scenes])
     script.validate()
     return script
 

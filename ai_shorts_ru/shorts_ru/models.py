@@ -65,10 +65,13 @@ class Script:
     scenes: list[Scene]
     description: str = ""
     hashtags: list[str] = field(default_factory=list)
+    ending: str = "normal"   # normal | cut (обрыв на полуслове — ролик зацикливается в Shorts)
 
     def validate(self) -> None:
         if not self.scenes:
             raise ValueError("В сценарии нет сцен")
+        if self.ending not in ("normal", "cut"):
+            self.ending = "normal"
         if self.mood not in MOODS:
             self.mood = "mystery"
         for s in self.scenes:
@@ -87,7 +90,7 @@ class Script:
     def load(cls, path: Path) -> "Script":
         d = json.loads(Path(path).read_text(encoding="utf-8"))
         scenes = [Scene(**{k: v for k, v in s.items() if k in Scene.__dataclass_fields__}) for s in d["scenes"]]
-        sc = cls(topic=d.get("topic", ""), title=d.get("title", ""), mood=d.get("mood", "mystery"),
+        sc = cls(topic=d.get("topic", ""), title=d.get("title", ""), mood=d.get("mood", "mystery"), ending=d.get("ending", "normal"),
                  scenes=scenes, description=d.get("description", ""), hashtags=d.get("hashtags", []))
         sc.validate()
         return sc

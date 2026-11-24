@@ -350,7 +350,7 @@ def voice_script(script, cfg, work: Path) -> np.ndarray:
             # темп по эмоции: волнение быстрее, раздумье и грусть медленнее, финал — весомее
             rate = {"excited": 1.06, "scared": 1.05, "surprised": 1.03, "sad": 0.94,
                     "thinking": 0.96}.get(sc.character_emotion or "", 1.0)
-            if i == n - 1:
+            if i == n - 1 and script.ending != "cut":
                 rate *= 0.94
         x, weights = engine.synth(sc.text, path, rate)
         if do_polish:
@@ -359,7 +359,7 @@ def voice_script(script, cfg, work: Path) -> np.ndarray:
         words = proportional_words(sc.text, weights, x, SR, t)
         words = aligner.refine(words, x, SR, t)
         sc.start, sc.end, sc.audio, sc.words = t, t + len(x) / SR, str(path), words
-        gap = pause if i < n - 1 else 0.6
+        gap = pause if i < n - 1 else (0.05 if script.ending == "cut" else 0.6)
         if dramatic and i < n - 1:
             if i == 0:
                 gap += 0.2             # пауза после хука

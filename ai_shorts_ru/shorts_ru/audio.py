@@ -48,7 +48,7 @@ def _note(f, dur, kind="saw"):
     return x / 3
 
 
-def music(mood: str, dur: float, seed: int = 0) -> np.ndarray:
+def music(mood: str, dur: float, seed: int = 0, fade_out: float = 1.5) -> np.ndarray:
     bpm, chords, minor, bright, rhythm = MOODS.get(mood, MOODS["mystery"])
     rng = np.random.default_rng(seed)
     n = int(dur * SR)
@@ -106,7 +106,7 @@ def music(mood: str, dur: float, seed: int = 0) -> np.ndarray:
         ci += 1
     out = _lp(out, bright)
     out /= np.max(np.abs(out)) + 1e-9
-    fade = int(1.5 * SR)
+    fade = max(1, int(fade_out * SR))
     out[-fade:] *= np.linspace(1, 0, fade)
     out[: int(0.5 * SR)] *= np.linspace(0, 1, int(0.5 * SR))
     return out * 0.8
@@ -157,7 +157,8 @@ def envelope(voice: np.ndarray, fps: int) -> np.ndarray:
 
 
 def mix(voice: np.ndarray, script, cfg, out: Path, music_file: str | None = None) -> Path:
-    n = len(voice) + int(0.3 * SR)
+    cut = getattr(script, "ending", "normal") == "cut"
+    n = len(voice) + (0 if cut else int(0.3 * SR))
     v = np.zeros(n)
     v[: len(voice)] = voice
     total = n / SR
@@ -172,7 +173,7 @@ def mix(voice: np.ndarray, script, cfg, out: Path, music_file: str | None = None
                 m = np.frombuffer(w.readframes(w.getnframes()), np.int16).astype(np.float32) / 32768
         else:
             mood = script.mood if a.music_mood == "auto" else a.music_mood
-            m = music(mood, total, seed=len(script.title))
+            m = music(mood, total, seed=len(script.title), fade_out=0.03 if cut else 1.5)
         m = np.pad(m, (0, max(0, n - len(m))))[:n]
         # ducking: огибающая голоса, сглаженная (атака 50 мс, отпускание 400 мс)
         hop = 441

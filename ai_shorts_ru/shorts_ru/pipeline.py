@@ -78,7 +78,7 @@ def render(args, cfg) -> Path:
     log.info("Озвучка…")
     voice = tts.voice_script(script, cfg, work / "voice")
     voice = fit_duration(script, voice, cfg, work / "voice")
-    duration = len(voice) / tts.SR + 0.3
+    duration = len(voice) / tts.SR + (0.0 if script.ending == "cut" else 0.3)
     script.save(work / "script.json")  # с таймингами
 
     images = None
