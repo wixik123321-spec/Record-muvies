@@ -160,7 +160,9 @@ def render_video(script: Script, cfg, work: Path, mix_path: Path, final: Path, d
                     raise ShortsError(f"Ошибка рендера куска: {exc}") from exc
                 done += 1
                 el = time.time() - t0
-                log.info("  %d/%d кусков, ~%.0f с осталось", done, len(jobs), el / done * (len(jobs) - done))
+                # куски идут параллельно: в работе одновременно до `workers` штук
+                eta = el / max(done, min(workers, len(jobs))) * (len(jobs) - done)
+                log.info("  %d/%d кусков, ~%.0f мин осталось", done, len(jobs), eta / 60)
     lst = seg_dir / "list.txt"
     lst.write_text("".join(f"file '{Path(j['out']).name}'\n" for j in jobs), encoding="utf-8")
     run(["ffmpeg", "-y", "-v", "error", "-f", "concat", "-safe", "0", "-i", str(lst), "-i", str(mix_path),
