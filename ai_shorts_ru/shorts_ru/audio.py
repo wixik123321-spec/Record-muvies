@@ -125,7 +125,7 @@ def chaptered_music(script, total: float, xfade: float = 2.5) -> np.ndarray:
         if ch != cur:
             mood = script.chapters[ch]["mood"] if 0 <= ch < len(script.chapters) else \
                 ("upbeat" if ch == -2 else script.mood)
-            bounds.append((max(0.0, sc.start - 0.4), mood, 11 + ch * 7))
+            bounds.append((max(0.0, sc.start - 0.4), mood, 11 + (ch + 3) * 7))
             cur = ch
     n = int(total * SR)
     out = np.zeros(n)

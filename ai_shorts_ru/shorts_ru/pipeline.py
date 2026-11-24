@@ -190,8 +190,16 @@ def render(args, cfg) -> Path:
              animator.W, animator.H)
 
     log.info("Озвучка…")
+    speed_file = work / "voice_speed.json"
+    if speed_file.exists():  # скорость, подобранная в прошлый раз (озвучка возьмётся из кэша)
+        saved = json.loads(speed_file.read_text())
+        if saved.get("base") == float(cfg.voice.speed) and saved.get("duration") == float(cfg.video.duration):
+            cfg["voice"]["speed"] = saved["speed"]
+    base_speed = float(cfg.voice.speed) if not speed_file.exists() else json.loads(speed_file.read_text()).get("base", float(cfg.voice.speed))
     voice = tts.voice_script(script, cfg, work / "voice")
     voice = fit_duration(script, voice, cfg, work / "voice")
+    speed_file.write_text(json.dumps({"base": base_speed, "duration": float(cfg.video.duration),
+                                      "speed": float(cfg.voice.speed)}))
     duration = len(voice) / tts.SR + (0.0 if script.ending == "cut" else 0.3)
     script.save(work / "script.json")  # с таймингами
 
