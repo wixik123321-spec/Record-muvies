@@ -169,8 +169,22 @@ class VoskTTS:
             tmp.unlink(missing_ok=True)
         return path
 
+    @staticmethod
+    def _clean(text: str, strict: bool = False) -> str:
+        """Символы, которых нет в словаре фонем Vosk, заменяем на понятные ему."""
+        t = (text.replace("–", "-").replace("‑", "-").replace("…", "...").replace("«", "").replace("»", "")
+             .replace("“", "").replace("”", "").replace("„", "").replace("’", "").replace("ʼ", ""))
+        if strict:
+            t = re.sub(r"[^\wЁё .,!?:;—-]", " ", t)
+            t = re.sub(r"\s+", " ", t).strip()
+        return t
+
     def synth(self, text: str, out: Path, rate: float = 1.0) -> tuple[np.ndarray, list[float]]:
-        audio = self.synth_.synth_audio(text, speaker_id=self.sid, speech_rate=self.speed * rate)
+        try:
+            audio = self.synth_.synth_audio(self._clean(text), speaker_id=self.sid, speech_rate=self.speed * rate)
+        except KeyError:
+            audio = self.synth_.synth_audio(self._clean(text, strict=True), speaker_id=self.sid,
+                                            speech_rate=self.speed * rate)
         x = np.asarray(audio)
         x = x.astype(np.float32) / 32768 if x.dtype == np.int16 else x.astype(np.float32)
         x = _resample(x, 22050)
