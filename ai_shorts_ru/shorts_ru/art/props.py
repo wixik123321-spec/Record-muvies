@@ -71,7 +71,7 @@ def prop_image(name: str, size: int = 300, accent: str = "#FFD23F") -> Image.Ima
     elif name == "coin":
         E(m, m, n - m, n - m, (255, 200, 60))
         E(n * 0.2, n * 0.2, n * 0.8, n * 0.8, (255, 220, 110), w // 2)
-        d.text((c, c), "₽", font=_font(int(n * 0.42)), anchor="mm", fill=(200, 130, 20))
+        d.polygon(_star(c, c, n * 0.2, n * 0.09), fill=(220, 150, 30))  # нейтральная монета без валюты
     elif name == "phone":
         d.rounded_rectangle((n * 0.27, m, n * 0.73, n - m), n * 0.07, fill=(40, 44, 60), outline=OUT, width=w)
         d.rounded_rectangle((n * 0.31, n * 0.15, n * 0.69, n * 0.82), n * 0.04, fill=(120, 200, 255))
