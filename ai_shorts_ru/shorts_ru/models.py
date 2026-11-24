@@ -32,6 +32,9 @@ class Scene:
     transition: str = "fade"
     sfx: str = "none"
     image_prompt: str = ""                      # для внешней генерации картинок (на английском)
+    card: str = ""                              # "" | title | chapter | end — титульные карточки длинных видео
+    chapter: int = -1                           # номер главы (индекс в Script.chapters), -1 = вне глав
+    hold: float = 0.0                           # дополнительная пауза после сцены, с (например, под конечную заставку)
     # заполняется при рендере
     start: float = 0.0
     end: float = 0.0
@@ -55,6 +58,9 @@ class Scene:
         if self.sfx not in SFX:
             self.sfx = "none"
         self.big_text = (self.big_text or "").strip()[:24]
+        if self.card not in ("", "title", "chapter", "end"):
+            self.card = ""
+        self.hold = max(0.0, float(self.hold or 0))
 
 
 @dataclass
@@ -66,12 +72,25 @@ class Script:
     description: str = ""
     hashtags: list[str] = field(default_factory=list)
     ending: str = "normal"   # normal | cut (обрыв на полуслове — ролик зацикливается в Shorts)
+    format: str = "short"    # short (9:16, 30–60 с) | long (16:9, несколько минут, с главами)
+    chapters: list[dict] = field(default_factory=list)   # [{"title": "...", "mood": "calm"}]
+    channel: str = ""        # название канала (для заставок, превью и описания)
+    tags: list[str] = field(default_factory=list)
+    title_options: list[str] = field(default_factory=list)
+    thumbnail: list[dict] = field(default_factory=list)  # варианты превью [{"top","bottom","emotion","props","setting"}]
+    sources: list[str] = field(default_factory=list)     # источники фактов для описания
+    pinned_comment: str = ""
 
     def validate(self) -> None:
         if not self.scenes:
             raise ValueError("В сценарии нет сцен")
         if self.ending not in ("normal", "cut"):
             self.ending = "normal"
+        if self.format not in ("short", "long"):
+            self.format = "short"
+        for ch in self.chapters:
+            if ch.get("mood") not in MOODS:
+                ch["mood"] = self.mood if self.mood in MOODS else "mystery"
         if self.mood not in MOODS:
             self.mood = "mystery"
         for s in self.scenes:
@@ -90,7 +109,9 @@ class Script:
     def load(cls, path: Path) -> "Script":
         d = json.loads(Path(path).read_text(encoding="utf-8"))
         scenes = [Scene(**{k: v for k, v in s.items() if k in Scene.__dataclass_fields__}) for s in d["scenes"]]
-        sc = cls(topic=d.get("topic", ""), title=d.get("title", ""), mood=d.get("mood", "mystery"), ending=d.get("ending", "normal"),
-                 scenes=scenes, description=d.get("description", ""), hashtags=d.get("hashtags", []))
+        extra = {k: d[k] for k in ("description", "hashtags", "ending", "format", "chapters", "channel", "tags",
+                                   "title_options", "thumbnail", "sources", "pinned_comment") if k in d}
+        sc = cls(topic=d.get("topic", ""), title=d.get("title", ""), mood=d.get("mood", "mystery"),
+                 scenes=scenes, **extra)
         sc.validate()
         return sc

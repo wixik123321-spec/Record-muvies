@@ -114,6 +114,36 @@ def music(mood: str, dur: float, seed: int = 0, fade_out: float = 1.5) -> np.nda
 
 # ---------------------------------------------------------------------------
 
+def chaptered_music(script, total: float, xfade: float = 2.5) -> np.ndarray:
+    """Своя музыкальная тема для каждой главы (настроение из chapters[i].mood), с плавными переходами."""
+    bounds = []  # (start, mood, seed)
+    cur = None
+    for sc in script.scenes:
+        ch = sc.chapter
+        if sc.card == "end":
+            ch = -2
+        if ch != cur:
+            mood = script.chapters[ch]["mood"] if 0 <= ch < len(script.chapters) else \
+                ("upbeat" if ch == -2 else script.mood)
+            bounds.append((max(0.0, sc.start - 0.4), mood, 11 + ch * 7))
+            cur = ch
+    n = int(total * SR)
+    out = np.zeros(n)
+    xf = int(xfade * SR)
+    for k, (st, mood, seed) in enumerate(bounds):
+        en = bounds[k + 1][0] if k + 1 < len(bounds) else total
+        i0 = int(st * SR)
+        ln = min(n, int(en * SR) + xf) - i0
+        if ln <= 0:
+            continue
+        seg = music(mood, ln / SR + 0.1, seed=seed, fade_out=xfade if k + 1 < len(bounds) else 2.0)[:ln]
+        if k > 0:  # плавное появление поверх хвоста предыдущей темы
+            f = min(xf, len(seg))
+            seg[:f] *= np.linspace(0, 1, f)
+        out[i0:i0 + len(seg)] += seg
+    return out / (np.max(np.abs(out)) + 1e-9) * 0.8
+
+
 def sfx(name: str) -> np.ndarray:
     rng = np.random.default_rng(hash(name) % 1000)
     if name == "whoosh":
@@ -171,6 +201,8 @@ def mix(voice: np.ndarray, script, cfg, out: Path, music_file: str | None = None
                  "-ac", "1", "-ar", str(SR), str(tmp)])
             with wave.open(str(tmp)) as w:
                 m = np.frombuffer(w.readframes(w.getnframes()), np.int16).astype(np.float32) / 32768
+        elif getattr(script, "chapters", None) and a.music_mood == "auto":
+            m = chaptered_music(script, total)
         else:
             mood = script.mood if a.music_mood == "auto" else a.music_mood
             m = music(mood, total, seed=len(script.title), fade_out=0.03 if cut else 1.5)

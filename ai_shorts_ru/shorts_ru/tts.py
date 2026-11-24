@@ -17,6 +17,7 @@
 from __future__ import annotations
 
 import difflib
+import json
 import os
 import re
 import urllib.request
@@ -344,7 +345,7 @@ def voice_script(script, cfg, work: Path) -> np.ndarray:
     parts, t = [np.zeros(int(lead * SR), np.float32)], lead
     n = len(script.scenes)
     for i, sc in enumerate(script.scenes):
-        path = work / f"voice_{i:02d}.wav"
+        path = work / f"voice_{i:03d}.wav"
         rate = 1.0
         if dramatic:
             # темп по эмоции: волнение быстрее, раздумье и грусть медленнее, финал — весомее
@@ -352,21 +353,37 @@ def voice_script(script, cfg, work: Path) -> np.ndarray:
                     "thinking": 0.96}.get(sc.character_emotion or "", 1.0)
             if i == n - 1 and script.ending != "cut":
                 rate *= 0.94
-        x, weights = engine.synth(sc.text, path, rate)
-        if do_polish:
-            x = polish(x)
-            _write_wav(path, x)
-        words = proportional_words(sc.text, weights, x, SR, t)
-        words = aligner.refine(words, x, SR, t)
+        key = json.dumps([sc.text, type(engine).__name__, getattr(engine, "sid", None),
+                          float(cfg.voice.speed), round(rate, 3), do_polish], ensure_ascii=False)
+        meta = path.with_suffix(".json")
+        cached = json.loads(meta.read_text(encoding="utf-8")) if meta.exists() and path.exists() else None
+        if cached and cached.get("key") == key:
+            x, _ = _read_wav(path)
+            words = [{"w": w["w"], "s": round(w["s"] + t, 3), "e": round(w["e"] + t, 3)} for w in cached["words"]]
+        else:
+            x, weights = engine.synth(sc.text, path, rate)
+            if do_polish:
+                x = polish(x)
+                _write_wav(path, x)
+            words = proportional_words(sc.text, weights, x, SR, t)
+            words = aligner.refine(words, x, SR, t)
+            meta.write_text(json.dumps({"key": key, "words": [
+                {"w": w["w"], "s": w["s"] - t, "e": w["e"] - t} for w in words]}, ensure_ascii=False), encoding="utf-8")
         sc.start, sc.end, sc.audio, sc.words = t, t + len(x) / SR, str(path), words
         gap = pause if i < n - 1 else (0.05 if script.ending == "cut" else 0.6)
-        if dramatic and i < n - 1:
+        nxt = script.scenes[i + 1] if i < n - 1 else None
+        if dramatic and nxt is not None:
             if i == 0:
                 gap += 0.2             # пауза после хука
-            if i == n - 2:
+            if i == n - 2 and script.format != "long":
                 gap += 0.35            # пауза перед развязкой
             if sc.text.rstrip().endswith("?"):
                 gap += 0.15            # дать вопросу «повиснуть»
+        if nxt is not None and nxt.card:
+            gap += 0.6                 # вдох перед титульной карточкой главы
+        if sc.card and nxt is not None:
+            gap += 0.5                 # дать прочитать карточку
+        gap += sc.hold                 # например, время под конечную заставку
         parts += [x, np.zeros(int(gap * SR), np.float32)]
         t = sc.end + gap
         log.info("  сцена %d: %.1f с — %s", i + 1, sc.end - sc.start, sc.text[:60])

@@ -6,6 +6,7 @@ video:
   fps: 30
   duration: 45            # целевая длительность, 30–60 с (можно переопределить --duration)
   crf: 21                 # качество H.264 (меньше = лучше и тяжелее)
+  workers: auto           # сколько процессов рендерят кадры параллельно (auto = по числу ядер)
 
 script:
   provider: claude        # claude | text (свой текст через --text / --script)
@@ -56,3 +57,20 @@ audio:
   duck_db: -9             # насколько приглушать музыку под голосом
   sfx: true
   loudness_lufs: -14
+
+# Длинные видео YouTube (формат long: --format long или "format": "long" в сценарии).
+# Здесь только то, что отличается от настроек выше.
+long:
+  video:
+    width: 1920
+    height: 1080
+    duration: 450         # цель 7.5 минуты (можно переопределить --duration)
+  voice:
+    speed: 0.95           # чуть спокойнее, чем в Shorts
+    sentence_pause: 0.35
+  captions:
+    size: 62
+    y: 952
+    max_words: 5
+    max_chars: 32
+    stroke: 7

@@ -67,6 +67,8 @@ class CaptionRenderer:
         self.stroke, self.upper = int(c.stroke), bool(c.uppercase)
         self.y, self.W = int(c.y), width
         self.phrases = build_phrases(scenes, int(c.max_words), int(c.max_chars))
+        # на титульных карточках текст уже крупно на экране — субтитры там не рисуем (в .srt они остаются)
+        self.hidden = [(sc.start, sc.end) for sc in scenes if getattr(sc, "card", "") in ("title", "chapter")]
         self.keywords = set()
         for sc in scenes:
             for k in sc.keywords:
@@ -106,7 +108,7 @@ class CaptionRenderer:
 
     def overlay(self, frame: np.ndarray, t: float) -> np.ndarray:
         ph = next((p for p in self.phrases if p.start - 0.05 <= t < p.end), None)
-        if ph is None:
+        if ph is None or any(a <= ph.start < b for a, b in self.hidden):
             return frame
         active = -1
         for i, w in enumerate(ph.words):

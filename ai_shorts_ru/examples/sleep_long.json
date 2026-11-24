@@ -1,0 +1,2078 @@
+{
+ "topic": "что происходит с мозгом, когда мы спим",
+ "title": "Что происходит с мозгом, когда мы спим",
+ "format": "long",
+ "mood": "mystery",
+ "channel": "Почему так?",
+ "chapters": [
+  {
+   "title": "Зачем мы спим",
+   "mood": "calm"
+  },
+  {
+   "title": "Фазы сна",
+   "mood": "mystery"
+  },
+  {
+   "title": "Откуда берутся сны",
+   "mood": "mystery"
+  },
+  {
+   "title": "Сонный паралич",
+   "mood": "tense"
+  },
+  {
+   "title": "Что будет без сна",
+   "mood": "epic"
+  },
+  {
+   "title": "Как спать лучше",
+   "mood": "upbeat"
+  }
+ ],
+ "description": "Каждую ночь мозг выполняет одну из самых важных своих работ. Разбираем простым языком: зачем мы спим, как устроены фазы сна, откуда берутся сны, что такое сонный паралич, что случилось с человеком, который не спал одиннадцать дней, и как спать лучше.",
+ "hashtags": [
+  "#сон",
+  "#мозг",
+  "#наука"
+ ],
+ "title_options": [
+  "Что происходит с мозгом, когда мы спим",
+  "Твой мозг ночью не отдыхает: всё о сне за 7 минут",
+  "11 дней без сна, сонный паралич и сны — что делает мозг ночью",
+  "Зачем мы спим и откуда берутся сны? Объясняем простым языком",
+  "Почему мы спим треть жизни? Наука сна за 7 минут"
+ ],
+ "tags": [
+  "сон",
+  "мозг",
+  "наука",
+  "фазы сна",
+  "быстрый сон",
+  "сны",
+  "откуда берутся сны",
+  "сонный паралич",
+  "осознанные сны",
+  "Рэнди Гарднер",
+  "сколько можно не спать",
+  "недосып",
+  "как спать лучше",
+  "гигиена сна",
+  "мелатонин",
+  "глимфатическая система",
+  "психология",
+  "научпоп",
+  "интересные факты",
+  "почему мы спим"
+ ],
+ "thumbnail": [
+  {
+   "top": "Что делает мозг",
+   "bottom": "пока ты спишь?",
+   "emotion": "surprised",
+   "pose": "hands_up",
+   "props": [
+    "brain",
+    "moon"
+   ],
+   "setting": "night_city",
+   "badge": "7 минут"
+  },
+  {
+   "top": "11 дней",
+   "bottom": "без сна",
+   "emotion": "scared",
+   "pose": "hands_up",
+   "props": [
+    "clock",
+    "exclamation"
+   ],
+   "setting": "brain",
+   "badge": "реальная история",
+   "seed": 3
+  },
+  {
+   "top": "Твой мозг ночью",
+   "bottom": "не отдыхает",
+   "emotion": "excited",
+   "pose": "point",
+   "props": [
+    "brain",
+    "lightning"
+   ],
+   "setting": "space",
+   "badge": "наука сна",
+   "seed": 7
+  }
+ ],
+ "sources": [
+  "Xie L. et al. Sleep Drives Metabolite Clearance from the Adult Brain. Science, 2013",
+  "Sharpless B. A., Barber J. P. Lifetime prevalence rates of sleep paralysis: a systematic review. Sleep Medicine Reviews, 2011",
+  "Williamson A. M., Feyer A.-M. Moderate sleep deprivation produces impairments comparable to alcohol intoxication. Occupational and Environmental Medicine, 2000",
+  "Gulevich G., Dement W., Johnson L. Psychiatric and EEG observations on a case of prolonged (264 hours) wakefulness. Archives of General Psychiatry, 1966",
+  "National Institute of Neurological Disorders and Stroke (NINDS): Brain Basics — Understanding Sleep",
+  "Walker M. Why We Sleep (Зачем мы спим), 2017"
+ ],
+ "pinned_comment": "А вы помните свои сны? Напишите самый странный сон, который вам снился 👇 Самые интересные разберём в одном из следующих видео!",
+ "scenes": [
+  {
+   "chapter": -1,
+   "text": "Каждую ночь ты на несколько часов отключаешься от мира, и никто не считает это странным.",
+   "setting": "room",
+   "character_emotion": "surprised",
+   "character_pose": "hands_up",
+   "character_side": "left",
+   "props": [
+    "moon"
+   ],
+   "big_text": "",
+   "keywords": [
+    "отключаешься"
+   ],
+   "camera": "zoom_in",
+   "transition": "fade",
+   "sfx": "whoosh",
+   "card": "",
+   "hold": 0.0
+  },
+  {
+   "chapter": -1,
+   "text": "За всю жизнь набегает около двадцати пяти лет сна.",
+   "setting": "night_city",
+   "character_emotion": null,
+   "character_pose": "idle",
+   "character_side": "center",
+   "props": [
+    "clock",
+    "moon"
+   ],
+   "big_text": "25 лет",
+   "keywords": [
+    "двадцати",
+    "пяти",
+    "лет"
+   ],
+   "camera": "zoom_out",
+   "transition": "zoom",
+   "sfx": "pop",
+   "card": "",
+   "hold": 0.0
+  },
+  {
+   "chapter": -1,
+   "text": "Целая треть жизни, о которой мы почти ничего не помним.",
+   "setting": "night_city",
+   "character_emotion": "thinking",
+   "character_pose": "think",
+   "character_side": "right",
+   "props": [
+    "question"
+   ],
+   "big_text": "",
+   "keywords": [
+    "треть"
+   ],
+   "camera": "pan_left",
+   "transition": "slide",
+   "sfx": "none",
+   "card": "",
+   "hold": 0.0
+  },
+  {
+   "chapter": -1,
+   "text": "Но что на самом деле происходит с мозгом, пока ты спишь?",
+   "setting": "brain",
+   "character_emotion": "thinking",
+   "character_pose": "think",
+   "character_side": "left",
+   "props": [
+    "brain",
+    "question"
+   ],
+   "big_text": "",
+   "keywords": [
+    "мозгом"
+   ],
+   "camera": "zoom_in",
+   "transition": "whip",
+   "sfx": "whoosh",
+   "card": "",
+   "hold": 0.0
+  },
+  {
+   "chapter": -1,
+   "text": "Сегодня разберём, зачем нам вообще сон, как устроены его фазы и откуда берутся сны.",
+   "setting": "abstract",
+   "character_emotion": "happy",
+   "character_pose": "point",
+   "character_side": "right",
+   "props": [
+    "book",
+    "moon"
+   ],
+   "big_text": "",
+   "keywords": [
+    "фазы"
+   ],
+   "camera": "pan_right",
+   "transition": "slide",
+   "sfx": "none",
+   "card": "",
+   "hold": 0.0
+  },
+  {
+   "chapter": -1,
+   "text": "А ещё поговорим о сонном параличе, о человеке, который не спал одиннадцать дней, и о том, как спать лучше.",
+   "setting": "abstract",
+   "character_emotion": "excited",
+   "character_pose": "shrug",
+   "character_side": "left",
+   "props": [
+    "eye",
+    "clock",
+    "lightbulb"
+   ],
+   "big_text": "",
+   "keywords": [
+    "одиннадцать",
+    "дней"
+   ],
+   "camera": "zoom_out",
+   "transition": "zoom",
+   "sfx": "none",
+   "card": "",
+   "hold": 0.0
+  },
+  {
+   "chapter": -1,
+   "text": "Устраивайся поудобнее, будет интересно.",
+   "setting": "room",
+   "character_emotion": "happy",
+   "character_pose": "wave",
+   "character_side": "right",
+   "props": [
+    "moon",
+    "star"
+   ],
+   "big_text": "",
+   "keywords": [
+    "интересно"
+   ],
+   "camera": "zoom_in",
+   "transition": "fade",
+   "sfx": "none",
+   "card": "",
+   "hold": 0.0
+  },
+  {
+   "chapter": -1,
+   "text": "Что происходит с мозгом, когда мы спим.",
+   "setting": "space",
+   "character_emotion": null,
+   "character_pose": "idle",
+   "character_side": "left",
+   "props": [],
+   "big_text": "",
+   "keywords": [],
+   "camera": "zoom_in",
+   "transition": "flash",
+   "sfx": "boom",
+   "card": "title",
+   "hold": 0.0
+  },
+  {
+   "chapter": 0,
+   "text": "Глава первая. Зачем мы вообще спим?",
+   "setting": "space",
+   "character_emotion": null,
+   "character_pose": "idle",
+   "character_side": "left",
+   "props": [],
+   "big_text": "",
+   "keywords": [],
+   "camera": "zoom_in",
+   "transition": "flash",
+   "sfx": "whoosh",
+   "card": "chapter",
+   "hold": 0.0
+  },
+  {
+   "chapter": 0,
+   "text": "Долгое время сон считали просто отдыхом, вроде выключенного компьютера.",
+   "setting": "room",
+   "character_emotion": "neutral",
+   "character_pose": "point",
+   "character_side": "left",
+   "props": [
+    "phone"
+   ],
+   "big_text": "",
+   "keywords": [
+    "отдыхом"
+   ],
+   "camera": "zoom_in",
+   "transition": "fade",
+   "sfx": "none",
+   "card": "",
+   "hold": 0.0
+  },
+  {
+   "chapter": 0,
+   "text": "Но когда учёные начали записывать активность мозга ночью, их ждал сюрприз.",
+   "setting": "lab",
+   "character_emotion": "thinking",
+   "character_pose": "think",
+   "character_side": "right",
+   "props": [
+    "magnifier"
+   ],
+   "big_text": "",
+   "keywords": [
+    "активность"
+   ],
+   "camera": "pan_left",
+   "transition": "slide",
+   "sfx": "none",
+   "card": "",
+   "hold": 0.0
+  },
+  {
+   "chapter": 0,
+   "text": "Мозг во сне вовсе не выключается, а продолжает напряжённо работать.",
+   "setting": "brain",
+   "character_emotion": "surprised",
+   "character_pose": "hands_up",
+   "character_side": "left",
+   "props": [
+    "brain",
+    "lightning"
+   ],
+   "big_text": "",
+   "keywords": [
+    "работать"
+   ],
+   "camera": "zoom_in",
+   "transition": "zoom",
+   "sfx": "pop",
+   "card": "",
+   "hold": 0.0
+  },
+  {
+   "chapter": 0,
+   "text": "Первая его ночная задача — разобрать воспоминания за день.",
+   "setting": "brain",
+   "character_emotion": "thinking",
+   "character_pose": "point",
+   "character_side": "right",
+   "props": [
+    "book"
+   ],
+   "big_text": "",
+   "keywords": [
+    "воспоминания"
+   ],
+   "camera": "push_up",
+   "transition": "fade",
+   "sfx": "none",
+   "card": "",
+   "hold": 0.0
+  },
+  {
+   "chapter": 0,
+   "text": "Важное переносится в долговременную память, а лишнее постепенно стирается.",
+   "setting": "brain",
+   "character_emotion": "neutral",
+   "character_pose": "point",
+   "character_side": "left",
+   "props": [
+    "brain",
+    "book"
+   ],
+   "big_text": "",
+   "keywords": [
+    "долговременную"
+   ],
+   "camera": "pan_right",
+   "transition": "slide",
+   "sfx": "none",
+   "card": "",
+   "hold": 0.0
+  },
+  {
+   "chapter": 0,
+   "text": "Поэтому выученное вечером после хорошего сна запоминается заметно лучше.",
+   "setting": "lab",
+   "character_emotion": "happy",
+   "character_pose": "wave",
+   "character_side": "right",
+   "props": [
+    "lightbulb",
+    "book"
+   ],
+   "big_text": "",
+   "keywords": [
+    "запоминается"
+   ],
+   "camera": "zoom_out",
+   "transition": "zoom",
+   "sfx": "ding",
+   "card": "",
+   "hold": 0.0
+  },
+  {
+   "chapter": 0,
+   "text": "Вторая задача похожа на генеральную уборку.",
+   "setting": "abstract",
+   "character_emotion": "excited",
+   "character_pose": "shrug",
+   "character_side": "left",
+   "props": [
+    "star"
+   ],
+   "big_text": "",
+   "keywords": [
+    "уборку"
+   ],
+   "camera": "zoom_in",
+   "transition": "whip",
+   "sfx": "whoosh",
+   "card": "",
+   "hold": 0.0
+  },
+  {
+   "chapter": 0,
+   "text": "В две тысячи тринадцатом году исследователи заметили на мышах удивительную вещь.",
+   "setting": "lab",
+   "character_emotion": "surprised",
+   "character_pose": "point",
+   "character_side": "right",
+   "props": [
+    "magnifier"
+   ],
+   "big_text": "2013",
+   "keywords": [
+    "удивительную"
+   ],
+   "camera": "pan_left",
+   "transition": "slide",
+   "sfx": "none",
+   "card": "",
+   "hold": 0.0
+  },
+  {
+   "chapter": 0,
+   "text": "Во сне промежутки между клетками мозга заметно расширяются.",
+   "setting": "brain",
+   "character_emotion": null,
+   "character_pose": "idle",
+   "character_side": "center",
+   "props": [
+    "brain",
+    "magnifier"
+   ],
+   "big_text": "",
+   "keywords": [
+    "расширяются"
+   ],
+   "camera": "zoom_in",
+   "transition": "zoom",
+   "sfx": "none",
+   "card": "",
+   "hold": 0.0
+  },
+  {
+   "chapter": 0,
+   "text": "И жидкость гораздо быстрее вымывает отходы, которые накопились за день.",
+   "setting": "underwater",
+   "character_emotion": "neutral",
+   "character_pose": "point",
+   "character_side": "left",
+   "props": [
+    "brain"
+   ],
+   "big_text": "",
+   "keywords": [
+    "вымывает"
+   ],
+   "camera": "push_up",
+   "transition": "fade",
+   "sfx": "none",
+   "card": "",
+   "hold": 0.0
+  },
+  {
+   "chapter": 0,
+   "text": "Эту систему очистки назвали глимфатической.",
+   "setting": "lab",
+   "character_emotion": "thinking",
+   "character_pose": "think",
+   "character_side": "right",
+   "props": [
+    "book"
+   ],
+   "big_text": "",
+   "keywords": [
+    "глимфатической"
+   ],
+   "camera": "zoom_out",
+   "transition": "slide",
+   "sfx": "none",
+   "card": "",
+   "hold": 0.0
+  },
+  {
+   "chapter": 0,
+   "text": "Получается, сон — это не роскошь, а обязательное техобслуживание мозга.",
+   "setting": "city_day",
+   "character_emotion": "happy",
+   "character_pose": "point",
+   "character_side": "left",
+   "props": [
+    "key",
+    "lightbulb"
+   ],
+   "big_text": "",
+   "keywords": [
+    "техобслуживание"
+   ],
+   "camera": "zoom_in",
+   "transition": "zoom",
+   "sfx": "ding",
+   "card": "",
+   "hold": 0.0
+  },
+  {
+   "chapter": 0,
+   "text": "Кстати, спят почти все животные: даже рыбы и насекомые.",
+   "setting": "underwater",
+   "character_emotion": "surprised",
+   "character_pose": "point",
+   "character_side": "right",
+   "props": [
+    "fish"
+   ],
+   "big_text": "",
+   "keywords": [
+    "рыбы",
+    "насекомые"
+   ],
+   "camera": "pan_right",
+   "transition": "slide",
+   "sfx": "pop",
+   "card": "",
+   "hold": 0.0
+  },
+  {
+   "chapter": 0,
+   "text": "А дельфины умеют спать по очереди одной половиной мозга, чтобы не утонуть.",
+   "setting": "ocean",
+   "character_emotion": "excited",
+   "character_pose": "hands_up",
+   "character_side": "left",
+   "props": [
+    "fish",
+    "brain"
+   ],
+   "big_text": "",
+   "keywords": [
+    "половиной",
+    "мозга"
+   ],
+   "camera": "zoom_in",
+   "transition": "zoom",
+   "sfx": "whoosh",
+   "card": "",
+   "hold": 0.0
+  },
+  {
+   "chapter": 1,
+   "text": "Глава вторая. Фазы сна.",
+   "setting": "night_city",
+   "character_emotion": null,
+   "character_pose": "idle",
+   "character_side": "left",
+   "props": [],
+   "big_text": "",
+   "keywords": [],
+   "camera": "zoom_in",
+   "transition": "flash",
+   "sfx": "whoosh",
+   "card": "chapter",
+   "hold": 0.0
+  },
+  {
+   "chapter": 1,
+   "text": "Сон — это не одно состояние, а несколько этапов, которые идут по кругу.",
+   "setting": "night_city",
+   "character_emotion": "thinking",
+   "character_pose": "point",
+   "character_side": "right",
+   "props": [
+    "clock"
+   ],
+   "big_text": "",
+   "keywords": [
+    "этапов"
+   ],
+   "camera": "zoom_in",
+   "transition": "fade",
+   "sfx": "none",
+   "card": "",
+   "hold": 0.0
+  },
+  {
+   "chapter": 1,
+   "text": "Учёные различают эти этапы по электрическим волнам мозга, которые записывает энцефалограф.",
+   "setting": "lab",
+   "character_emotion": "neutral",
+   "character_pose": "point",
+   "character_side": "left",
+   "props": [
+    "lightning",
+    "magnifier"
+   ],
+   "big_text": "",
+   "keywords": [
+    "волнам"
+   ],
+   "camera": "pan_left",
+   "transition": "slide",
+   "sfx": "none",
+   "card": "",
+   "hold": 0.0
+  },
+  {
+   "chapter": 1,
+   "text": "Всё начинается с лёгкой дремоты.",
+   "setting": "room",
+   "character_emotion": "neutral",
+   "character_pose": "idle",
+   "character_side": "left",
+   "props": [
+    "moon"
+   ],
+   "big_text": "",
+   "keywords": [
+    "дремоты"
+   ],
+   "camera": "pan_right",
+   "transition": "slide",
+   "sfx": "none",
+   "card": "",
+   "hold": 0.0
+  },
+  {
+   "chapter": 1,
+   "text": "В этот момент тебя может разбудить любой шорох.",
+   "setting": "room",
+   "character_emotion": "surprised",
+   "character_pose": "hands_up",
+   "character_side": "right",
+   "props": [
+    "exclamation"
+   ],
+   "big_text": "",
+   "keywords": [
+    "шорох"
+   ],
+   "camera": "zoom_in",
+   "transition": "whip",
+   "sfx": "click",
+   "card": "",
+   "hold": 0.0
+  },
+  {
+   "chapter": 1,
+   "text": "Именно здесь бывает то самое чувство падения, когда всё тело резко вздрагивает.",
+   "setting": "room",
+   "character_emotion": "scared",
+   "character_pose": "hands_up",
+   "character_side": "left",
+   "props": [
+    "lightning"
+   ],
+   "big_text": "",
+   "keywords": [
+    "падения"
+   ],
+   "camera": "shake",
+   "transition": "flash",
+   "sfx": "boom",
+   "card": "",
+   "hold": 0.0
+  },
+  {
+   "chapter": 1,
+   "text": "Потом сон становится глубже.",
+   "setting": "night_city",
+   "character_emotion": "neutral",
+   "character_pose": "idle",
+   "character_side": "right",
+   "props": [
+    "moon"
+   ],
+   "big_text": "",
+   "keywords": [
+    "глубже"
+   ],
+   "camera": "push_up",
+   "transition": "fade",
+   "sfx": "none",
+   "card": "",
+   "hold": 0.0
+  },
+  {
+   "chapter": 1,
+   "text": "Мозг переходит на медленные мощные волны, и разбудить человека теперь очень трудно.",
+   "setting": "brain",
+   "character_emotion": "thinking",
+   "character_pose": "think",
+   "character_side": "left",
+   "props": [
+    "brain"
+   ],
+   "big_text": "",
+   "keywords": [
+    "медленные"
+   ],
+   "camera": "zoom_out",
+   "transition": "zoom",
+   "sfx": "none",
+   "card": "",
+   "hold": 0.0
+  },
+  {
+   "chapter": 1,
+   "text": "А если всё же разбудить, он несколько минут будет сонным и растерянным.",
+   "setting": "room",
+   "character_emotion": "sad",
+   "character_pose": "idle",
+   "character_side": "right",
+   "props": [
+    "question"
+   ],
+   "big_text": "",
+   "keywords": [
+    "растерянным"
+   ],
+   "camera": "pan_left",
+   "transition": "slide",
+   "sfx": "none",
+   "card": "",
+   "hold": 0.0
+  },
+  {
+   "chapter": 1,
+   "text": "Глубокий сон особенно важен для восстановления тела.",
+   "setting": "city_day",
+   "character_emotion": "happy",
+   "character_pose": "wave",
+   "character_side": "left",
+   "props": [
+    "heart"
+   ],
+   "big_text": "",
+   "keywords": [
+    "восстановления"
+   ],
+   "camera": "zoom_in",
+   "transition": "fade",
+   "sfx": "pop",
+   "card": "",
+   "hold": 0.0
+  },
+  {
+   "chapter": 1,
+   "text": "Дальше наступает самая загадочная фаза — быстрый сон.",
+   "setting": "space",
+   "character_emotion": "excited",
+   "character_pose": "point",
+   "character_side": "right",
+   "props": [
+    "eye"
+   ],
+   "big_text": "быстрый сон",
+   "keywords": [
+    "быстрый",
+    "сон"
+   ],
+   "camera": "zoom_in",
+   "transition": "flash",
+   "sfx": "whoosh",
+   "card": "",
+   "hold": 0.0
+  },
+  {
+   "chapter": 1,
+   "text": "Глаза под закрытыми веками быстро двигаются, дыхание и пульс становятся неровными.",
+   "setting": "room",
+   "character_emotion": "surprised",
+   "character_pose": "point",
+   "character_side": "left",
+   "props": [
+    "eye",
+    "heart"
+   ],
+   "big_text": "",
+   "keywords": [
+    "двигаются"
+   ],
+   "camera": "pan_right",
+   "transition": "slide",
+   "sfx": "none",
+   "card": "",
+   "hold": 0.0
+  },
+  {
+   "chapter": 1,
+   "text": "По активности мозг в этой фазе почти не отличается от бодрствования.",
+   "setting": "brain",
+   "character_emotion": "surprised",
+   "character_pose": "hands_up",
+   "character_side": "right",
+   "props": [
+    "brain",
+    "lightning"
+   ],
+   "big_text": "",
+   "keywords": [
+    "бодрствования"
+   ],
+   "camera": "zoom_out",
+   "transition": "zoom",
+   "sfx": "none",
+   "card": "",
+   "hold": 0.0
+  },
+  {
+   "chapter": 1,
+   "text": "Весь цикл занимает примерно полтора часа.",
+   "setting": "abstract",
+   "character_emotion": null,
+   "character_pose": "idle",
+   "character_side": "center",
+   "props": [
+    "clock"
+   ],
+   "big_text": "90 минут",
+   "keywords": [
+    "полтора",
+    "часа"
+   ],
+   "camera": "zoom_in",
+   "transition": "flash",
+   "sfx": "ding",
+   "card": "",
+   "hold": 0.0
+  },
+  {
+   "chapter": 1,
+   "text": "И за ночь он повторяется от четырёх до шести раз.",
+   "setting": "night_city",
+   "character_emotion": "thinking",
+   "character_pose": "think",
+   "character_side": "left",
+   "props": [
+    "clock",
+    "moon"
+   ],
+   "big_text": "",
+   "keywords": [
+    "четырёх",
+    "шести"
+   ],
+   "camera": "pan_left",
+   "transition": "slide",
+   "sfx": "none",
+   "card": "",
+   "hold": 0.0
+  },
+  {
+   "chapter": 1,
+   "text": "Причём под утро быстрого сна становится всё больше.",
+   "setting": "sky_sunset",
+   "character_emotion": "neutral",
+   "character_pose": "point",
+   "character_side": "right",
+   "props": [
+    "eye"
+   ],
+   "big_text": "",
+   "keywords": [
+    "утро"
+   ],
+   "camera": "push_up",
+   "transition": "fade",
+   "sfx": "none",
+   "card": "",
+   "hold": 0.0
+  },
+  {
+   "chapter": 1,
+   "text": "Поэтому взрослому человеку обычно нужно от семи до девяти часов сна, чтобы пройти все циклы.",
+   "setting": "city_day",
+   "character_emotion": null,
+   "character_pose": "idle",
+   "character_side": "center",
+   "props": [
+    "clock",
+    "moon"
+   ],
+   "big_text": "7–9 часов",
+   "keywords": [
+    "семи",
+    "девяти"
+   ],
+   "camera": "zoom_in",
+   "transition": "flash",
+   "sfx": "ding",
+   "card": "",
+   "hold": 0.0
+  },
+  {
+   "chapter": 2,
+   "text": "Глава третья. Откуда берутся сны.",
+   "setting": "space",
+   "character_emotion": null,
+   "character_pose": "idle",
+   "character_side": "left",
+   "props": [],
+   "big_text": "",
+   "keywords": [],
+   "camera": "zoom_in",
+   "transition": "flash",
+   "sfx": "whoosh",
+   "card": "chapter",
+   "hold": 0.0
+  },
+  {
+   "chapter": 2,
+   "text": "Самые яркие и странные сны мы видим как раз в фазе быстрого сна.",
+   "setting": "space",
+   "character_emotion": "happy",
+   "character_pose": "wave",
+   "character_side": "left",
+   "props": [
+    "star",
+    "moon"
+   ],
+   "big_text": "",
+   "keywords": [
+    "яркие"
+   ],
+   "camera": "zoom_in",
+   "transition": "fade",
+   "sfx": "none",
+   "card": "",
+   "hold": 0.0
+  },
+  {
+   "chapter": 2,
+   "text": "И пока мозг смотрит это кино, тело почти полностью обездвижено.",
+   "setting": "space",
+   "character_emotion": "surprised",
+   "character_pose": "hands_up",
+   "character_side": "right",
+   "props": [
+    "eye"
+   ],
+   "big_text": "",
+   "keywords": [
+    "обездвижено"
+   ],
+   "camera": "pan_left",
+   "transition": "slide",
+   "sfx": "none",
+   "card": "",
+   "hold": 0.0
+  },
+  {
+   "chapter": 2,
+   "text": "Это защитный механизм.",
+   "setting": "lab",
+   "character_emotion": "thinking",
+   "character_pose": "think",
+   "character_side": "left",
+   "props": [
+    "key"
+   ],
+   "big_text": "",
+   "keywords": [
+    "защитный"
+   ],
+   "camera": "zoom_in",
+   "transition": "zoom",
+   "sfx": "click",
+   "card": "",
+   "hold": 0.0
+  },
+  {
+   "chapter": 2,
+   "text": "Без него мы бы вскакивали с кровати и повторяли во сне все свои движения.",
+   "setting": "room",
+   "character_emotion": "scared",
+   "character_pose": "hands_up",
+   "character_side": "right",
+   "props": [
+    "exclamation"
+   ],
+   "big_text": "",
+   "keywords": [
+    "вскакивали"
+   ],
+   "camera": "shake",
+   "transition": "whip",
+   "sfx": "whoosh",
+   "card": "",
+   "hold": 0.0
+  },
+  {
+   "chapter": 2,
+   "text": "Зачем вообще нужны сны, учёные до сих пор спорят.",
+   "setting": "lab",
+   "character_emotion": "thinking",
+   "character_pose": "think",
+   "character_side": "left",
+   "props": [
+    "question"
+   ],
+   "big_text": "",
+   "keywords": [
+    "спорят"
+   ],
+   "camera": "push_up",
+   "transition": "fade",
+   "sfx": "none",
+   "card": "",
+   "hold": 0.0
+  },
+  {
+   "chapter": 2,
+   "text": "По одной версии, так мозг переживает и перерабатывает эмоции дня.",
+   "setting": "brain",
+   "character_emotion": "sad",
+   "character_pose": "idle",
+   "character_side": "right",
+   "props": [
+    "heart",
+    "brain"
+   ],
+   "big_text": "",
+   "keywords": [
+    "эмоции"
+   ],
+   "camera": "zoom_out",
+   "transition": "slide",
+   "sfx": "none",
+   "card": "",
+   "hold": 0.0
+  },
+  {
+   "chapter": 2,
+   "text": "По другой, сон — это тренировка, где мы безопасно проигрываем опасные ситуации.",
+   "setting": "forest",
+   "character_emotion": "scared",
+   "character_pose": "shrug",
+   "character_side": "left",
+   "props": [
+    "lightning"
+   ],
+   "big_text": "",
+   "keywords": [
+    "тренировка"
+   ],
+   "camera": "pan_right",
+   "transition": "zoom",
+   "sfx": "none",
+   "card": "",
+   "hold": 0.0
+  },
+  {
+   "chapter": 2,
+   "text": "Кстати, большинство снов мы забываем уже через несколько минут после пробуждения.",
+   "setting": "room",
+   "character_emotion": "sad",
+   "character_pose": "idle",
+   "character_side": "right",
+   "props": [
+    "clock"
+   ],
+   "big_text": "",
+   "keywords": [
+    "забываем"
+   ],
+   "camera": "zoom_in",
+   "transition": "fade",
+   "sfx": "none",
+   "card": "",
+   "hold": 0.0
+  },
+  {
+   "chapter": 2,
+   "text": "Даже слепые от рождения люди видят сны, только не картинками, а звуками, запахами и ощущениями.",
+   "setting": "space",
+   "character_emotion": "surprised",
+   "character_pose": "point",
+   "character_side": "left",
+   "props": [
+    "eye",
+    "star"
+   ],
+   "big_text": "",
+   "keywords": [
+    "слепые"
+   ],
+   "camera": "pan_left",
+   "transition": "slide",
+   "sfx": "none",
+   "card": "",
+   "hold": 0.0
+  },
+  {
+   "chapter": 2,
+   "text": "А люди старшего поколения чаще других вспоминают чёрно-белые сны, возможно, из-за чёрно-белого телевидения в детстве.",
+   "setting": "night_city",
+   "character_emotion": "thinking",
+   "character_pose": "think",
+   "character_side": "right",
+   "props": [
+    "phone",
+    "question"
+   ],
+   "big_text": "",
+   "keywords": [
+    "чёрно-белые"
+   ],
+   "camera": "zoom_out",
+   "transition": "zoom",
+   "sfx": "none",
+   "card": "",
+   "hold": 0.0
+  },
+  {
+   "chapter": 2,
+   "text": "Если хочешь их запоминать, держи у кровати блокнот и записывай сон сразу, как открыл глаза.",
+   "setting": "room",
+   "character_emotion": "happy",
+   "character_pose": "point",
+   "character_side": "left",
+   "props": [
+    "book"
+   ],
+   "big_text": "",
+   "keywords": [
+    "блокнот"
+   ],
+   "camera": "pan_left",
+   "transition": "slide",
+   "sfx": "pop",
+   "card": "",
+   "hold": 0.0
+  },
+  {
+   "chapter": 2,
+   "text": "А некоторые люди даже понимают во сне, что спят, и могут менять сюжет.",
+   "setting": "space",
+   "character_emotion": "excited",
+   "character_pose": "hands_up",
+   "character_side": "right",
+   "props": [
+    "star",
+    "rocket"
+   ],
+   "big_text": "",
+   "keywords": [
+    "понимают"
+   ],
+   "camera": "zoom_in",
+   "transition": "zoom",
+   "sfx": "whoosh",
+   "card": "",
+   "hold": 0.0
+  },
+  {
+   "chapter": 2,
+   "text": "Такие сны называют осознанными, и их всерьёз изучают в лабораториях.",
+   "setting": "lab",
+   "character_emotion": "neutral",
+   "character_pose": "point",
+   "character_side": "left",
+   "props": [
+    "magnifier"
+   ],
+   "big_text": "осознанные сны",
+   "keywords": [
+    "осознанными"
+   ],
+   "camera": "zoom_out",
+   "transition": "flash",
+   "sfx": "ding",
+   "card": "",
+   "hold": 0.0
+  },
+  {
+   "chapter": 3,
+   "text": "Глава четвёртая. Сонный паралич.",
+   "setting": "night_city",
+   "character_emotion": null,
+   "character_pose": "idle",
+   "character_side": "left",
+   "props": [],
+   "big_text": "",
+   "keywords": [],
+   "camera": "zoom_in",
+   "transition": "flash",
+   "sfx": "boom",
+   "card": "chapter",
+   "hold": 0.0
+  },
+  {
+   "chapter": 3,
+   "text": "А теперь самая жуткая часть.",
+   "setting": "night_city",
+   "character_emotion": "scared",
+   "character_pose": "idle",
+   "character_side": "left",
+   "props": [
+    "exclamation"
+   ],
+   "big_text": "",
+   "keywords": [
+    "жуткая"
+   ],
+   "camera": "push_up",
+   "transition": "fade",
+   "sfx": "riser",
+   "card": "",
+   "hold": 0.0
+  },
+  {
+   "chapter": 3,
+   "text": "Представь: ты просыпаешься ночью, всё видишь, но не можешь пошевелить даже пальцем.",
+   "setting": "room",
+   "character_emotion": "scared",
+   "character_pose": "idle",
+   "character_side": "right",
+   "props": [
+    "eye"
+   ],
+   "big_text": "",
+   "keywords": [
+    "пошевелить"
+   ],
+   "camera": "zoom_in",
+   "transition": "slide",
+   "sfx": "none",
+   "card": "",
+   "hold": 0.0
+  },
+  {
+   "chapter": 3,
+   "text": "А в углу комнаты будто стоит чья-то тёмная фигура.",
+   "setting": "room",
+   "character_emotion": "scared",
+   "character_pose": "hands_up",
+   "character_side": "left",
+   "props": [
+    "question"
+   ],
+   "big_text": "",
+   "keywords": [
+    "фигура"
+   ],
+   "camera": "shake",
+   "transition": "flash",
+   "sfx": "boom",
+   "card": "",
+   "hold": 0.0
+  },
+  {
+   "chapter": 3,
+   "text": "Это сонный паралич.",
+   "setting": "night_city",
+   "character_emotion": null,
+   "character_pose": "idle",
+   "character_side": "center",
+   "props": [
+    "moon"
+   ],
+   "big_text": "",
+   "keywords": [
+    "сонный",
+    "паралич"
+   ],
+   "camera": "zoom_in",
+   "transition": "zoom",
+   "sfx": "none",
+   "card": "",
+   "hold": 0.0
+  },
+  {
+   "chapter": 3,
+   "text": "Чаще всего он настигает тех, кто спит на спине.",
+   "setting": "room",
+   "character_emotion": "thinking",
+   "character_pose": "think",
+   "character_side": "left",
+   "props": [
+    "moon"
+   ],
+   "big_text": "",
+   "keywords": [
+    "спине"
+   ],
+   "camera": "pan_right",
+   "transition": "slide",
+   "sfx": "none",
+   "card": "",
+   "hold": 0.0
+  },
+  {
+   "chapter": 3,
+   "text": "По оценкам исследователей, хотя бы раз в жизни его испытывают около восьми процентов людей.",
+   "setting": "lab",
+   "character_emotion": "surprised",
+   "character_pose": "point",
+   "character_side": "right",
+   "props": [
+    "magnifier"
+   ],
+   "big_text": "8%",
+   "keywords": [
+    "восьми",
+    "процентов"
+   ],
+   "camera": "pan_left",
+   "transition": "slide",
+   "sfx": "pop",
+   "card": "",
+   "hold": 0.0
+  },
+  {
+   "chapter": 3,
+   "text": "Причина в том, что мозг уже проснулся, а мышцы ещё выключены, как в быстром сне.",
+   "setting": "brain",
+   "character_emotion": "thinking",
+   "character_pose": "think",
+   "character_side": "left",
+   "props": [
+    "brain",
+    "lightning"
+   ],
+   "big_text": "",
+   "keywords": [
+    "выключены"
+   ],
+   "camera": "zoom_out",
+   "transition": "fade",
+   "sfx": "none",
+   "card": "",
+   "hold": 0.0
+  },
+  {
+   "chapter": 3,
+   "text": "Сознание наполовину во сне, и мозг дорисовывает пугающие образы.",
+   "setting": "brain",
+   "character_emotion": "scared",
+   "character_pose": "shrug",
+   "character_side": "right",
+   "props": [
+    "eye"
+   ],
+   "big_text": "",
+   "keywords": [
+    "дорисовывает"
+   ],
+   "camera": "push_up",
+   "transition": "zoom",
+   "sfx": "none",
+   "card": "",
+   "hold": 0.0
+  },
+  {
+   "chapter": 3,
+   "text": "Отсюда у самых разных народов легенды о ночных существах, которые садятся человеку на грудь.",
+   "setting": "night_city",
+   "character_emotion": "scared",
+   "character_pose": "hands_up",
+   "character_side": "left",
+   "props": [
+    "moon",
+    "skull"
+   ],
+   "big_text": "",
+   "keywords": [
+    "легенды"
+   ],
+   "camera": "pan_right",
+   "transition": "slide",
+   "sfx": "none",
+   "card": "",
+   "hold": 0.0
+  },
+  {
+   "chapter": 3,
+   "text": "Хорошая новость: сонный паралич не опасен и обычно длится от нескольких секунд до пары минут.",
+   "setting": "city_day",
+   "character_emotion": "happy",
+   "character_pose": "wave",
+   "character_side": "right",
+   "props": [
+    "heart"
+   ],
+   "big_text": "",
+   "keywords": [
+    "не",
+    "опасен"
+   ],
+   "camera": "zoom_in",
+   "transition": "flash",
+   "sfx": "ding",
+   "card": "",
+   "hold": 0.0
+  },
+  {
+   "chapter": 3,
+   "text": "Многие советуют в такой момент не паниковать и попробовать пошевелить пальцами рук или ног.",
+   "setting": "room",
+   "character_emotion": "neutral",
+   "character_pose": "point",
+   "character_side": "left",
+   "props": [
+    "key"
+   ],
+   "big_text": "",
+   "keywords": [
+    "пальцами"
+   ],
+   "camera": "zoom_in",
+   "transition": "slide",
+   "sfx": "none",
+   "card": "",
+   "hold": 0.0
+  },
+  {
+   "chapter": 3,
+   "text": "Чаще всего он случается при недосыпе и сбитом режиме, так что лучшая защита — нормальный сон.",
+   "setting": "room",
+   "character_emotion": "neutral",
+   "character_pose": "point",
+   "character_side": "left",
+   "props": [
+    "clock"
+   ],
+   "big_text": "",
+   "keywords": [
+    "недосыпе"
+   ],
+   "camera": "zoom_out",
+   "transition": "fade",
+   "sfx": "none",
+   "card": "",
+   "hold": 0.0
+  },
+  {
+   "chapter": 4,
+   "text": "Глава пятая. Что будет, если не спать.",
+   "setting": "lab",
+   "character_emotion": null,
+   "character_pose": "idle",
+   "character_side": "left",
+   "props": [],
+   "big_text": "",
+   "keywords": [],
+   "camera": "zoom_in",
+   "transition": "flash",
+   "sfx": "whoosh",
+   "card": "chapter",
+   "hold": 0.0
+  },
+  {
+   "chapter": 4,
+   "text": "В конце тысяча девятьсот шестьдесят третьего года американский школьник Рэнди Гарднер решил поставить рекорд.",
+   "setting": "city_day",
+   "character_emotion": "excited",
+   "character_pose": "wave",
+   "character_side": "left",
+   "props": [
+    "star"
+   ],
+   "big_text": "1963",
+   "keywords": [
+    "Гарднер"
+   ],
+   "camera": "zoom_in",
+   "transition": "fade",
+   "sfx": "none",
+   "card": "",
+   "hold": 0.0
+  },
+  {
+   "chapter": 4,
+   "text": "Он не спал одиннадцать суток подряд, больше двухсот шестидесяти часов.",
+   "setting": "night_city",
+   "character_emotion": null,
+   "character_pose": "idle",
+   "character_side": "center",
+   "props": [
+    "clock"
+   ],
+   "big_text": "264 часа",
+   "keywords": [
+    "одиннадцать",
+    "суток"
+   ],
+   "camera": "zoom_out",
+   "transition": "zoom",
+   "sfx": "boom",
+   "card": "",
+   "hold": 0.0
+  },
+  {
+   "chapter": 4,
+   "text": "Уже через несколько дней начались проблемы с памятью, вниманием и настроением.",
+   "setting": "brain",
+   "character_emotion": "sad",
+   "character_pose": "idle",
+   "character_side": "right",
+   "props": [
+    "brain"
+   ],
+   "big_text": "",
+   "keywords": [
+    "памятью"
+   ],
+   "camera": "pan_left",
+   "transition": "slide",
+   "sfx": "none",
+   "card": "",
+   "hold": 0.0
+  },
+  {
+   "chapter": 4,
+   "text": "Слова путались, а простые задачи давались с огромным трудом.",
+   "setting": "lab",
+   "character_emotion": "thinking",
+   "character_pose": "think",
+   "character_side": "left",
+   "props": [
+    "question",
+    "book"
+   ],
+   "big_text": "",
+   "keywords": [
+    "путались"
+   ],
+   "camera": "push_up",
+   "transition": "fade",
+   "sfx": "none",
+   "card": "",
+   "hold": 0.0
+  },
+  {
+   "chapter": 4,
+   "text": "А ближе к концу появились галлюцинации: ему казалось, что он известный футболист.",
+   "setting": "city_day",
+   "character_emotion": "surprised",
+   "character_pose": "hands_up",
+   "character_side": "right",
+   "props": [
+    "star"
+   ],
+   "big_text": "",
+   "keywords": [
+    "галлюцинации"
+   ],
+   "camera": "zoom_in",
+   "transition": "whip",
+   "sfx": "whoosh",
+   "card": "",
+   "hold": 0.0
+  },
+  {
+   "chapter": 4,
+   "text": "После эксперимента Рэнди проспал около четырнадцати часов, и симптомы прошли.",
+   "setting": "room",
+   "character_emotion": "happy",
+   "character_pose": "idle",
+   "character_side": "left",
+   "props": [
+    "moon"
+   ],
+   "big_text": "",
+   "keywords": [
+    "четырнадцати"
+   ],
+   "camera": "zoom_out",
+   "transition": "fade",
+   "sfx": "none",
+   "card": "",
+   "hold": 0.0
+  },
+  {
+   "chapter": 4,
+   "text": "Сегодня Книга рекордов Гиннесса больше не регистрирует такие попытки, потому что это опасно.",
+   "setting": "lab",
+   "character_emotion": "neutral",
+   "character_pose": "point",
+   "character_side": "right",
+   "props": [
+    "book",
+    "skull"
+   ],
+   "big_text": "",
+   "keywords": [
+    "опасно"
+   ],
+   "camera": "pan_right",
+   "transition": "slide",
+   "sfx": "pop",
+   "card": "",
+   "hold": 0.0
+  },
+  {
+   "chapter": 4,
+   "text": "И не нужно не спать сутками, чтобы почувствовать последствия.",
+   "setting": "night_city",
+   "character_emotion": "thinking",
+   "character_pose": "think",
+   "character_side": "left",
+   "props": [
+    "clock"
+   ],
+   "big_text": "",
+   "keywords": [
+    "последствия"
+   ],
+   "camera": "zoom_in",
+   "transition": "zoom",
+   "sfx": "none",
+   "card": "",
+   "hold": 0.0
+  },
+  {
+   "chapter": 4,
+   "text": "При сильной усталости мозг начинает отключаться на несколько секунд прямо днём, и это называют микросном.",
+   "setting": "brain",
+   "character_emotion": "scared",
+   "character_pose": "shrug",
+   "character_side": "right",
+   "props": [
+    "brain",
+    "clock"
+   ],
+   "big_text": "микросон",
+   "keywords": [
+    "микросном"
+   ],
+   "camera": "zoom_in",
+   "transition": "flash",
+   "sfx": "boom",
+   "card": "",
+   "hold": 0.0
+  },
+  {
+   "chapter": 4,
+   "text": "Человек часто даже не замечает этих провалов, поэтому усталость за рулём так опасна.",
+   "setting": "night_city",
+   "character_emotion": "scared",
+   "character_pose": "hands_up",
+   "character_side": "left",
+   "props": [
+    "exclamation"
+   ],
+   "big_text": "",
+   "keywords": [
+    "рулём"
+   ],
+   "camera": "shake",
+   "transition": "whip",
+   "sfx": "whoosh",
+   "card": "",
+   "hold": 0.0
+  },
+  {
+   "chapter": 4,
+   "text": "Исследования показывают, что после семнадцати–девятнадцати часов без сна реакция ухудшается примерно как от небольшой дозы алкоголя.",
+   "setting": "lab",
+   "character_emotion": "surprised",
+   "character_pose": "point",
+   "character_side": "right",
+   "props": [
+    "magnifier",
+    "exclamation"
+   ],
+   "big_text": "17–19 часов",
+   "keywords": [
+    "реакция"
+   ],
+   "camera": "push_up",
+   "transition": "flash",
+   "sfx": "boom",
+   "card": "",
+   "hold": 0.0
+  },
+  {
+   "chapter": 4,
+   "text": "А при постоянном недосыпе страдают память, иммунитет и настроение.",
+   "setting": "brain",
+   "character_emotion": "sad",
+   "character_pose": "idle",
+   "character_side": "left",
+   "props": [
+    "heart",
+    "brain"
+   ],
+   "big_text": "",
+   "keywords": [
+    "недосыпе"
+   ],
+   "camera": "zoom_out",
+   "transition": "fade",
+   "sfx": "none",
+   "card": "",
+   "hold": 0.0
+  },
+  {
+   "chapter": 5,
+   "text": "Глава шестая. Как спать лучше.",
+   "setting": "sky_sunset",
+   "character_emotion": null,
+   "character_pose": "idle",
+   "character_side": "left",
+   "props": [],
+   "big_text": "",
+   "keywords": [],
+   "camera": "zoom_in",
+   "transition": "flash",
+   "sfx": "whoosh",
+   "card": "chapter",
+   "hold": 0.0
+  },
+  {
+   "chapter": 5,
+   "text": "Хорошая новость: качество сна можно заметно улучшить простыми привычками.",
+   "setting": "sky_sunset",
+   "character_emotion": "happy",
+   "character_pose": "wave",
+   "character_side": "left",
+   "props": [
+    "lightbulb"
+   ],
+   "big_text": "",
+   "keywords": [
+    "привычками"
+   ],
+   "camera": "zoom_in",
+   "transition": "fade",
+   "sfx": "ding",
+   "card": "",
+   "hold": 0.0
+  },
+  {
+   "chapter": 5,
+   "text": "Первое: ложись и вставай в одно и то же время, даже по выходным.",
+   "setting": "room",
+   "character_emotion": "neutral",
+   "character_pose": "point",
+   "character_side": "right",
+   "props": [
+    "clock"
+   ],
+   "big_text": "1",
+   "keywords": [
+    "одно",
+    "время"
+   ],
+   "camera": "pan_left",
+   "transition": "slide",
+   "sfx": "pop",
+   "card": "",
+   "hold": 0.0
+  },
+  {
+   "chapter": 5,
+   "text": "Так внутренние часы организма работают точнее, и засыпать становится легче.",
+   "setting": "brain",
+   "character_emotion": "happy",
+   "character_pose": "idle",
+   "character_side": "left",
+   "props": [
+    "clock",
+    "brain"
+   ],
+   "big_text": "",
+   "keywords": [
+    "внутренние",
+    "часы"
+   ],
+   "camera": "zoom_out",
+   "transition": "zoom",
+   "sfx": "none",
+   "card": "",
+   "hold": 0.0
+  },
+  {
+   "chapter": 5,
+   "text": "Второе: утром побудь на ярком свете, а вечером приглуши лампы.",
+   "setting": "sky_sunset",
+   "character_emotion": "neutral",
+   "character_pose": "point",
+   "character_side": "right",
+   "props": [
+    "lightbulb"
+   ],
+   "big_text": "2",
+   "keywords": [
+    "свете"
+   ],
+   "camera": "zoom_in",
+   "transition": "slide",
+   "sfx": "pop",
+   "card": "",
+   "hold": 0.0
+  },
+  {
+   "chapter": 5,
+   "text": "Яркий свет вечером, особенно от экранов, сдвигает выработку мелатонина — гормона сна.",
+   "setting": "room",
+   "character_emotion": "thinking",
+   "character_pose": "think",
+   "character_side": "left",
+   "props": [
+    "phone",
+    "moon"
+   ],
+   "big_text": "",
+   "keywords": [
+    "мелатонина"
+   ],
+   "camera": "push_up",
+   "transition": "fade",
+   "sfx": "none",
+   "card": "",
+   "hold": 0.0
+  },
+  {
+   "chapter": 5,
+   "text": "Третье: последний кофе — не позже чем за шесть-восемь часов до сна.",
+   "setting": "city_day",
+   "character_emotion": "surprised",
+   "character_pose": "point",
+   "character_side": "right",
+   "props": [
+    "coin"
+   ],
+   "big_text": "3",
+   "keywords": [
+    "кофе"
+   ],
+   "camera": "pan_right",
+   "transition": "whip",
+   "sfx": "pop",
+   "card": "",
+   "hold": 0.0
+  },
+  {
+   "chapter": 5,
+   "text": "Кофеин держится в организме гораздо дольше, чем кажется.",
+   "setting": "lab",
+   "character_emotion": "thinking",
+   "character_pose": "think",
+   "character_side": "left",
+   "props": [
+    "clock"
+   ],
+   "big_text": "",
+   "keywords": [
+    "дольше"
+   ],
+   "camera": "zoom_out",
+   "transition": "zoom",
+   "sfx": "none",
+   "card": "",
+   "hold": 0.0
+  },
+  {
+   "chapter": 5,
+   "text": "Четвёртое: в спальне должно быть прохладно, тихо и темно.",
+   "setting": "room",
+   "character_emotion": "happy",
+   "character_pose": "wave",
+   "character_side": "right",
+   "props": [
+    "moon"
+   ],
+   "big_text": "4",
+   "keywords": [
+    "прохладно"
+   ],
+   "camera": "zoom_in",
+   "transition": "slide",
+   "sfx": "pop",
+   "card": "",
+   "hold": 0.0
+  },
+  {
+   "chapter": 5,
+   "text": "Пятое: не наедайся плотно перед сном и не занимайся тяжёлым спортом за пару часов до него.",
+   "setting": "city_day",
+   "character_emotion": "neutral",
+   "character_pose": "point",
+   "character_side": "left",
+   "props": [
+    "heart"
+   ],
+   "big_text": "5",
+   "keywords": [
+    "плотно"
+   ],
+   "camera": "pan_right",
+   "transition": "slide",
+   "sfx": "pop",
+   "card": "",
+   "hold": 0.0
+  },
+  {
+   "chapter": 5,
+   "text": "И если днём хочется подремать, ограничься двадцатью минутами, чтобы не провалиться в глубокий сон.",
+   "setting": "city_day",
+   "character_emotion": "neutral",
+   "character_pose": "point",
+   "character_side": "left",
+   "props": [
+    "clock"
+   ],
+   "big_text": "20 минут",
+   "keywords": [
+    "двадцатью"
+   ],
+   "camera": "pan_left",
+   "transition": "fade",
+   "sfx": "none",
+   "card": "",
+   "hold": 0.0
+  },
+  {
+   "chapter": 5,
+   "text": "И главное: если не получается уснуть дольше двадцати минут, лучше встать и заняться чем-то спокойным при тусклом свете.",
+   "setting": "room",
+   "character_emotion": "thinking",
+   "character_pose": "think",
+   "character_side": "right",
+   "props": [
+    "moon",
+    "book"
+   ],
+   "big_text": "",
+   "keywords": [
+    "встать"
+   ],
+   "camera": "zoom_in",
+   "transition": "fade",
+   "sfx": "none",
+   "card": "",
+   "hold": 0.0
+  },
+  {
+   "chapter": 5,
+   "text": "Так мозг не привыкает связывать кровать с бессонницей.",
+   "setting": "brain",
+   "character_emotion": "happy",
+   "character_pose": "idle",
+   "character_side": "left",
+   "props": [
+    "brain",
+    "lightbulb"
+   ],
+   "big_text": "",
+   "keywords": [
+    "бессонницей"
+   ],
+   "camera": "zoom_out",
+   "transition": "zoom",
+   "sfx": "ding",
+   "card": "",
+   "hold": 0.0
+  },
+  {
+   "chapter": -1,
+   "text": "Получается, пока ты спишь, мозг не отдыхает, а делает одну из самых важных своих работ.",
+   "setting": "brain",
+   "character_emotion": "excited",
+   "character_pose": "hands_up",
+   "character_side": "right",
+   "props": [
+    "brain",
+    "star"
+   ],
+   "big_text": "",
+   "keywords": [
+    "важных"
+   ],
+   "camera": "zoom_in",
+   "transition": "flash",
+   "sfx": "boom",
+   "card": "",
+   "hold": 0.0
+  },
+  {
+   "chapter": -1,
+   "text": "Так что если сегодня ляжешь пораньше, считай, что ты не ленишься, а прокачиваешь мозг.",
+   "setting": "night_city",
+   "character_emotion": "happy",
+   "character_pose": "wave",
+   "character_side": "left",
+   "props": [
+    "moon",
+    "lightbulb"
+   ],
+   "big_text": "",
+   "keywords": [
+    "прокачиваешь"
+   ],
+   "camera": "zoom_out",
+   "transition": "fade",
+   "sfx": "none",
+   "card": "",
+   "hold": 0.0
+  },
+  {
+   "chapter": -1,
+   "text": "Напиши в комментариях, сколько часов ты обычно спишь.",
+   "setting": "room",
+   "character_emotion": "happy",
+   "character_pose": "point",
+   "character_side": "right",
+   "props": [
+    "clock",
+    "question"
+   ],
+   "big_text": "",
+   "keywords": [
+    "комментариях"
+   ],
+   "camera": "zoom_in",
+   "transition": "slide",
+   "sfx": "pop",
+   "card": "",
+   "hold": 0.0
+  },
+  {
+   "chapter": -1,
+   "text": "Если было интересно, подпишись на канал и поставь лайк. А в следующем видео разберём, как работает память.",
+   "setting": "space",
+   "character_emotion": null,
+   "character_pose": "idle",
+   "character_side": "left",
+   "props": [],
+   "big_text": "",
+   "keywords": [],
+   "camera": "zoom_in",
+   "transition": "flash",
+   "sfx": "ding",
+   "card": "end",
+   "hold": 9.0
+  }
+ ]
+}

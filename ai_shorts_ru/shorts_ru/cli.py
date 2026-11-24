@@ -27,7 +27,10 @@ def main(argv=None) -> int:
     _load_dotenv()
     p = argparse.ArgumentParser(prog="shorts_ru", description="Анимационные YouTube Shorts с русской озвучкой по одной теме.")
     p.add_argument("topic", nargs="?", help="тема ролика, например «почему мы видим сны»")
-    p.add_argument("-d", "--duration", type=float, help="длительность 30–60 с (по умолчанию из config.yaml)")
+    p.add_argument("-d", "--duration", type=float, help="длительность, с: 30–60 для Shorts, до 1800 для длинных видео")
+    p.add_argument("--format", choices=["short", "long"], help="short = вертикальный Shorts, long = видео 16:9 с главами")
+    p.add_argument("--channel", help="название канала для заставок, превью, шапки и описания")
+    p.add_argument("--workers", help="число процессов рендера (auto по умолчанию)")
     p.add_argument("-c", "--config", help="свой config.yaml")
     p.add_argument("-o", "--out", default="output", help="папка для результата (output)")
     p.add_argument("--name", help="имя файла без расширения")
@@ -46,9 +49,12 @@ def main(argv=None) -> int:
     try:
         cfg = load_config(a.config)
         if a.duration:
-            if not 30 <= a.duration <= 60:
-                raise ShortsError("--duration должна быть от 30 до 60 секунд")
+            if not 30 <= a.duration <= 1800:
+                raise ShortsError("--duration должна быть от 30 до 1800 секунд")
             cfg["video"]["duration"] = a.duration
+            cfg["_duration_from_cli"] = True
+        if a.workers:
+            cfg["video"]["workers"] = a.workers
         if a.voice:
             if a.voice.startswith("ru_RU-"):
                 cfg["voice"]["provider"], cfg["voice"]["piper_voice"] = "piper", a.voice
