@@ -28,10 +28,10 @@ def api(params):
     for attempt in range(8):
         try:
             with urllib.request.urlopen(urllib.request.Request(url, headers=UA), timeout=150) as r:
-                time.sleep(2.0)
+                time.sleep(5.0)
                 return json.load(r)
         except Exception as e:  # noqa: BLE001
-            wait = 90 + attempt * 30 if "429" in str(e) else 3 + attempt * 4
+            wait = 60 + attempt * 30 if "429" in str(e) else 3 + attempt * 4
             print(f"  API: {e} — жду {wait} с", flush=True)
             time.sleep(wait)
     raise RuntimeError("Wikimedia API недоступен")
@@ -98,7 +98,7 @@ def fetch_all():
             continue
         if key in meta and all((IMG / f"{key}_{i}.jpg").exists() for i in range(len(meta[key]))) and meta[key]:
             continue
-        cands = candidates(query, 3 if uses[key] >= 3 else 2)
+        cands = candidates(query, 2 if uses[key] >= 3 else 1)
         for i, c in enumerate(cands):
             dest = IMG / f"{key}_{i}.jpg"
             for attempt in range(4):
@@ -114,10 +114,10 @@ def fetch_all():
                     im.save(dest, quality=92)
                     break
                 except Exception as e:  # noqa: BLE001
-                    wait = 90 + attempt * 30 if "429" in str(e) else 3 + attempt * 4
+                    wait = 60 + attempt * 30 if "429" in str(e) else 3 + attempt * 4
                     print(f"  повтор {key}_{i}: {e} — жду {wait} с", flush=True)
                     time.sleep(wait)
-            time.sleep(3.0)
+            time.sleep(20.0)
         meta[key] = cands
         print(f"{key:22s} {len(cands)} шт. — {query}", flush=True)
         meta_path.write_text(json.dumps(meta, ensure_ascii=False, indent=1), encoding="utf-8")
