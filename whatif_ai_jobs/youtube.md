@@ -28,12 +28,12 @@
 Источники:
 Goldman Sachs (2023) · McKinsey Global Institute «Agents, robots, and us» (2025) · WEF Future of Jobs Report 2025 · Microsoft Research (2025) · Kela/STM (Финляндия) · GiveDirectly (Кения) · SEED (Стоктон) · OpenResearch · CBO · USDA ERS · J. Bessen. Полный список ссылок — в закреплённом комментарии.
 
-Фото: Wikimedia Commons (Public domain / CC0 / CC BY, авторы указаны в закреплённом комментарии). Музыка: оригинальная. Голос: синтез речи.
+Фото: Wikimedia Commons и Flickr (Public domain / CC0 / CC BY, авторы — в закреплённом комментарии). Музыка: оригинальная. Голос: синтез речи.
 
 #ЧтоЕсли #ИИ #БудущееРаботы
 ```
 
-Длина описания: 1579 символов (лимит 5000).
+Длина описания: 1582 символов (лимит 5000).
 
 ## Теги (15)
 
@@ -60,22 +60,66 @@ Goldman Sachs (2023) · McKinsey Global Institute «Agents, robots, and us» (20
 • https://0-www-imf-org.library.svsu.edu/external/pubs/ft/fandd/2015/03/pdf/bessen.pdf
 • https://en.wikipedia.org/wiki/Economic_Possibilities_for_our_Grandchildren
 
-Фото (Wikimedia Commons):
+Фото (Wikimedia Commons, Flickr):
 • Ged Carroll — CC BY 2.0 — https://commons.wikimedia.org/wiki/File:Empty_office.jpg
-• President (1981-1989 : Reagan). White House Photographic Off — Public domain — https://commons.wikimedia.org/wiki/File:Empty_Oval_Office_in_The_White_House_-_DPLA_-_a210b70429be57def74b3c6c603b6d89.jpg
-• President (1993-2001 : Clinton). White House Photograph Offi — Public domain — https://commons.wikimedia.org/wiki/File:Photograph_of_the_Oval_Office_Empty_-_DPLA_-_ee727a27b60aac2bf9c349dd57e47d0f.jpg
-• Cerium4B — CC0 — https://commons.wikimedia.org/wiki/File:Rangpur_city_highway_at_night_1.jpg
 • Ishanjyotibora — CC BY 4.0 — https://commons.wikimedia.org/wiki/File:National_Highway_during_night_at_Lakhara.jpg
-• Cerium4B — CC0 — https://commons.wikimedia.org/wiki/File:Rangpur_city_highway_at_night.jpg
 • Keymeulen — CC0 — https://commons.wikimedia.org/wiki/File:Crowd_crossing_the_street,_Hungary_2011.jpg
 • Jennifer Woodard Maderazo — CC BY 2.0 — https://commons.wikimedia.org/wiki/File:Corner_of_Stockton_and_Jackson_Street,_crowd,_San_Francisco_(April_2007).jpg
-• Jack Downey, U.S. Office of War Information — Public domain — https://commons.wikimedia.org/wiki/File:Crowds_of_French_patriots_line_the_Champs_Elysees-edit2.jpg
 • Julian Lupyan — CC0 — https://commons.wikimedia.org/wiki/File:Buildings_in_Financial_District,_Manhattan.jpg
-• Julian Lupyan — CC0 — https://commons.wikimedia.org/wiki/File:Financial_District_East_Skyline,_2025.jpg
-• Julian Lupyan — CC0 — https://commons.wikimedia.org/wiki/File:Skyline_of_Financial_District,_Manhattan,_2025.jpg
+• Unknown authorUnknown author — Public domain — https://commons.wikimedia.org/wiki/File:Andre_Citroen_rencontre_Henry_Ford_Juin_1923.jpg
+• Unknown authorUnknown author — Public domain — https://commons.wikimedia.org/wiki/File:John_Maynard_Keynes_1929.jpg
+• 'thöR — CC BY 2.0 — https://www.flickr.com/photos/42428589@N00/495988527
+• Jemimus — CC BY 2.0 — https://www.flickr.com/photos/12967790@N00/4285638187
+• Johan.V. — CC BY 2.0 — https://www.flickr.com/photos/26519208@N04/2498157861
+• markhillary — CC BY 2.0 — https://www.flickr.com/photos/56087830@N00/3309506859
+• markhillary — CC BY 2.0 — https://www.flickr.com/photos/56087830@N00/3309490947
+• garryknight — CC BY 2.0 — https://www.flickr.com/photos/8176740@N05/15657882247
+• toolstop — CC BY 2.0 — https://www.flickr.com/photos/42408834@N06/5330227632
+• Keith Williamson — CC BY 2.0 — https://www.flickr.com/photos/34673186@N03/5306295850
+• u07ch — CC BY 2.0 — https://www.flickr.com/photos/76705972@N00/29251553196
+• lupita.ala — CC BY 2.0 — https://www.flickr.com/photos/75691612@N08/6862658630
+• Wilson Hui — CC BY 2.0 — https://www.flickr.com/photos/51942038@N04/12097239876
+• lsiegert — CC BY 2.0 — https://www.flickr.com/photos/13127104@N08/3334892258
+• wwward0 — CC BY 2.0 — https://www.flickr.com/photos/15802578@N00/18418392694
+• Yiie — CC BY 2.0 — https://www.flickr.com/photos/7342411@N02/4720347876
+• jurvetson — CC BY 2.0 — https://www.flickr.com/photos/44124348109@N01/8975298066
+• Creative Tools — CC BY 2.0 — https://www.flickr.com/photos/33907867@N02/14964195639
+• David Blaikie — CC BY 2.0 — https://www.flickr.com/photos/12568962@N00/3448030730
+• Mark Hodson Photos — CC BY 2.0 — https://www.flickr.com/photos/20538653@N00/14856861681
+• Dimitry B — CC BY 2.0 — https://www.flickr.com/photos/61533954@N00/9168343124
+• Giuseppe Milo (www.pixael.com) — CC BY 2.0 — https://www.flickr.com/photos/87690240@N03/27387081943
+• Mobilephotos@heidenstrom — CC BY 2.0 — https://www.flickr.com/photos/38841280@N03/5554867741
+• The Dilly Lama — CC BY 2.0 — https://www.flickr.com/photos/50169083@N00/1199545090
+• sonstroem — CC BY 2.0 — https://www.flickr.com/photos/96964826@N05/31890729246
+• Manuel Schmalstieg — CC BY 2.0 — https://www.flickr.com/photos/97179825@N00/15751933467
+• Manuel Schmalstieg — CC BY 2.0 — https://www.flickr.com/photos/97179825@N00/15911884516
+• Ian Sane — CC BY 2.0 — https://www.flickr.com/photos/31246066@N04/4210502680
+• tux0racer — CC BY 2.0 — https://www.flickr.com/photos/87060703@N08/8300317020
+• pingnews.com — Public Domain Mark 1.0 — https://www.flickr.com/photos/39735679@N00/501634331
+• janbommes — CC BY 2.0 — https://www.flickr.com/photos/30036111@N04/10779755053
+• quinet — CC BY 2.0 — https://www.flickr.com/photos/91994044@N00/28854325518
+• selkovjr — CC BY 2.0 — https://www.flickr.com/photos/14192663@N07/2173614324
+• crackdog — Public Domain Mark 1.0 — https://www.flickr.com/photos/88645472@N00/6239413521
+• crackdog — Public Domain Mark 1.0 — https://www.flickr.com/photos/88645472@N00/4943347151
+• crackdog — Public Domain Mark 1.0 — https://www.flickr.com/photos/88645472@N00/5643782311
+• motleypixel — CC BY 2.0 — https://www.flickr.com/photos/16894864@N05/6239564720
+• francisco.j.gonzalez — CC BY 2.0 — https://www.flickr.com/photos/54752966@N06/8085342806
+• Thomas Leuthard — CC BY 2.0 — https://www.flickr.com/photos/41346951@N05/14981603135
+• Cristian Ştefănescu — CC BY 2.0 — https://www.flickr.com/photos/46145615@N02/14171645229
+• lejoe — CC BY 2.0 — https://www.flickr.com/photos/21458229@N00/2800660239
+• alykat — CC BY 2.0 — https://www.flickr.com/photos/80081757@N00/5850122
+• Average Jane — CC BY 2.0 — https://www.flickr.com/photos/64401168@N00/7624350518
+• Peppe702 — CC BY 2.0 — https://www.flickr.com/photos/81812830@N03/7976978042
+• luis perez — CC BY 2.0 — https://www.flickr.com/photos/65092670@N00/4969047988
+• Augapfel — CC BY 2.0 — https://www.flickr.com/photos/47038415@N00/3250006311
+• Phillie Casablanca — CC BY 2.0 — https://www.flickr.com/photos/19451080@N00/3353381517
+• illustir — CC BY 2.0 — https://www.flickr.com/photos/12505664@N00/9311087323
+• tendenci — CC BY 2.0 — https://www.flickr.com/photos/107430063@N05/13806684563
+• jurvetson — CC BY 2.0 — https://www.flickr.com/photos/44124348109@N01/52023220709
+• Futurilla — CC0 1.0 — https://www.flickr.com/photos/52067454@N00/29841969793
 ```
 
-Длина: 3161 символов (лимит комментария 10 000).
+Длина: 6530 символов (лимит комментария 10 000).
 
 ## Конечная заставка
 

@@ -127,15 +127,17 @@ def sources_md():
     lines += ["", "Сценарные элементы (обвал биржевого индекса, «утопия/антиутопия», сроки «день/месяц/год») — "
               "мысленный эксперимент; на экране помечены как иллюстрация сценария.", "",
               "## Изображения", "",
-              "Все фото — Wikimedia Commons, только лицензии, разрешающие коммерческое использование без "
-              "«копилефта»: Public domain, CC0, CC BY. Фото обработаны (цветокоррекция, кадрирование, движение камеры). "
+              "Фото — Wikimedia Commons и Flickr (поиск через Openverse). Только лицензии, разрешающие "
+              "коммерческое использование без «копилефта»: Public domain / Public Domain Mark, CC0, CC BY. "
+              "CC BY-SA, NC и ND не использовались. Фото обработаны (цветокоррекция, кадрирование, движение камеры). "
               "Инфографика, заставки, графики и превью нарисованы кодом (Python/Pillow) специально для ролика.", "",
-              "| Ключ | Файл | Автор | Лицензия | Ссылка |", "|---|---|---|---|---|"]
+              "| Ключ | Название | Автор | Лицензия | Источник | Ссылка |", "|---|---|---|---|---|---|"]
     for key, c in image_credits():
         author = re.sub(r"\s+", " ", c["author"]).replace("|", "/")[:80]
         title = c["title"].replace("File:", "").replace("|", "/")
         lic = c["license"] + (f" ({c['license_url']})" if c.get("license_url") else "")
-        lines.append(f"| {key} | {title} | {author} | {lic} | {c['page']} |")
+        src = c.get("source", "Wikimedia Commons")
+        lines.append(f"| {key} | {title} | {author} | {lic} | {src} | {c['page']} |")
     lines += ["", "## Музыка и звук", "",
               "Оригинальная процедурная электронная/эмбиент-музыка, сгенерированная кодом для этого ролика "
               "(модуль `ai_shorts_ru/shorts_ru/audio.py`): своя тема на каждую главу. Сторонних треков нет — "
@@ -163,10 +165,10 @@ def youtube_md():
 Источники:
 Goldman Sachs (2023) · McKinsey Global Institute «Agents, robots, and us» (2025) · WEF Future of Jobs Report 2025 · Microsoft Research (2025) · Kela/STM (Финляндия) · GiveDirectly (Кения) · SEED (Стоктон) · OpenResearch · CBO · USDA ERS · J. Bessen. Полный список ссылок — в закреплённом комментарии.
 
-Фото: Wikimedia Commons (Public domain / CC0 / CC BY, авторы указаны в закреплённом комментарии). Музыка: оригинальная. Голос: синтез речи.
+Фото: Wikimedia Commons и Flickr (Public domain / CC0 / CC BY, авторы — в закреплённом комментарии). Музыка: оригинальная. Голос: синтез речи.
 
 {HASHTAGS}"""
-    credits = ["Фото (Wikimedia Commons):"]
+    credits = ["Фото (Wikimedia Commons, Flickr):"]
     for key, c in image_credits():
         author = re.sub(r"\s+", " ", c["author"])[:60]
         credits.append(f"• {author} — {c['license']} — {c['page']}")

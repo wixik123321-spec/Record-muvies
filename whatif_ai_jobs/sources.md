@@ -46,22 +46,66 @@
 
 ## Изображения
 
-Все фото — Wikimedia Commons, только лицензии, разрешающие коммерческое использование без «копилефта»: Public domain, CC0, CC BY. Фото обработаны (цветокоррекция, кадрирование, движение камеры). Инфографика, заставки, графики и превью нарисованы кодом (Python/Pillow) специально для ролика.
+Фото — Wikimedia Commons и Flickr (поиск через Openverse). Только лицензии, разрешающие коммерческое использование без «копилефта»: Public domain / Public Domain Mark, CC0, CC BY. CC BY-SA, NC и ND не использовались. Фото обработаны (цветокоррекция, кадрирование, движение камеры). Инфографика, заставки, графики и превью нарисованы кодом (Python/Pillow) специально для ролика.
 
-| Ключ | Файл | Автор | Лицензия | Ссылка |
-|---|---|---|---|---|
-| office_empty | Empty office.jpg | Ged Carroll | CC BY 2.0 (https://creativecommons.org/licenses/by/2.0) | https://commons.wikimedia.org/wiki/File:Empty_office.jpg |
-| office_empty | Empty Oval Office in The White House - DPLA - a210b70429be57def74b3c6c603b6d89.jpg | President (1981-1989 : Reagan). White House Photographic Office. 1981-1989 | Public domain | https://commons.wikimedia.org/wiki/File:Empty_Oval_Office_in_The_White_House_-_DPLA_-_a210b70429be57def74b3c6c603b6d89.jpg |
-| office_empty | Photograph of the Oval Office Empty - DPLA - ee727a27b60aac2bf9c349dd57e47d0f.jpg | President (1993-2001 : Clinton). White House Photograph Office. 1/20/1993-1/20/2 | Public domain | https://commons.wikimedia.org/wiki/File:Photograph_of_the_Oval_Office_Empty_-_DPLA_-_ee727a27b60aac2bf9c349dd57e47d0f.jpg |
-| highway_night | Rangpur city highway at night 1.jpg | Cerium4B | CC0 (http://creativecommons.org/publicdomain/zero/1.0/deed.en) | https://commons.wikimedia.org/wiki/File:Rangpur_city_highway_at_night_1.jpg |
-| highway_night | National Highway during night at Lakhara.jpg | Ishanjyotibora | CC BY 4.0 (https://creativecommons.org/licenses/by/4.0) | https://commons.wikimedia.org/wiki/File:National_Highway_during_night_at_Lakhara.jpg |
-| highway_night | Rangpur city highway at night.jpg | Cerium4B | CC0 (http://creativecommons.org/publicdomain/zero/1.0/deed.en) | https://commons.wikimedia.org/wiki/File:Rangpur_city_highway_at_night.jpg |
-| crowd | Crowd crossing the street, Hungary 2011.jpg | Keymeulen | CC0 (http://creativecommons.org/publicdomain/zero/1.0/deed.en) | https://commons.wikimedia.org/wiki/File:Crowd_crossing_the_street,_Hungary_2011.jpg |
-| crowd | Corner of Stockton and Jackson Street, crowd, San Francisco (April 2007).jpg | Jennifer Woodard Maderazo | CC BY 2.0 (https://creativecommons.org/licenses/by/2.0) | https://commons.wikimedia.org/wiki/File:Corner_of_Stockton_and_Jackson_Street,_crowd,_San_Francisco_(April_2007).jpg |
-| crowd | Crowds of French patriots line the Champs Elysees-edit2.jpg | Jack Downey, U.S. Office of War Information | Public domain | https://commons.wikimedia.org/wiki/File:Crowds_of_French_patriots_line_the_Champs_Elysees-edit2.jpg |
-| finance_towers | Buildings in Financial District, Manhattan.jpg | Julian Lupyan | CC0 (http://creativecommons.org/publicdomain/zero/1.0/deed.en) | https://commons.wikimedia.org/wiki/File:Buildings_in_Financial_District,_Manhattan.jpg |
-| finance_towers | Financial District East Skyline, 2025.jpg | Julian Lupyan | CC0 (http://creativecommons.org/publicdomain/zero/1.0/deed.en) | https://commons.wikimedia.org/wiki/File:Financial_District_East_Skyline,_2025.jpg |
-| finance_towers | Skyline of Financial District, Manhattan, 2025.jpg | Julian Lupyan | CC0 (http://creativecommons.org/publicdomain/zero/1.0/deed.en) | https://commons.wikimedia.org/wiki/File:Skyline_of_Financial_District,_Manhattan,_2025.jpg |
+| Ключ | Название | Автор | Лицензия | Источник | Ссылка |
+|---|---|---|---|---|---|
+| office_empty | Empty office.jpg | Ged Carroll | CC BY 2.0 (https://creativecommons.org/licenses/by/2.0) | Wikimedia Commons | https://commons.wikimedia.org/wiki/File:Empty_office.jpg |
+| highway_night | National Highway during night at Lakhara.jpg | Ishanjyotibora | CC BY 4.0 (https://creativecommons.org/licenses/by/4.0) | Wikimedia Commons | https://commons.wikimedia.org/wiki/File:National_Highway_during_night_at_Lakhara.jpg |
+| crowd | Crowd crossing the street, Hungary 2011.jpg | Keymeulen | CC0 (http://creativecommons.org/publicdomain/zero/1.0/deed.en) | Wikimedia Commons | https://commons.wikimedia.org/wiki/File:Crowd_crossing_the_street,_Hungary_2011.jpg |
+| crowd | Corner of Stockton and Jackson Street, crowd, San Francisco (April 2007).jpg | Jennifer Woodard Maderazo | CC BY 2.0 (https://creativecommons.org/licenses/by/2.0) | Wikimedia Commons | https://commons.wikimedia.org/wiki/File:Corner_of_Stockton_and_Jackson_Street,_crowd,_San_Francisco_(April_2007).jpg |
+| finance_towers | Buildings in Financial District, Manhattan.jpg | Julian Lupyan | CC0 (http://creativecommons.org/publicdomain/zero/1.0/deed.en) | Wikimedia Commons | https://commons.wikimedia.org/wiki/File:Buildings_in_Financial_District,_Manhattan.jpg |
+| henry_ford | Andre Citroen rencontre Henry Ford Juin 1923.jpg | Unknown authorUnknown author | Public domain | Wikimedia Commons | https://commons.wikimedia.org/wiki/File:Andre_Citroen_rencontre_Henry_Ford_Juin_1923.jpg |
+| keynes | John Maynard Keynes 1929.jpg | Unknown authorUnknown author | Public domain | Wikimedia Commons | https://commons.wikimedia.org/wiki/File:John_Maynard_Keynes_1929.jpg |
+| laptop_night | laptop night - noche de laptops | 'thöR | CC BY 2.0 (https://creativecommons.org/licenses/by/2.0/) | Openverse / Flickr | https://www.flickr.com/photos/42428589@N00/495988527 |
+| laptop_night | This is how I like to admin | Jemimus | CC BY 2.0 (https://creativecommons.org/licenses/by/2.0/) | Openverse / Flickr | https://www.flickr.com/photos/12967790@N00/4285638187 |
+| laptop_night | Hacking | Johan.V. | CC BY 2.0 (https://creativecommons.org/licenses/by/2.0/) | Openverse / Flickr | https://www.flickr.com/photos/26519208@N04/2498157861 |
+| call_center | Xceed Call centre in Cairo | markhillary | CC BY 2.0 (https://creativecommons.org/licenses/by/2.0/) | Openverse / Flickr | https://www.flickr.com/photos/56087830@N00/3309506859 |
+| call_center | Vodafone call centre | markhillary | CC BY 2.0 (https://creativecommons.org/licenses/by/2.0/) | Openverse / Flickr | https://www.flickr.com/photos/56087830@N00/3309490947 |
+| electrician | Electrician | garryknight | CC BY 2.0 (https://creativecommons.org/licenses/by/2.0/) | Openverse / Flickr | https://www.flickr.com/photos/8176740@N05/15657882247 |
+| electrician | Makita P51851 96 Piece Electricians Kit | toolstop | CC BY 2.0 (https://creativecommons.org/licenses/by/2.0/) | Openverse / Flickr | https://www.flickr.com/photos/42408834@N06/5330227632 |
+| plumber | Keith the plumber Project 365(2) Day 329 | Keith Williamson | CC BY 2.0 (https://creativecommons.org/licenses/by/2.0/) | Openverse / Flickr | https://www.flickr.com/photos/34673186@N03/5306295850 |
+| empty_street | Empty Streets of Birmingham | u07ch | CC BY 2.0 (https://creativecommons.org/licenses/by/2.0/) | Openverse / Flickr | https://www.flickr.com/photos/76705972@N00/29251553196 |
+| empty_street | Empty Streets | lupita.ala | CC BY 2.0 (https://creativecommons.org/licenses/by/2.0/) | Openverse / Flickr | https://www.flickr.com/photos/75691612@N08/6862658630 |
+| park_people | Tai Chi at the People's Park | Wilson Hui | CC BY 2.0 (https://creativecommons.org/licenses/by/2.0/) | Openverse / Flickr | https://www.flickr.com/photos/51942038@N04/12097239876 |
+| atm | automated teller machine machine | lsiegert | CC BY 2.0 (https://creativecommons.org/licenses/by/2.0/) | Openverse / Flickr | https://www.flickr.com/photos/13127104@N08/3334892258 |
+| atm | Glass Tellers | wwward0 | CC BY 2.0 (https://creativecommons.org/licenses/by/2.0/) | Openverse / Flickr | https://www.flickr.com/photos/15802578@N00/18418392694 |
+| mall_empty | Hong Kong: Empty Mall | Yiie | CC BY 2.0 (https://creativecommons.org/licenses/by/2.0/) | Openverse / Flickr | https://www.flickr.com/photos/7342411@N02/4720347876 |
+| warehouse_robot | SpaceX Octaweb | jurvetson | CC BY 2.0 (https://creativecommons.org/licenses/by/2.0/) | Openverse / Flickr | https://www.flickr.com/photos/44124348109@N01/8975298066 |
+| car_robots | 3D Printshow 2014 London - Industrial robot 3D printer v02 | Creative Tools | CC BY 2.0 (https://creativecommons.org/licenses/by/2.0/) | Openverse / Flickr | https://www.flickr.com/photos/33907867@N02/14964195639 |
+| stock_exchange | New York Stock Exchange | David Blaikie | CC BY 2.0 (https://creativecommons.org/licenses/by/2.0/) | Openverse / Flickr | https://www.flickr.com/photos/12568962@N00/3448030730 |
+| banknotes | US dollars and Euros - cash banknotes | Mark Hodson Photos | CC BY 2.0 (https://creativecommons.org/licenses/by/2.0/) | Openverse / Flickr | https://www.flickr.com/photos/20538653@N00/14856861681 |
+| helsinki | Helsinki Cathedral, White Night | Dimitry B | CC BY 2.0 (https://creativecommons.org/licenses/by/2.0/) | Openverse / Flickr | https://www.flickr.com/photos/61533954@N00/9168343124 |
+| helsinki | On the train - Helsinki, Finland - Black and white street photography | Giuseppe Milo (www.pixael.com) | CC BY 2.0 (https://creativecommons.org/licenses/by/2.0/) | Openverse / Flickr | https://www.flickr.com/photos/87690240@N03/27387081943 |
+| kenya_village | Dennis Refugee kid in Mt Kenya Village | Mobilephotos@heidenstrom | CC BY 2.0 (https://creativecommons.org/licenses/by/2.0/) | Openverse / Flickr | https://www.flickr.com/photos/38841280@N03/5554867741 |
+| kenya_village | Masai Mara Tribe Women 2 | The Dilly Lama | CC BY 2.0 (https://creativecommons.org/licenses/by/2.0/) | Openverse / Flickr | https://www.flickr.com/photos/50169083@N00/1199545090 |
+| stockton | Deep Water Channel, Stockton, California. Sunset. | sonstroem | CC BY 2.0 (https://creativecommons.org/licenses/by/2.0/) | Openverse / Flickr | https://www.flickr.com/photos/96964826@N05/31890729246 |
+| coworking | Voisins Coworking / Cafe — 2014-12-03 | Manuel Schmalstieg | CC BY 2.0 (https://creativecommons.org/licenses/by/2.0/) | Openverse / Flickr | https://www.flickr.com/photos/97179825@N00/15751933467 |
+| coworking | Voisins Coworking / Cafe — 2014-12-03 | Manuel Schmalstieg | CC BY 2.0 (https://creativecommons.org/licenses/by/2.0/) | Openverse / Flickr | https://www.flickr.com/photos/97179825@N00/15911884516 |
+| city_night | Oregon City Nights | Ian Sane | CC BY 2.0 (https://creativecommons.org/licenses/by/2.0/) | Openverse / Flickr | https://www.flickr.com/photos/31246066@N04/4210502680 |
+| city_night | City Night Sky | tux0racer | CC BY 2.0 (https://creativecommons.org/licenses/by/2.0/) | Openverse / Flickr | https://www.flickr.com/photos/87060703@N08/8300317020 |
+| textile_mill | No Known Restrictions: Vice-President Lyndon Baines Johnson at Textile Mill, South Vietnam by Thomas J. O'Halloran, May 1961 (LOC) | pingnews.com | Public Domain Mark 1.0 (https://creativecommons.org/publicdomain/mark/1.0/) | Openverse / Flickr | https://www.flickr.com/photos/39735679@N00/501634331 |
+| textile_mill | Abandoned Textile Mill (5) | janbommes | CC BY 2.0 (https://creativecommons.org/licenses/by/2.0/) | Openverse / Flickr | https://www.flickr.com/photos/30036111@N04/10779755053 |
+| luddites | Small power loom | quinet | CC BY 2.0 (https://creativecommons.org/licenses/by/2.0/) | Openverse / Flickr | https://www.flickr.com/photos/91994044@N00/28854325518 |
+| industrial_revolution | The Engine of the Industrial Revolution | selkovjr | CC BY 2.0 (https://creativecommons.org/licenses/by/2.0/) | Openverse / Flickr | https://www.flickr.com/photos/14192663@N07/2173614324 |
+| model_t | Tourists in a Ford Model T at the 'Devil's Den' at Gettysburg Battlefield in Pennsylvania, c1910-1915 | crackdog | Public Domain Mark 1.0 (https://creativecommons.org/publicdomain/mark/1.0/) | Openverse / Flickr | https://www.flickr.com/photos/88645472@N00/6239413521 |
+| model_t | Ford Model T, Yakima, Washington, 1923 | crackdog | Public Domain Mark 1.0 (https://creativecommons.org/publicdomain/mark/1.0/) | Openverse / Flickr | https://www.flickr.com/photos/88645472@N00/4943347151 |
+| model_t | 1916 Ford Model T Speedster, March 26, 1916, California | crackdog | Public Domain Mark 1.0 (https://creativecommons.org/publicdomain/mark/1.0/) | Openverse / Flickr | https://www.flickr.com/photos/88645472@N00/5643782311 |
+| data_center | Data Center Network Core | motleypixel | CC BY 2.0 (https://creativecommons.org/licenses/by/2.0/) | Openverse / Flickr | https://www.flickr.com/photos/16894864@N05/6239564720 |
+| trading_screens | Tickers | francisco.j.gonzalez | CC BY 2.0 (https://creativecommons.org/licenses/by/2.0/) | Openverse / Flickr | https://www.flickr.com/photos/54752966@N06/8085342806 |
+| window_man | untitled | Thomas Leuthard | CC BY 2.0 (https://creativecommons.org/licenses/by/2.0/) | Openverse / Flickr | https://www.flickr.com/photos/41346951@N05/14981603135 |
+| window_man | Another black and with photo with an old man in a window | Cristian Ştefănescu | CC BY 2.0 (https://creativecommons.org/licenses/by/2.0/) | Openverse / Flickr | https://www.flickr.com/photos/46145615@N02/14171645229 |
+| team_meeting | Liip team meeting | lejoe | CC BY 2.0 (https://creativecommons.org/licenses/by/2.0/) | Openverse / Flickr | https://www.flickr.com/photos/21458229@N00/2800660239 |
+| green_city | Green City | alykat | CC BY 2.0 (https://creativecommons.org/licenses/by/2.0/) | Openverse / Flickr | https://www.flickr.com/photos/80081757@N00/5850122 |
+| artist | Art supplies | Average Jane | CC BY 2.0 (https://creativecommons.org/licenses/by/2.0/) | Openverse / Flickr | https://www.flickr.com/photos/64401168@N00/7624350518 |
+| runners | Stockholm Marathon 2006 | Peppe702 | CC BY 2.0 (https://creativecommons.org/licenses/by/2.0/) | Openverse / Flickr | https://www.flickr.com/photos/81812830@N03/7976978042 |
+| family_picnic | Picnic + ma-lu | luis perez | CC BY 2.0 (https://creativecommons.org/licenses/by/2.0/) | Openverse / Flickr | https://www.flickr.com/photos/65092670@N00/4969047988 |
+| slum_towers | Dubai Slums Do Exist | Augapfel | CC BY 2.0 (https://creativecommons.org/licenses/by/2.0/) | Openverse / Flickr | https://www.flickr.com/photos/47038415@N00/3250006311 |
+| programmer | Programmers | Phillie Casablanca | CC BY 2.0 (https://creativecommons.org/licenses/by/2.0/) | Openverse / Flickr | https://www.flickr.com/photos/19451080@N00/3353381517 |
+| programmer | The Exemplary Programmer | illustir | CC BY 2.0 (https://creativecommons.org/licenses/by/2.0/) | Openverse / Flickr | https://www.flickr.com/photos/12505664@N00/9311087323 |
+| programmer | Schipul programmers 2010 (+ special guest Adil) | tendenci | CC BY 2.0 (https://creativecommons.org/licenses/by/2.0/) | Openverse / Flickr | https://www.flickr.com/photos/107430063@N05/13806684563 |
+| humanoid | Humanoid Robot Uprising | jurvetson | CC BY 2.0 (https://creativecommons.org/licenses/by/2.0/) | Openverse / Flickr | https://www.flickr.com/photos/44124348109@N01/52023220709 |
+| humanoid | NASA R5 Valkyrie humanoid robot | Futurilla | CC0 1.0 (https://creativecommons.org/publicdomain/zero/1.0/) | Openverse / Flickr | https://www.flickr.com/photos/52067454@N00/29841969793 |
 
 ## Музыка и звук
 

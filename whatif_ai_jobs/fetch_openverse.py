@@ -61,7 +61,7 @@ def search(query, n):
     return out
 
 
-def main(only=None):
+def main(only=None, override=None):
     sys.path.insert(0, str(ROOT))
     from shots import ASSETS
     meta_path = ROOT / "build" / "images.json"
@@ -82,7 +82,7 @@ def main(only=None):
         have = [i for i in range(len(meta.get(key, []))) if (IMG / f"{key}_{i}.jpg").exists()]
         if have and not only:
             continue
-        cands = search(query, 3)
+        cands = search((override or {}).get(key, query), 3)
         got = []
         for c in cands:
             data = get(c["url"])
@@ -100,4 +100,6 @@ def main(only=None):
 
 
 if __name__ == "__main__":
-    main(set(sys.argv[1:]) or None)
+    args = sys.argv[1:]
+    ov = dict(a.split("=", 1) for a in args if "=" in a)     # ключ=новый|запрос
+    main({a.split("=", 1)[0] for a in args} or None, ov)

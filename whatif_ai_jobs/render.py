@@ -709,10 +709,12 @@ class Renderer:
         order = self.choice.get(key, avail)
         if isinstance(order, int):
             order = [order] + [i for i in avail if i != order]
-        order = [i for i in order if i in avail]
-        if not order:
+        # элемент списка: номер варианта этого ключа или «другой_ключ_N» (фото из другого набора)
+        files = [IMG / f"{key}_{o}.jpg" if isinstance(o, int) else IMG / f"{o}.jpg" for o in order]
+        files = [f for f in files if f.exists()]
+        if not files:
             return None
-        return str(IMG / f"{key}_{order[n % len(order)]}.jpg")
+        return str(files[n % len(files)])
 
     def idx_at(self, t):
         import bisect
