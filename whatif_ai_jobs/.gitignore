@@ -1,0 +1,8 @@
+# большие и генерируемые файлы не коммитим
+build/
+assets/images/
+assets/generated/
+output/
+*.mp4
+*.mp3
+*.wav
