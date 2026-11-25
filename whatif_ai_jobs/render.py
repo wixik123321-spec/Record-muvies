@@ -662,7 +662,7 @@ class Renderer:
         timing = json.loads((BUILD / "timing.json").read_text(encoding="utf-8"))
         meta_p = BUILD / "images.json"
         self.meta = json.loads(meta_p.read_text(encoding="utf-8")) if meta_p.exists() else {}
-        choice_p = BUILD / "image_choice.json"
+        choice_p = ROOT / "image_choice.json"
         self.choice = json.loads(choice_p.read_text(encoding="utf-8")) if choice_p.exists() else {}
         self.shots = data["shots"]
         self.sections = data["sections"]

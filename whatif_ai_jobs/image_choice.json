@@ -1,0 +1,140 @@
+{
+ "office_empty": [
+  0,
+  "call_center_0",
+  0,
+  "mall_empty_0"
+ ],
+ "highway_night": [
+  1
+ ],
+ "crowd": [
+  0,
+  1
+ ],
+ "finance_towers": [
+  0
+ ],
+ "henry_ford": [
+  0
+ ],
+ "keynes": [
+  0
+ ],
+ "laptop_night": [
+  1,
+  2,
+  0
+ ],
+ "call_center": [
+  1,
+  0
+ ],
+ "electrician": [
+  0,
+  1
+ ],
+ "plumber": [
+  0
+ ],
+ "empty_street": [
+  1,
+  2
+ ],
+ "park_people": [
+  2,
+  0
+ ],
+ "atm": [
+  2,
+  0
+ ],
+ "mall_empty": [
+  0
+ ],
+ "warehouse_robot": [
+  1
+ ],
+ "car_robots": [
+  0
+ ],
+ "stock_exchange": [
+  2
+ ],
+ "banknotes": [
+  1
+ ],
+ "helsinki": [
+  0,
+  1
+ ],
+ "kenya_village": [
+  1,
+  0
+ ],
+ "stockton": [
+  1
+ ],
+ "coworking": [
+  1,
+  2
+ ],
+ "city_night": [
+  1,
+  0
+ ],
+ "textile_mill": [
+  "industrial_revolution_0"
+ ],
+ "luddites": [
+  0,
+  "textile_mill_1"
+ ],
+ "industrial_revolution": [
+  "textile_mill_0"
+ ],
+ "ford_line": [
+  "model_t_1"
+ ],
+ "model_t": [
+  0,
+  2
+ ],
+ "data_center": [
+  1
+ ],
+ "trading_screens": [
+  2
+ ],
+ "window_man": [
+  2,
+  0
+ ],
+ "team_meeting": [
+  0,
+  "programmer_2",
+  "programmer_0"
+ ],
+ "green_city": [
+  0
+ ],
+ "artist": [
+  0
+ ],
+ "runners": [
+  1
+ ],
+ "family_picnic": [
+  0
+ ],
+ "slum_towers": [
+  2
+ ],
+ "programmer": [
+  1,
+  "laptop_night_0"
+ ],
+ "humanoid": [
+  0
+ ]
+}
