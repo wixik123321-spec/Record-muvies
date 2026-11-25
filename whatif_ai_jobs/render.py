@@ -629,6 +629,8 @@ def g_endcard(d, v, u, dur):
     d.text((cx, cy + 175), "ПОДПИШИСЬ", font=F("Black", 54), fill=(*WHITE, int(255 * es)), anchor="mm")
 
 
+HISTORIC = {"henry_ford", "keynes", "luddites", "textile_mill", "industrial_revolution", "ford_line", "model_t"}
+
 FALLBACK = {
     "call_center": ["laptop_night", "office_empty"], "programmer": ["laptop_night"], "coworking": ["laptop_night", "office_empty"],
     "team_meeting": ["crowd", "office_empty"], "window_man": ["city_night", "laptop_night"], "city_night": ["highway_night", "finance_towers"],
@@ -680,6 +682,12 @@ class Renderer:
                 n = seen.get(k, 0)
                 seen[k] = n + 1
                 self.photo[i] = self._pick(k, n)
+                if self.photo[i] is None and k not in HISTORIC:
+                    # последний вариант: любое уже скачанное фото (разное для разных кадров)
+                    pool = sorted(str(x) for x in IMG.glob("*.jpg")
+                                  if x.stem.rsplit("_", 1)[0] not in HISTORIC and x.stem.rsplit("_", 1)[0] in self.meta)
+                    if pool:
+                        self.photo[i] = pool[zlib.crc32(f"pool{s['id']}".encode()) % len(pool)]
         kws = {}
         for i, s in enumerate(self.shots):
             kws[i] = {norm(w)[:5] for w in (s.get("onscreen") or "").split() if len(norm(w)) >= 5}
