@@ -231,7 +231,7 @@ def thumbnail(robot_path=None):
     # «ТЫ УВОЛЕН» со свечением
     glow = Image.new("RGBA", (TW, TH), (0, 0, 0, 0))
     g = ImageDraw.Draw(glow)
-    f1, f2 = F("Black", 190), F("Black", 196)
+    f1, f2 = F("Black", 184), F("Black", 172)
     g.text((44, 300), "ТЫ", font=f1, fill=(255, 255, 255, 255), anchor="lm")
     g.text((40, 500), "УВОЛЕН", font=f2, fill=(255, 40, 70, 255), anchor="lm")
     blur = glow.filter(ImageFilter.GaussianBlur(18))

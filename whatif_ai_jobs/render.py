@@ -629,6 +629,20 @@ def g_endcard(d, v, u, dur):
     d.text((cx, cy + 175), "ПОДПИШИСЬ", font=F("Black", 54), fill=(*WHITE, int(255 * es)), anchor="mm")
 
 
+FALLBACK = {
+    "call_center": ["laptop_night", "office_empty"], "programmer": ["laptop_night"], "coworking": ["laptop_night", "office_empty"],
+    "team_meeting": ["crowd", "office_empty"], "window_man": ["city_night", "laptop_night"], "city_night": ["highway_night", "finance_towers"],
+    "empty_street": ["highway_night", "city_night"], "mall_empty": ["office_empty", "empty_street"], "park_people": ["crowd"],
+    "stock_exchange": ["trading_screens", "finance_towers"], "trading_screens": ["stock_exchange", "finance_towers"],
+    "data_center": ["laptop_night"], "green_city": ["finance_towers", "city_night"], "slum_towers": ["finance_towers", "crowd"],
+    "runners": ["crowd", "park_people"], "family_picnic": ["park_people", "crowd"], "artist": ["coworking", "crowd"],
+    "stockton": ["empty_street", "highway_night"], "helsinki": ["city_night", "finance_towers"], "banknotes": ["atm", "finance_towers"],
+    "atm": ["banknotes", "finance_towers"], "warehouse_robot": ["car_robots", "data_center"], "car_robots": ["warehouse_robot", "ford_line"],
+    "humanoid": ["warehouse_robot", "car_robots", "data_center"], "model_t": ["ford_line", "henry_ford"], "ford_line": ["model_t", "car_robots"],
+    "textile_mill": ["industrial_revolution", "luddites"], "industrial_revolution": ["textile_mill", "luddites"],
+    "luddites": ["textile_mill", "industrial_revolution"], "electrician": ["plumber"], "plumber": ["electrician"],
+}
+
 GRAPHICS = {"timeline": g_timeline, "list": g_list, "counter": g_counter, "bars": g_bars, "bigtext": g_bigtext,
             "split": g_split, "chart_down": g_chart_down, "endcard": g_endcard}
 
@@ -672,8 +686,13 @@ class Renderer:
         hidden = [(self.start[i], self.end[i]) for i, s in enumerate(self.shots) if s["visual"] == "card"]
         self.caps = Captions(make_phrases(timing["words"]), kws, hidden)
 
-    def _pick(self, key, n):
+    def _pick(self, key, n, _depth=0):
         cands = self.meta.get(key) or []
+        if not any((IMG / f"{key}_{i}.jpg").exists() for i in range(len(cands))) and _depth == 0:
+            for alt in FALLBACK.get(key, []):   # нет своего фото — ближайшее по смыслу
+                r = self._pick(alt, n, 1)
+                if r:
+                    return r
         avail = [i for i in range(len(cands)) if (IMG / f"{key}_{i}.jpg").exists()]
         order = self.choice.get(key, avail)
         if isinstance(order, int):
