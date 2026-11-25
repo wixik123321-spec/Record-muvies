@@ -93,15 +93,23 @@ def fetch_all():
             uses[v[4:]] += 1
         elif isinstance(v, dict) and v.get("photo"):
             uses[v["photo"]] += 1
-    for key, query in ASSETS.items():
+    # сначала то, чему нет замены (исторические фото, ключевые сцены), потом остальное
+    priority = ["henry_ford", "keynes", "luddites", "ford_line", "model_t", "atm", "humanoid", "kenya_village",
+                "helsinki", "electrician", "call_center", "stock_exchange", "data_center", "warehouse_robot",
+                "green_city", "slum_towers", "team_meeting", "window_man", "programmer", "banknotes"]
+    order = [k for k in priority if k in ASSETS] + [k for k in ASSETS if k not in priority]
+    for key in order:
+        query = ASSETS[key]
         if not uses[key]:
             continue
-        if key in meta and all((IMG / f"{key}_{i}.jpg").exists() for i in range(len(meta[key]))) and meta[key]:
+        have = [i for i in range(len(meta.get(key, []))) if (IMG / f"{key}_{i}.jpg").exists()]
+        if have:
             continue
         cands = candidates(query, 2 if uses[key] >= 3 else 1)
+        got = []
         for i, c in enumerate(cands):
-            dest = IMG / f"{key}_{i}.jpg"
-            for attempt in range(4):
+            dest = IMG / f"{key}_{len(got)}.jpg"
+            for attempt in range(6):
                 try:
                     req = urllib.request.Request(c["url"], headers=UA)
                     with urllib.request.urlopen(req, timeout=180) as r:
@@ -112,15 +120,17 @@ def fetch_all():
                     if im.width > 2400:
                         im = im.resize((2400, round(im.height * 2400 / im.width)), Image.LANCZOS)
                     im.save(dest, quality=92)
+                    got.append(c)
                     break
                 except Exception as e:  # noqa: BLE001
-                    wait = 60 + attempt * 30 if "429" in str(e) else 3 + attempt * 4
-                    print(f"  повтор {key}_{i}: {e} — жду {wait} с", flush=True)
+                    wait = 120 + attempt * 30 if "429" in str(e) else 3 + attempt * 4
+                    print(f"  повтор {key}_{i}: {str(e)[:60]} — жду {wait} с", flush=True)
                     time.sleep(wait)
-            time.sleep(20.0)
-        meta[key] = cands
-        print(f"{key:22s} {len(cands)} шт. — {query}", flush=True)
-        meta_path.write_text(json.dumps(meta, ensure_ascii=False, indent=1), encoding="utf-8")
+            time.sleep(30.0)
+            if got:  # одного варианта достаточно, если лимит строгий
+                meta[key] = got
+                meta_path.write_text(json.dumps(meta, ensure_ascii=False, indent=1), encoding="utf-8")
+        print(f"{key:22s} {len(got)} шт. — {query}", flush=True)
 
 
 def sheet():
