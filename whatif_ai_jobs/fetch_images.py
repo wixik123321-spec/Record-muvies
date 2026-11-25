@@ -28,7 +28,7 @@ def api(params):
     for attempt in range(8):
         try:
             with urllib.request.urlopen(urllib.request.Request(url, headers=UA), timeout=150) as r:
-                time.sleep(6.0)
+                time.sleep(2.0)
                 return json.load(r)
         except Exception as e:  # noqa: BLE001
             wait = 90 + attempt * 30 if "429" in str(e) else 3 + attempt * 4
@@ -66,7 +66,10 @@ def _search(query, n):
         w, h = ii.get("width", 0), ii.get("height", 0)
         if ii.get("mime") not in ("image/jpeg", "image/png") or w < 1200 or w / max(h, 1) < 1.0:
             continue
-        out.append({"title": p["title"], "page": ii.get("descriptionurl"), "url": (ii.get("thumburl") or ii.get("url")).replace("//thumb.wikimedia.org/", "//upload.wikimedia.org/"),
+        if ii.get("size", 0) > 15_000_000:   # слишком тяжёлый оригинал
+            continue
+        # мини-превью Wikimedia сейчас режет по частоте запросов (429) — берём оригинал и уменьшаем у себя
+        out.append({"title": p["title"], "page": ii.get("descriptionurl"), "url": ii.get("url"),
                     "license": lic, "license_url": strip(meta.get("LicenseUrl", {}).get("value", "")),
                     "author": strip(meta.get("Artist", {}).get("value", ""))[:120] or "неизвестен",
                     "width": w, "height": h})
@@ -101,14 +104,20 @@ def fetch_all():
             for attempt in range(4):
                 try:
                     req = urllib.request.Request(c["url"], headers=UA)
-                    with urllib.request.urlopen(req, timeout=120) as r:
-                        dest.write_bytes(r.read())
+                    with urllib.request.urlopen(req, timeout=180) as r:
+                        data = r.read()
+                    from io import BytesIO
+                    from PIL import Image
+                    im = Image.open(BytesIO(data)).convert("RGB")
+                    if im.width > 2400:
+                        im = im.resize((2400, round(im.height * 2400 / im.width)), Image.LANCZOS)
+                    im.save(dest, quality=92)
                     break
                 except Exception as e:  # noqa: BLE001
                     wait = 90 + attempt * 30 if "429" in str(e) else 3 + attempt * 4
                     print(f"  повтор {key}_{i}: {e} — жду {wait} с", flush=True)
                     time.sleep(wait)
-            time.sleep(10.0)
+            time.sleep(3.0)
         meta[key] = cands
         print(f"{key:22s} {len(cands)} шт. — {query}", flush=True)
         meta_path.write_text(json.dumps(meta, ensure_ascii=False, indent=1), encoding="utf-8")
