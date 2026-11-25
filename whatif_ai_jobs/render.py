@@ -206,13 +206,17 @@ def graded(path: str, w: int = SRC_W, h: int = SRC_H, tint: str = "neon") -> np.
     a = np.asarray(im.crop((left, top, left + w, top + h)), np.float32) / 255.0
     lum = a @ np.array([0.299, 0.587, 0.114], np.float32)
     a = lum[..., None] * 0.42 + a * 0.58                     # приглушить цвет
-    a = np.clip((a - 0.5) * 1.12 + 0.5, 0, 1)                # контраст
+    a = np.clip((a - 0.5) * 1.2 + 0.5, 0, 1)                 # контраст
+    a = a ** 1.15                                            # плотнее тени и середина
     sh = (1 - lum)[..., None] ** 1.5
     tone = {"neon": (0.10, 0.07, 0.30), "red": (0.30, 0.04, 0.10), "blue": (0.03, 0.12, 0.30)}[tint]
     a = a * (1 - 0.45 * sh) + np.array(tone, np.float32) * 0.45 * sh   # тени в сине-фиолетовый
     hi = np.clip(lum - 0.55, 0, 1)[..., None]
     a += hi * np.array((0.02, 0.10, 0.16), np.float32)       # блики чуть в циан
-    a *= 0.80
+    a *= 0.74
+    # светлое небо/верх кадра — притемнить и увести в холодный тон
+    top = np.clip(1 - (np.linspace(0, 1, h, dtype=np.float32)[:, None, None] / 0.45), 0, 1) ** 1.5
+    a = a * (1 - 0.35 * top) + np.array((0.05, 0.06, 0.18), np.float32) * 0.35 * top
     yv = np.linspace(-1, 1, h, dtype=np.float32)[:, None]
     xv = np.linspace(-1, 1, w, dtype=np.float32)[None, :]
     vig = 1 - 0.6 * np.clip((xv ** 2 * 0.75 + yv ** 2) - 0.2, 0, 1.3) / 1.3
