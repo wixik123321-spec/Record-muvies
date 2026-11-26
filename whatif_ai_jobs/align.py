@@ -7,6 +7,7 @@
 
 import difflib
 import json
+import os
 import re
 import subprocess
 import sys
@@ -14,8 +15,9 @@ from pathlib import Path
 
 import numpy as np
 
-ROOT = Path(__file__).resolve().parent
-sys.path.insert(0, str(ROOT.parent / "ai_shorts_ru"))
+CODE = Path(__file__).resolve().parent
+ROOT = Path(os.environ.get("WHATIF_ROOT") or CODE).resolve()   # папка проекта (по умолчанию — эта)
+sys.path.insert(0, str(CODE.parent / "ai_shorts_ru"))
 
 END_HOLD = 9.0   # конечная заставка держится после последних слов (под элементы YouTube)
 

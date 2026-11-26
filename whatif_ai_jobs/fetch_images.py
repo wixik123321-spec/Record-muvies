@@ -9,6 +9,7 @@ Public domain, CC0, CC BY (любая версия). CC BY-SA и прочие п
 """
 
 import json
+import os
 import re
 import sys
 import time
@@ -16,7 +17,8 @@ import urllib.parse
 import urllib.request
 from pathlib import Path
 
-ROOT = Path(__file__).resolve().parent
+CODE = Path(__file__).resolve().parent
+ROOT = Path(os.environ.get("WHATIF_ROOT") or CODE).resolve()   # папка проекта
 IMG = ROOT / "assets" / "images"
 UA = {"User-Agent": "WhatIfVideoBuilder/1.0 (educational YouTube video; image credits listed in description)"}
 API = "https://commons.wikimedia.org/w/api.php"
@@ -28,7 +30,7 @@ def api(params):
     for attempt in range(8):
         try:
             with urllib.request.urlopen(urllib.request.Request(url, headers=UA), timeout=150) as r:
-                time.sleep(5.0)
+                time.sleep(1.5)
                 return json.load(r)
         except Exception as e:  # noqa: BLE001
             wait = 60 + attempt * 30 if "429" in str(e) else 3 + attempt * 4
@@ -86,13 +88,17 @@ def fetch_all():
     meta = json.loads(meta_path.read_text(encoding="utf-8")) if meta_path.exists() else {}
     import collections
     shots = json.loads((ROOT / "build" / "shots.json").read_text(encoding="utf-8"))["shots"]
-    uses = collections.Counter({"green_city": 1, "slum_towers": 1})   # фоны для сравнения утопия/антиутопия
+    uses = collections.Counter({"green_city": 1, "slum_towers": 1} if "ai_jobs" in str(ROOT) else {})
     for s in shots:
         v = s["visual"]
         if isinstance(v, str) and v.startswith("img:"):
             uses[v[4:]] += 1
         elif isinstance(v, dict) and v.get("photo"):
             uses[v["photo"]] += 1
+        if isinstance(v, dict):
+            for k in ("left_photo", "right_photo"):
+                if v.get(k):
+                    uses[v[k]] += 1
     # сначала то, чему нет замены (исторические фото, ключевые сцены), потом остальное
     priority = ["henry_ford", "keynes", "luddites", "ford_line", "model_t", "atm", "humanoid", "kenya_village",
                 "helsinki", "electrician", "call_center", "stock_exchange", "data_center", "warehouse_robot",
@@ -105,7 +111,7 @@ def fetch_all():
         have = [i for i in range(len(meta.get(key, []))) if (IMG / f"{key}_{i}.jpg").exists()]
         if have:
             continue
-        cands = candidates(query, 2 if uses[key] >= 3 else 1)
+        cands = candidates(query, min(3, uses[key] + 2))
         got = []
         for i, c in enumerate(cands):
             dest = IMG / f"{key}_{len(got)}.jpg"
@@ -126,7 +132,7 @@ def fetch_all():
                     wait = 120 + attempt * 30 if "429" in str(e) else 3 + attempt * 4
                     print(f"  повтор {key}_{i}: {str(e)[:60]} — жду {wait} с", flush=True)
                     time.sleep(wait)
-            time.sleep(30.0)
+            time.sleep(4.0)
             if got:  # одного варианта достаточно, если лимит строгий
                 meta[key] = got
                 meta_path.write_text(json.dumps(meta, ensure_ascii=False, indent=1), encoding="utf-8")

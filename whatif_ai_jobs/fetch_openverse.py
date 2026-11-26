@@ -10,6 +10,7 @@ python fetch_openverse.py key1 key2       перекачать указанны�
 
 import collections
 import json
+import os
 import sys
 import time
 import urllib.parse
@@ -19,7 +20,8 @@ from pathlib import Path
 
 from PIL import Image
 
-ROOT = Path(__file__).resolve().parent
+CODE = Path(__file__).resolve().parent
+ROOT = Path(os.environ.get("WHATIF_ROOT") or CODE).resolve()   # папка проекта (по умолчанию — эта)
 IMG = ROOT / "assets" / "images"
 UA = {"User-Agent": "WhatIfVideoBuilder/1.0 (educational YouTube video; image credits listed in description)"}
 API = "https://api.openverse.org/v1/images/"
@@ -67,7 +69,7 @@ def main(only=None, override=None):
     meta_path = ROOT / "build" / "images.json"
     meta = json.loads(meta_path.read_text(encoding="utf-8")) if meta_path.exists() else {}
     shots = json.loads((ROOT / "build" / "shots.json").read_text(encoding="utf-8"))["shots"]
-    uses = collections.Counter({"green_city": 1, "slum_towers": 1})
+    uses = collections.Counter({"green_city": 1, "slum_towers": 1} if "ai_jobs" in str(ROOT) else {})
     for s in shots:
         v = s["visual"]
         if isinstance(v, str) and v.startswith("img:"):

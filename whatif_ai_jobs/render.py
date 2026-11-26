@@ -30,11 +30,12 @@ import cv2
 import numpy as np
 from PIL import Image, ImageDraw, ImageFont
 
-ROOT = Path(__file__).resolve().parent
+CODE = Path(__file__).resolve().parent
+ROOT = Path(os.environ.get("WHATIF_ROOT") or CODE).resolve()   # папка проекта (по умолчанию — эта)
 BUILD = ROOT / "build"
 IMG = ROOT / "assets" / "images"
-sys.path.insert(0, str(ROOT))
-sys.path.insert(0, str(ROOT.parent / "ai_shorts_ru"))
+sys.path.insert(0, str(CODE))
+sys.path.insert(0, str(CODE.parent / "ai_shorts_ru"))
 
 W, H, FPS = 1920, 1080, 30
 XF = 0.4                     # длительность перехода (crossfade), с
@@ -309,6 +310,9 @@ def draw_corners(frame, alpha=1.0):
 
 # ---------------------------------------------------------------- captions
 
+EXTRA_STEMS: tuple = ()   # ключевые основы конкретного проекта (из shots.json → "keywords")
+
+
 class Captions:
     """Крупные субтитры снизу по центру: 1–2 строки, обводка, ключевые слова цветом."""
 
@@ -325,7 +329,7 @@ class Captions:
             return False
         if re.search(r"\d", w) or (len(n) >= 5 and n[:5] in self.kw.get(shot, ())):
             return True
-        return n == "ии" or any(n.startswith(s) for s in KEY_STEMS if len(s) > 2)
+        return n == "ии" or any(n.startswith(s) for s in KEY_STEMS + EXTRA_STEMS if len(s) > 2)
 
     @lru_cache(maxsize=12)
     def img(self, k):
@@ -563,7 +567,7 @@ def g_split(d, v, u, dur):
         f = F("Black", 92)
         cx = W * (0.25 if side == 0 else 0.75) + (-80 if side == 0 else 80) * (1 - e)
         d.text((cx, 470), txt, font=f, fill=(*col, int(255 * e)), anchor="mm")
-        sub = "мир изобилия" if side == 0 else "мир неравенства"
+        sub = v.get("left_sub", "мир изобилия") if side == 0 else v.get("right_sub", "мир неравенства")
         d.text((cx, 570), sub, font=F("Medium", 44), fill=(*WHITE, int(230 * ease(prog(u, 0.4, 0.9)))), anchor="mm")
     h = int(760 * ease(prog(u, 0.1, 0.7)))
     if h > 4:
@@ -604,7 +608,7 @@ def g_chart_down(d, v, u, dur):
             d.polygon(dn + [(dn[-1][0], y1), (dn[0][0], y1)], fill=(*RED, 32))
             d.line(dn, fill=(*RED, 255), width=6, joint="curve")
             fl = clip01((m - crash) / 6)
-            d.text((pts[-1][0] - 10, pts[-1][1] - 60), "−48%", font=F("Black", 64), fill=(*RED, int(255 * fl)), anchor="rm")
+            d.text((pts[-1][0] - 10, pts[-1][1] - 60), v.get("label", "−48%"), font=F("Black", 64), fill=(*RED, int(255 * fl)), anchor="rm")
         xe, ye = pts[-1]
         d.ellipse((xe - 10, ye - 10, xe + 10, ye + 10), fill=(*WHITE, 255))
     note_block(d, v.get("note"), u, y=812)
@@ -665,6 +669,8 @@ class Renderer:
         choice_p = ROOT / "image_choice.json"
         self.choice = json.loads(choice_p.read_text(encoding="utf-8")) if choice_p.exists() else {}
         self.shots = data["shots"]
+        global EXTRA_STEMS
+        EXTRA_STEMS = tuple(data.get("keywords", ()))
         self.sections = data["sections"]
         self.duration = timing["duration"]
         self.lines = timing["lines"]
@@ -733,7 +739,7 @@ class Renderer:
         if isinstance(v, str) and v.startswith("img:"):
             path = self.photo.get(i)
             if path:
-                tint = "red" if sec == "newworld" and s["id"] in (79, 80) else "neon"
+                tint = s.get("tint") or ("red" if sec == "newworld" and s["id"] in (79, 80) and "ai_jobs" in str(ROOT) else "neon")
                 fr = kenburns(graded(path, tint=tint), u, dur, seed)
             else:  # нет подходящего фото — абстрактный фон с надписью
                 fr = tech_frame(t)
@@ -744,7 +750,7 @@ class Renderer:
             fr = self.factcard(i, v, u, dur, t, seed)
         elif isinstance(v, dict) and v["kind"] == "split":
             fr = tech_frame(t)
-            for side, key, tint in ((0, "green_city", "blue"), (1, "slum_towers", "red")):
+            for side, key, tint in ((0, v.get("left_photo", "green_city"), "blue"), (1, v.get("right_photo", "slum_towers"), "red")):
                 pth = self._pick(key, 0)
                 if pth:
                     half = kenburns(graded(pth, int(W / 2 * 1.16), int(H * 1.16), tint=tint), u, dur, seed + side, W // 2, H)

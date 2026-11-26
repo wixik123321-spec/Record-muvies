@@ -5,13 +5,15 @@ python docs.py --thumb    только превью
 """
 
 import json
+import os
 import re
 import sys
 from pathlib import Path
 
 from PIL import Image, ImageDraw, ImageFilter, ImageFont
 
-ROOT = Path(__file__).resolve().parent
+CODE = Path(__file__).resolve().parent
+ROOT = Path(os.environ.get("WHATIF_ROOT") or CODE).resolve()   # папка проекта
 BUILD = ROOT / "build"
 FONT_DIR = Path("/usr/share/fonts/opentype/inter")
 
@@ -83,6 +85,28 @@ FACTS = [
 ]
 
 
+VIDEO_TITLE = "Что если бы ИИ заменил всех людей на работе?"
+SCENARIO_NOTE = ("Сценарные элементы (обвал биржевого индекса, «утопия/антиутопия», сроки «день/месяц/год») — "
+                 "мысленный эксперимент; на экране помечены как иллюстрация сценария.")
+DESC_INTRO = None          # текст описания до таймкодов (None — текст про ИИ ниже)
+SOURCES_LINE = None
+PHOTO_LINE = "Фото: Wikimedia Commons и Flickr (Public domain / CC0 / CC BY, авторы — в закреплённом комментарии). Музыка: оригинальная. Голос: синтез речи."
+PHOTO_SECTION = ("Фото — Wikimedia Commons и Flickr (поиск через Openverse). Только лицензии, разрешающие "
+                 "коммерческое использование без «копилефта»: Public domain / Public Domain Mark, CC0, CC BY. "
+                 "CC BY-SA, NC и ND не использовались.")
+VOICE_NOTE = ("Озвучка: офлайн-синтез Vosk TTS 0.9 (модель vosk-model-tts-ru-0.9-multi, голос male_1, лицензия "
+              "Apache 2.0), обработка (эквалайзер, компрессия), нормализация до −16 LUFS. ElevenLabs не "
+              "использовался: на бесплатном тарифе оставалось 244 символа из ~8 000 нужных.")
+THUMB = {"top": "ЧТО ЕСЛИ ИИ ЗАМЕНИТ ВСЕХ?", "line1": ("ТЫ", 184, (255, 255, 255)),
+         "line2": ("УВОЛЕН", 172, (255, 45, 75)), "bottom": "через 1 день · 1 год · 20 лет"}
+
+_meta = ROOT / "project_meta.py"
+if _meta.exists():   # тексты конкретного ролика
+    _ns: dict = {}
+    exec(compile(_meta.read_text(encoding="utf-8"), str(_meta), "exec"), _ns)
+    globals().update({k: v for k, v in _ns.items() if k.isupper()})
+
+
 def F(weight, size):
     return ImageFont.truetype(str(FONT_DIR / f"Inter-{weight}.otf"), size)
 
@@ -117,19 +141,16 @@ def image_credits():
 
 def sources_md():
     ch, dur = chapters()
-    lines = ["# Источники — «Что если бы ИИ заменил всех людей на работе?»", "",
+    lines = [f"# Источники — «{VIDEO_TITLE}»", "",
              f"Длительность видео: {ts(dur)}. Все факты в сценарии проверены по источникам ниже.", "",
              "## Факты и цифры", ""]
     for i, (fact, urls) in enumerate(FACTS, 1):
         lines.append(f"{i}. {fact}")
         for u in urls:
             lines.append(f"   - {u}")
-    lines += ["", "Сценарные элементы (обвал биржевого индекса, «утопия/антиутопия», сроки «день/месяц/год») — "
-              "мысленный эксперимент; на экране помечены как иллюстрация сценария.", "",
+    lines += ["", SCENARIO_NOTE, "",
               "## Изображения", "",
-              "Фото — Wikimedia Commons и Flickr (поиск через Openverse). Только лицензии, разрешающие "
-              "коммерческое использование без «копилефта»: Public domain / Public Domain Mark, CC0, CC BY. "
-              "CC BY-SA, NC и ND не использовались. Фото обработаны (цветокоррекция, кадрирование, движение камеры). "
+              PHOTO_SECTION + " Фото обработаны (цветокоррекция, кадрирование, движение камеры). "
               "Инфографика, заставки, графики и превью нарисованы кодом (Python/Pillow) специально для ролика.", "",
               "| Ключ | Название | Автор | Лицензия | Источник | Ссылка |", "|---|---|---|---|---|---|"]
     for key, c in image_credits():
@@ -143,9 +164,7 @@ def sources_md():
               "(модуль `ai_shorts_ru/shorts_ru/audio.py`): своя тема на каждую главу. Сторонних треков нет — "
               "авторских прав третьих лиц не затрагивает.", "",
               "## Голос", "",
-              "Озвучка: офлайн-синтез Vosk TTS 0.9 (модель vosk-model-tts-ru-0.9-multi, голос male_1, лицензия "
-              "Apache 2.0), обработка (эквалайзер, компрессия), нормализация до −16 LUFS. ElevenLabs не "
-              "использовался: на бесплатном тарифе оставалось 244 символа из ~8 000 нужных.", "",
+              VOICE_NOTE, "",
               "## Шрифт", "", "Inter (SIL Open Font License 1.1).", ""]
     (ROOT / "sources.md").write_text("\n".join(lines), encoding="utf-8")
 
@@ -153,22 +172,30 @@ def sources_md():
 def youtube_md():
     ch, dur = chapters()
     stamps = "\n".join(f"{ts(t)} {name}" for t, name in ch)
-    desc = f"""Что будет, если завтра искусственный интеллект заменит всех людей на работе? Проживём этот сценарий шаг за шагом: первый день, первый месяц, год, пять и двадцать лет — и посмотрим, каким станет новый мир.
-
-В ролике: какие профессии исчезнут первыми, а какие продержатся дольше всех; что станет с зарплатами, налогами и экономикой; что показали реальные эксперименты с базовым доходом в Финляндии, Кении и США; чему нас учат луддиты, конвейер Форда и банкоматы; что прогнозируют Goldman Sachs, McKinsey и Всемирный экономический форум — и где люди будут искать смысл, если работа исчезнет.
-
-А в конце — пять навыков, которые стоит развивать уже сейчас, чтобы ИИ работал на тебя, а не вместо тебя. Пиши в комментариях, какой мир ждёт нас, по-твоему: утопия или антиутопия?
+    intro = DESC_INTRO or (
+        "Что будет, если завтра искусственный интеллект заменит всех людей на работе? Проживём этот сценарий шаг за шагом: "
+        "первый день, первый месяц, год, пять и двадцать лет — и посмотрим, каким станет новый мир.\n\n"
+        "В ролике: какие профессии исчезнут первыми, а какие продержатся дольше всех; что станет с зарплатами, налогами и "
+        "экономикой; что показали реальные эксперименты с базовым доходом в Финляндии, Кении и США; чему нас учат луддиты, "
+        "конвейер Форда и банкоматы; что прогнозируют Goldman Sachs, McKinsey и Всемирный экономический форум — и где люди "
+        "будут искать смысл, если работа исчезнет.\n\n"
+        "А в конце — пять навыков, которые стоит развивать уже сейчас, чтобы ИИ работал на тебя, а не вместо тебя. Пиши в "
+        "комментариях, какой мир ждёт нас, по-твоему: утопия или антиутопия?")
+    src = SOURCES_LINE or ("Goldman Sachs (2023) · McKinsey Global Institute «Agents, robots, and us» (2025) · WEF Future of "
+                           "Jobs Report 2025 · Microsoft Research (2025) · Kela/STM (Финляндия) · GiveDirectly (Кения) · SEED "
+                           "(Стоктон) · OpenResearch · CBO · USDA ERS · J. Bessen. Полный список ссылок — в закреплённом комментарии.")
+    desc = f"""{intro}
 
 Таймкоды:
 {stamps}
 
 Источники:
-Goldman Sachs (2023) · McKinsey Global Institute «Agents, robots, and us» (2025) · WEF Future of Jobs Report 2025 · Microsoft Research (2025) · Kela/STM (Финляндия) · GiveDirectly (Кения) · SEED (Стоктон) · OpenResearch · CBO · USDA ERS · J. Bessen. Полный список ссылок — в закреплённом комментарии.
+{src}
 
-Фото: Wikimedia Commons и Flickr (Public domain / CC0 / CC BY, авторы — в закреплённом комментарии). Музыка: оригинальная. Голос: синтез речи.
+{PHOTO_LINE}
 
 {HASHTAGS}"""
-    credits = ["Фото (Wikimedia Commons, Flickr):"]
+    credits = [f"Фото ({'PD12M: Public Domain / CC0' if 'PD12M' in PHOTO_LINE else 'Wikimedia Commons, Flickr'}):"]
     for key, c in image_credits():
         author = re.sub(r"\s+", " ", c["author"])[:60]
         credits.append(f"• {author} — {c['license']} — {c['page']}")
@@ -226,24 +253,37 @@ def thumbnail(robot_path=None):
     d = ImageDraw.Draw(bg, "RGBA")
     # верхняя плашка
     f_top = F("Black", 44)
-    top = "ЧТО ЕСЛИ ИИ ЗАМЕНИТ ВСЕХ?"
+    top = THUMB["top"]
     tw = d.textlength(top, font=f_top)
     d.rounded_rectangle((48, 44, 48 + tw + 44, 44 + 72), 12, fill=(255, 214, 40))
     d.text((48 + 22, 44 + 36), top, font=f_top, fill=(10, 8, 20), anchor="lm")
     # «ТЫ УВОЛЕН» со свечением
     glow = Image.new("RGBA", (TW, TH), (0, 0, 0, 0))
     g = ImageDraw.Draw(glow)
-    f1, f2 = F("Black", 184), F("Black", 172)
-    g.text((44, 300), "ТЫ", font=f1, fill=(255, 255, 255, 255), anchor="lm")
-    g.text((40, 500), "УВОЛЕН", font=f2, fill=(255, 40, 70, 255), anchor="lm")
+    (t1, s1, c1), (t2, s2, c2) = THUMB["line1"], THUMB["line2"]
+    f1, f2 = F("Black", s1), F("Black", s2)
+    g.text((44, 300), t1, font=f1, fill=(*c1, 255), anchor="lm")
+    g.text((40, 500), t2, font=f2, fill=(*c2, 255), anchor="lm")
     blur = glow.filter(ImageFilter.GaussianBlur(18))
     bg = Image.alpha_composite(bg.convert("RGBA"), blur)
     bg = Image.alpha_composite(bg, blur)
     d = ImageDraw.Draw(bg)
-    d.text((44, 300), "ТЫ", font=f1, fill=(255, 255, 255), anchor="lm", stroke_width=8, stroke_fill=(5, 5, 15))
-    d.text((40, 500), "УВОЛЕН", font=f2, fill=(255, 45, 75), anchor="lm", stroke_width=8, stroke_fill=(5, 5, 15))
+    d.text((44, 300), t1, font=f1, fill=c1, anchor="lm", stroke_width=8, stroke_fill=(5, 5, 15))
+    d.text((40, 500), t2, font=f2, fill=c2, anchor="lm", stroke_width=8, stroke_fill=(5, 5, 15))
+    if THUMB.get("icon") == "nowifi":   # перечёркнутый значок Wi-Fi
+        cx, cy = 1010, 370
+        ic = Image.new("RGBA", (TW, TH), (0, 0, 0, 0))
+        di = ImageDraw.Draw(ic)
+        for r, wdt in ((190, 34), (128, 34), (66, 34)):
+            di.arc((cx - r, cy - r, cx + r, cy + r), 225, 315, fill=(255, 255, 255, 255), width=wdt)
+        di.ellipse((cx - 22, cy - 22, cx + 22, cy + 22), fill=(255, 255, 255, 255))
+        di.line((cx - 150, cy - 205, cx + 140, cy + 50), fill=(255, 45, 75, 255), width=30)
+        sh = ic.filter(ImageFilter.GaussianBlur(14))
+        bg = Image.alpha_composite(bg, sh)
+        bg = Image.alpha_composite(bg, ic)
+        d = ImageDraw.Draw(bg)
     # нижняя подпись
-    d.text((48, 652), "через 1 день · 1 год · 20 лет", font=F("Bold", 40), fill=(120, 225, 255), anchor="lm",
+    d.text((48, 652), THUMB["bottom"], font=F("Bold", 40), fill=(120, 225, 255), anchor="lm",
            stroke_width=4, stroke_fill=(5, 5, 15))
     bg.convert("RGB").save(ROOT / "thumbnail.png")
     print("thumbnail.png", bg.size)

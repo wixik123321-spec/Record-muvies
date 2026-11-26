@@ -6,11 +6,13 @@
 """
 
 import json
+import os
 import re
 import subprocess
 from pathlib import Path
 
-ROOT = Path(__file__).resolve().parent
+CODE = Path(__file__).resolve().parent
+ROOT = Path(os.environ.get("WHATIF_ROOT") or CODE).resolve()   # папка проекта (по умолчанию — эта)
 VIDEO = ROOT / "final_video.mp4"
 OUT = ROOT / "build" / "qa"
 
