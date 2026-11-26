@@ -60,6 +60,7 @@ def main():
     from shots import PD_QUERIES
     df = pd.read_parquet(INDEX)
     df["cap"] = df["caption"].str.lower()
+    OUT.parent.mkdir(parents=True, exist_ok=True)
     res = json.loads(OUT.read_text(encoding="utf-8")) if OUT.exists() else {}
     for key, spec in PD_QUERIES.items():
         if key in res and res[key]:

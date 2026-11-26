@@ -11,6 +11,7 @@ from __future__ import annotations
 
 import difflib
 import json
+import os
 import multiprocessing as mp
 import re
 import subprocess
@@ -25,8 +26,9 @@ import cv2
 import numpy as np
 from PIL import Image, ImageDraw
 
-HERE = Path(__file__).resolve().parent
-PROJ = HERE.parent
+CODE = Path(__file__).resolve().parent
+PROJ = CODE.parent                   # whatif_ai_jobs (render.py и пр.)
+HERE = Path(os.environ.get("SHORT_ROOT") or CODE).resolve()   # папка конкретного шортса
 BUILD = HERE / "build"
 sys.path.insert(0, str(PROJ))
 sys.path.insert(0, str(PROJ.parent / "ai_shorts_ru"))
@@ -59,6 +61,17 @@ LINES = [
 KEY = ("деньг", "денег", "услови", "финлянд", "евро", "стресс", "стоктон", "процент", "кени", "бизнес",
        "доллар", "тысяч", "час", "ленив", "работ", "бросил")
 
+STRESS: dict = {}                    # ударения для озвучки {"слово": "сл+ово"}
+BADGE = "ЧТО ЕСЛИ?"                  # плашка на первом кадре
+MOOD = "tense"                       # настроение музыки
+ACCENT_LINES: tuple = (0, 10)        # кадры с белым заголовком и красной рамкой (хук и финальный вопрос)
+
+_cfg = HERE / "short_config.py"      # свой шортс: LINES, KEY, STRESS, BADGE, MOOD, ACCENT_LINES
+if HERE != CODE and _cfg.exists():
+    _ns: dict = {"LIB": LIB, "OWN": HERE / "assets", "Path": Path}
+    exec(compile(_cfg.read_text(encoding="utf-8"), str(_cfg), "exec"), _ns)
+    globals().update({k: v for k, v in _ns.items() if k.isupper()})
+
 PANEL = (60, 560, 960, 640)          # x, y, w, h — фото в рамке (в безопасной зоне Shorts)
 XF = 0.22
 
@@ -68,7 +81,10 @@ XF = 0.22
 def voice():
     from shorts_ru import tts
     SR = tts.SR
-    eng = tts.VoskTTS("male_1", 1.04)
+    eng = tts.VoskTTS("male_1", 1.04, STRESS)
+    oov = sorted({w for t, *_r in LINES for w in eng.audit(t)})
+    if oov:
+        print("ВНИМАНИЕ: слова без ударения:", ", ".join(oov), flush=True)
     parts, bounds, pos = [np.zeros(int(0.12 * SR), np.float32)], [], 0.12
     for i, (text, *_rest) in enumerate(LINES):
         x, _ = eng.synth(text, BUILD / "tmp.wav")
@@ -242,13 +258,14 @@ class Short:
         R.blend(fr, np.dstack([img, panel_mask()]), x, y)
         lay = Image.new("RGBA", (W, H), (0, 0, 0, 0))
         d = ImageDraw.Draw(lay)
-        col = R.RED if i in (0, 10) else (R.GREEN if big.startswith("+") or "→" in big else R.CYAN)
+        col = R.RED if i in ACCENT_LINES else (R.GREEN if big.startswith("+") or "→" in big else R.CYAN)
         d.rounded_rectangle((x - 5, y - 5, x + pw + 5, y + ph + 5), 38, outline=(*col, 230), width=5)
-        headline(d, big, sub, u, col if i not in (0, 10) else R.WHITE)
-        if i == 0:   # плашка «ЧТО ЕСЛИ?»
+        headline(d, big, sub, u, col if i not in ACCENT_LINES else R.WHITE)
+        if i == 0 and BADGE:   # плашка на первом кадре
             e = R.ease(u / 0.3)
-            d.rounded_rectangle((x + 26, y + 26, x + 26 + 330, y + 26 + 72), 14, fill=(*YELLOW, int(255 * e)))
-            d.text((x + 26 + 165, y + 62), "ЧТО ЕСЛИ?", font=R.F("Black", 46), fill=(10, 8, 20, int(255 * e)), anchor="mm")
+            bw = int(R.text_w(R.F("Black", 46), BADGE)) + 60
+            d.rounded_rectangle((x + 26, y + 26, x + 26 + bw, y + 26 + 72), 14, fill=(*YELLOW, int(255 * e)))
+            d.text((x + 26 + bw / 2, y + 62), BADGE, font=R.F("Black", 46), fill=(10, 8, 20, int(255 * e)), anchor="mm")
         return R.compose(fr, lay, glow=0.7)
 
     def frame(self, t):
@@ -290,7 +307,7 @@ def mix(dur):
     v = np.frombuffer(raw, np.float32).astype(np.float64)
     n = int(dur * SR)
     v = np.pad(v, (0, max(0, n - len(v))))[:n]
-    m = audio.music("tense", dur + 0.2, seed=7, fade_out=0.05)[:n]
+    m = audio.music(MOOD, dur + 0.2, seed=7, fade_out=0.05)[:n]
     m = np.pad(m, (0, n - len(m)))
     speech = np.abs(v) > 0.01
     gain = np.sqrt(np.mean(v[speech] ** 2)) / (np.sqrt(np.mean(m ** 2)) + 1e-9) * 10 ** (-18 / 20)
