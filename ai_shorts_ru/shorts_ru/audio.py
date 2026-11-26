@@ -48,6 +48,11 @@ def _note(f, dur, kind="saw"):
     return x / 3
 
 
+def _fit(x: np.ndarray, n: int) -> np.ndarray:
+    """Длина ноты может отличаться от нужной на отсчёт из-за округления — подгоняем."""
+    return x[:n] if len(x) >= n else np.pad(x, (0, n - len(x)))
+
+
 def music(mood: str, dur: float, seed: int = 0, fade_out: float = 1.5) -> np.ndarray:
     bpm, chords, minor, bright, rhythm = MOODS.get(mood, MOODS["mystery"])
     rng = np.random.default_rng(seed)
@@ -67,9 +72,9 @@ def music(mood: str, dur: float, seed: int = 0, fade_out: float = 1.5) -> np.nda
         a = min(seg, int(0.4 * SR))
         env[:a] = np.linspace(0, 1, a)
         env[-a:] *= np.linspace(1, 0.6, a)
-        pad = sum(_note(f * 2 ** (iv / 12) * 2, seg / SR) for iv in (0, third, 7, 12)) / 4
-        out[i0:i0 + seg] += pad[:seg] * env * 0.35
-        bass = _note(f / 2, seg / SR, "tri")[:seg]
+        pad = _fit(sum(_note(f * 2 ** (iv / 12) * 2, seg / SR) for iv in (0, third, 7, 12)) / 4, seg)
+        out[i0:i0 + seg] += pad * env * 0.35
+        bass = _fit(_note(f / 2, seg / SR, "tri"), seg)
         out[i0:i0 + seg] += bass * env * 0.35
         # арпеджио-колокольчики
         for b in range(8):
