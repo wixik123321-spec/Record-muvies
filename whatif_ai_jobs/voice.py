@@ -62,7 +62,12 @@ def finish(sections: list[np.ndarray], names: list[str]):
 
 def from_vosk(speed: float, voice: str = "male_1"):
     data = load_shots()
-    engine = tts.VoskTTS(voice, speed)
+    sp = ROOT / "stress.json"   # ударения проекта: {"слово": "сл+ово"}
+    stress = json.loads(sp.read_text(encoding="utf-8")) if sp.exists() else {}
+    engine = tts.VoskTTS(voice, speed, stress)
+    oov = sorted({w for s in data["shots"] for w in engine.audit(s["text"])})
+    if oov:
+        print("ВНИМАНИЕ: нет в словаре и не задано ударение (добавьте в stress.json):", ", ".join(oov), flush=True)
     sections, names = [], []
     for sec, _, _ in data["sections"]:
         lines = [s for s in data["shots"] if s["section"] == sec]

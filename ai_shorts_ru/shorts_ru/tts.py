@@ -133,10 +133,28 @@ VOSK_MODEL = "vosk-model-tts-ru-0.9-multi"
 VOSK_SPEAKERS = {"female_0": 0, "female_1": 1, "female_2": 2, "male_0": 3, "male_1": 4}
 
 
-class VoskTTS:
-    """Vosk TTS: многоголосая русская модель с ударениями из словаря (alphacep, Apache 2.0)."""
+# Ударения, которые словарь Vosk ставит неверно или которых в нём нет (знак «+» — перед ударной гласной).
+# Применяются только к тексту для синтеза; субтитры остаются без знаков.
+STRESS_FIXES = {
+    "уже": "уж+е",                      # словарь по умолчанию читает «+уже» (сравнительная от «узкий»)
+    "фейсбук": "фейсб+ук", "фейсбука": "фейсб+ука", "инстаграм": "инстагр+ам", "ватсап": "ватс+ап",
+    "пауэрбанк": "п+ауэрбанк", "пауэрбанка": "п+ауэрбанка", "краудстрайк": "кр+аудстрайк", "нотпетя": "нотп+етя",
+    "кэррингтон": "к+эррингтон", "кэррингтона": "к+эррингтона",
+}
 
-    def __init__(self, voice: str, speed: float = 1.0):
+
+def _match_case(src: str, repl: str) -> str:
+    return repl[:1].upper() + repl[1:] if src[:1].isupper() else repl
+
+
+class VoskTTS:
+    """Vosk TTS: многоголосая русская модель с ударениями из словаря (alphacep, Apache 2.0).
+
+    Ударения берутся из словаря модели; слова, которых нет в словаре, Vosk читает вообще без ударения,
+    а у омографов берёт самый частый вариант. Поэтому перед синтезом текст проходит через `accent()`:
+    общие исправления STRESS_FIXES + словарь проекта (`stress`)."""
+
+    def __init__(self, voice: str, speed: float = 1.0, stress: dict | None = None):
         try:
             from vosk_tts import Model, Synth
         except ImportError as exc:
@@ -147,6 +165,25 @@ class VoskTTS:
         log.info("Голос Vosk: %s", voice)
         self.synth_ = Synth(Model(model_path=str(path)))
         self.sid, self.speed = VOSK_SPEAKERS[voice], speed
+        self.stress = {k.lower(): v for k, v in {**STRESS_FIXES, **(stress or {})}.items()}
+        self._stress_re = re.compile(r"(?<![\w+])(" + "|".join(sorted(map(re.escape, self.stress), key=len, reverse=True))
+                                     + r")(?![\w+])", re.IGNORECASE) if self.stress else None
+
+    def accent(self, text: str) -> str:
+        """Подставить ударения из STRESS_FIXES и словаря проекта (с сохранением заглавной буквы)."""
+        if not self._stress_re:
+            return text
+        return self._stress_re.sub(lambda m: _match_case(m.group(0), self.stress[m.group(0).lower()]), text)
+
+    def audit(self, text: str) -> list[str]:
+        """Слова, которых нет в словаре Vosk и для которых не задано ударение, — их модель прочтёт без ударения."""
+        dic = self.synth_.model.dic
+        out = []
+        for w in re.findall(r"[А-Яа-яЁё+-]+", self.accent(self._clean(text))):
+            lw = w.lower().strip("-")
+            if lw and "+" not in lw and lw not in dic and re.search(r"[аеёиоуыэюя].*[аеёиоуыэюя]", lw):
+                out.append(w)
+        return out
 
     @staticmethod
     def _ensure() -> Path:
@@ -175,15 +212,16 @@ class VoskTTS:
         t = (text.replace("–", "-").replace("‑", "-").replace("…", "...").replace("«", "").replace("»", "")
              .replace("“", "").replace("”", "").replace("„", "").replace("’", "").replace("ʼ", ""))
         if strict:
-            t = re.sub(r"[^\wЁё .,!?:;—-]", " ", t)
+            t = re.sub(r"[^\wЁё+ .,!?:;—-]", " ", t)
             t = re.sub(r"\s+", " ", t).strip()
         return t
 
     def synth(self, text: str, out: Path, rate: float = 1.0) -> tuple[np.ndarray, list[float]]:
         try:
-            audio = self.synth_.synth_audio(self._clean(text), speaker_id=self.sid, speech_rate=self.speed * rate)
+            audio = self.synth_.synth_audio(self.accent(self._clean(text)), speaker_id=self.sid,
+                                            speech_rate=self.speed * rate)
         except KeyError:
-            audio = self.synth_.synth_audio(self._clean(text, strict=True), speaker_id=self.sid,
+            audio = self.synth_.synth_audio(self.accent(self._clean(text, strict=True)), speaker_id=self.sid,
                                             speech_rate=self.speed * rate)
         x = np.asarray(audio)
         x = x.astype(np.float32) / 32768 if x.dtype == np.int16 else x.astype(np.float32)
