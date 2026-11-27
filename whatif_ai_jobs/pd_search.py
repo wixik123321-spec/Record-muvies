@@ -57,7 +57,11 @@ def fetch(c, dest):
 def main():
     import pandas as pd
     sys.path.insert(0, str(ROOT))
+    import shots
     from shots import PD_QUERIES
+    global BAD
+    if getattr(shots, "PD_BAD", None):    # свой фильтр проекта (например, пчёлам нужны слова «insect», «bee»)
+        BAD = re.compile(shots.PD_BAD, re.I)
     df = pd.read_parquet(INDEX)
     df["cap"] = df["caption"].str.lower()
     OUT.parent.mkdir(parents=True, exist_ok=True)

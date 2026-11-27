@@ -1,0 +1,116 @@
+# YouTube — пакет публикации
+
+## Варианты названия (≤ 60 символов)
+
+- Что если исчезнут все пчёлы?  (28 симв.)
+- Мир без пчёл: правда ли, что нам останется 4 года?  (50 симв.)
+- Пчёлы исчезли. Что будет с едой через год и через 5 лет  (55 симв.)
+
+## Описание
+
+```
+Что будет, если однажды утром на Земле не останется ни одной пчелы? Правда ли, что, по словам Эйнштейна, человечеству останется всего четыре года? Проживём этот сценарий шаг за шагом: первый день, первая весна, год и пять лет без пчёл.
+
+В ролике: почему хлеб и рис останутся, а яблоки, миндаль и ягоды станут роскошью; сколько культур зависит от опылителей; что посчитали учёные в журнале The Lancet; почему шоколад выживет, а кофе подорожает; как в Китае люди уже опыляют сады вручную и почему пасечники США в 2025 году потеряли рекордную долю пчелиных семей.
+
+А в конце — пять простых шагов, которыми каждый может помочь пчёлам. Пиши в комментариях: какой фрукт тебе было бы жальче всего потерять?
+
+Таймкоды:
+0:00 Пчёлы исчезли. Миф Эйнштейна
+0:50 День 1: пустые ульи
+1:51 Первая весна: цветы без плодов
+3:04 Год 1: еда, витамины и цены
+4:41 Через 5 лет: новый мир
+5:54 Это уже происходит: Китай и США
+6:44 Как помочь пчёлам
+
+Источники:
+Klein et al., Proc. R. Soc. B (2007) · Smith et al., The Lancet (2015) · IPBES (2016) · FAO · Quote Investigator · Project Apis m. (2025) · репортажи о ручном опылении в Ханьюане (Сычуань). Полный список ссылок — в закреплённом комментарии.
+
+Фото: открытый набор PD12M (Public Domain / CC0). Музыка: оригинальная. Голос: синтез речи.
+
+#ЧтоЕсли #Пчёлы #Экология
+```
+
+Длина описания: 1299 символов (лимит 5000).
+
+## Теги (15)
+
+что если, пчёлы, мир без пчёл, исчезновение пчёл, опыление, опылители, Эйнштейн пчёлы, что будет если, экология, еда будущего, сельское хозяйство, научпоп, интересные факты, природа, пестициды
+
+Длина тегов: 178 символов (лимит 500).
+
+## Закреплённый комментарий (источники и авторы фото)
+
+```
+Источники цифр:
+• https://www.sciencedaily.com/releases/2006/10/061025165904.htm
+• https://scholar.harvard.edu/sites/scholar.harvard.edu/files/mattsmith/files/lancet_smith_et_al_2015.pdf
+• https://ipbes.net/article/press-release-pollinators-vital-our-food-supply-under-threat
+• https://www.fao.org/newsroom/detail/world-bee-day-2025--africa-honey-production-has-highest-global-growth-rate/en
+• https://quoteinvestigator.com/2013/08/27/einstein-bees/
+• https://andthewest.stanford.edu/2018/bees-for-hire-california-almonds-become-migratory-colonies-biggest-task/
+• https://www.huffpost.com/entry/humans-bees-china_n_570404b3e4b083f5c6092ba9/amp
+• https://www.ecowatch.com/honeybees-deaths-us-2025.html
+• https://en.wikipedia.org/wiki/Colony_collapse_disorder
+• https://en.wikipedia.org/wiki/Theobroma_cacao
+
+Фото (PD12M: Public Domain / CC0):
+• Wikimedia Commons — CC0 — https://pd12m.s3.us-west-2.amazonaws.com/images/ee678525-8612-5300-aa8a-5bd7007ba77e.jpeg
+• Wikimedia Commons — CC0 — https://pd12m.s3.us-west-2.amazonaws.com/images/9e50ee76-d729-5dd4-8c1a-07b1afe4c1e8.jpeg
+• Wikimedia Commons — CC0 — https://pd12m.s3.us-west-2.amazonaws.com/images/9ed888a8-88f7-5fa2-9605-11c1f0c913a4.jpeg
+• Wikimedia Commons — CC0 — https://pd12m.s3.us-west-2.amazonaws.com/images/395c648d-541a-59a1-90c4-e0743a74dad0.jpeg
+• Wikimedia Commons — CC0 — https://pd12m.s3.us-west-2.amazonaws.com/images/af524059-d98a-5ebb-916a-e77663600f4c.jpeg
+• Wikimedia Commons — CC0 — https://pd12m.s3.us-west-2.amazonaws.com/images/079840cd-7c00-5c74-aa9b-dd8d7ffd6556.jpeg
+• Wikimedia Commons — CC0 — https://pd12m.s3.us-west-2.amazonaws.com/images/fda573ed-5167-5fd8-8c71-7c66f15aa213.jpeg
+• Wikimedia Commons — CC0 — https://pd12m.s3.us-west-2.amazonaws.com/images/6f19fba2-511a-5883-9326-af1fd27290b6.jpeg
+• Wikimedia Commons — CC0 — https://pd12m.s3.us-west-2.amazonaws.com/images/c14f686d-f30f-5225-b082-0921cd212c90.jpeg
+• Wikimedia Commons — CC0 — https://pd12m.s3.us-west-2.amazonaws.com/images/878604c0-139c-5944-986c-e1e1b521ef16.jpeg
+• Wikimedia Commons — CC0 — https://pd12m.s3.us-west-2.amazonaws.com/images/9a4a33ef-2663-5b35-b694-b8b37d6e5021.jpeg
+• Wikimedia Commons — CC0 — https://pd12m.s3.us-west-2.amazonaws.com/images/ea616f36-eb1a-51d7-a83d-2807df75d889.jpeg
+• Wikimedia Commons — CC0 — https://pd12m.s3.us-west-2.amazonaws.com/images/bb1ae80f-2910-5fc7-a43a-3ff1c1642eba.jpeg
+• Wikimedia Commons — CC0 — https://pd12m.s3.us-west-2.amazonaws.com/images/88f28b64-0bd1-5885-83af-881f6cb19fde.jpeg
+• Wikimedia Commons — CC0 — https://pd12m.s3.us-west-2.amazonaws.com/images/ceb2c91f-ca8e-5fc2-841f-9035dba20c74.jpeg
+• Wikimedia Commons — CC0 — https://pd12m.s3.us-west-2.amazonaws.com/images/4075ee5e-3b47-5c9e-9fc7-938f6e13ad08.jpeg
+• Wikimedia Commons — CC0 — https://pd12m.s3.us-west-2.amazonaws.com/images/8fe52ea8-cb90-57ad-8809-1868a22ca7c8.jpeg
+• Wikimedia Commons — CC0 — https://pd12m.s3.us-west-2.amazonaws.com/images/801c033d-1209-5314-8feb-2375b805ec4e.jpeg
+• Wikimedia Commons — CC0 — https://pd12m.s3.us-west-2.amazonaws.com/images/455d9d05-b0cb-5c9e-aa80-0f99c67f027e.jpeg
+• Wikimedia Commons — CC0 — https://pd12m.s3.us-west-2.amazonaws.com/images/8867420b-fcae-5fff-8626-0757beb00d35.jpeg
+• Wikimedia Commons — CC0 — https://pd12m.s3.us-west-2.amazonaws.com/images/2566e662-09f1-5397-90c3-7024daba8bf7.jpeg
+• Wikimedia Commons — CC0 — https://pd12m.s3.us-west-2.amazonaws.com/images/eb9908cc-c06d-5805-ad3f-c7004ed3db65.jpeg
+• Wikimedia Commons — Public Domain — https://pd12m.s3.us-west-2.amazonaws.com/images/5563c4b1-95a5-5aee-b458-f467ee3ed6dd.jpeg
+• Wikimedia Commons — Public Domain — https://pd12m.s3.us-west-2.amazonaws.com/images/57bf35fa-bef6-504b-b90d-f9c1df15fa53.jpeg
+• Wikimedia Commons — CC0 — https://pd12m.s3.us-west-2.amazonaws.com/images/0a51669f-923e-54e9-acda-9473cd5ed829.jpeg
+• Wikimedia Commons — CC0 — https://pd12m.s3.us-west-2.amazonaws.com/images/81f79221-0148-57fe-b7ac-c3e5e02045d6.jpeg
+• Wikimedia Commons — CC0 — https://pd12m.s3.us-west-2.amazonaws.com/images/fd7d4595-7c36-538f-b53f-66665853b3ed.jpeg
+• Wikimedia Commons — CC0 — https://pd12m.s3.us-west-2.amazonaws.com/images/7af25789-a5a4-57ad-9ded-30dbcdf51af6.jpeg
+• Wikimedia Commons — CC0 — https://pd12m.s3.us-west-2.amazonaws.com/images/0fc6f905-5ff7-5d68-a231-1783b78a9ba7.jpeg
+• Wikimedia Commons — CC0 — https://pd12m.s3.us-west-2.amazonaws.com/images/ed73e6d5-7667-5c6e-9ca2-824a839fe865.jpeg
+• Wikimedia Commons — CC0 — https://pd12m.s3.us-west-2.amazonaws.com/images/52db0609-2600-5331-8768-770b80c6f99e.jpeg
+• Wikimedia Commons — CC0 — https://pd12m.s3.us-west-2.amazonaws.com/images/c62046a3-df78-5d53-ad74-ec3f6abc3b57.jpeg
+• Wikimedia Commons — CC0 — https://pd12m.s3.us-west-2.amazonaws.com/images/e5cf3d72-410d-573d-a4dc-84603b2b4235.jpeg
+• Wikimedia Commons — CC0 — https://pd12m.s3.us-west-2.amazonaws.com/images/4d17fad3-db7e-50a3-99b8-0e7171d7fb2e.jpeg
+• Wikimedia Commons — CC0 — https://pd12m.s3.us-west-2.amazonaws.com/images/52173074-aa03-5968-a593-7ebd0c568a2f.jpeg
+• Wikimedia Commons — CC0 — https://pd12m.s3.us-west-2.amazonaws.com/images/4da05ace-357e-576d-a168-5ce797628a88.jpeg
+• Wikimedia Commons — CC0 — https://pd12m.s3.us-west-2.amazonaws.com/images/89829825-73ac-5522-a3ab-422d971ca500.jpeg
+• Wikimedia Commons — CC0 — https://pd12m.s3.us-west-2.amazonaws.com/images/823346e0-8d4c-59c6-b739-f62d83545805.jpeg
+• Wikimedia Commons — CC0 — https://pd12m.s3.us-west-2.amazonaws.com/images/55dbe813-32e5-5e50-8ec9-93d46157535c.jpeg
+• Wikimedia Commons — CC0 — https://pd12m.s3.us-west-2.amazonaws.com/images/d6b09ded-c919-5f26-8493-457abbd06354.jpeg
+• Wikimedia Commons — CC0 — https://pd12m.s3.us-west-2.amazonaws.com/images/5c0b19da-0d17-5e68-8008-c8a63517c2e3.jpeg
+• Wikimedia Commons — CC0 — https://pd12m.s3.us-west-2.amazonaws.com/images/4a00bf13-1a3c-5a88-99d2-74cecdfe806d.jpeg
+• Wikimedia Commons — CC0 — https://pd12m.s3.us-west-2.amazonaws.com/images/22d2454a-e973-5ab7-a369-531aec604590.jpeg
+```
+
+Длина: 5935 символов (лимит комментария 10 000).
+
+## Конечная заставка
+
+Последние ~16 с (7:44–8:00): слева рамка «Смотри дальше», справа «Лучшее на канале», по центру кнопка подписки — поставьте туда элементы YouTube.
+
+## Файлы
+
+- final_video.mp4 — видео 1920×1080, 30 fps, H.264 + AAC
+- thumbnail.png — превью 1280×720
+- subtitles.srt — русские субтитры (загрузить как «Русский»)
+- script_voiceover.txt, storyboard.md — сценарий и раскадровка
+- sources.md — источники и лицензии

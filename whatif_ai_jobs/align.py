@@ -19,7 +19,7 @@ CODE = Path(__file__).resolve().parent
 ROOT = Path(os.environ.get("WHATIF_ROOT") or CODE).resolve()   # папка проекта (по умолчанию — эта)
 sys.path.insert(0, str(CODE.parent / "ai_shorts_ru"))
 
-END_HOLD = 9.0   # конечная заставка держится после последних слов (под элементы YouTube)
+END_HOLD = float(os.environ.get("END_HOLD", 9.0))   # конечная заставка держится после последних слов (под элементы YouTube)
 
 
 def norm(w: str) -> str:
