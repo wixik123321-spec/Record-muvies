@@ -839,7 +839,10 @@ class Renderer:
                 d.line((xj + 18, 760, xj + 192, 760), fill=(*MUTED, a // 3), width=2)
             short = self.sections[j + 1][1].replace("ЧЕРЕЗ ", "").replace("ЧТО ДЕЛАТЬ ", "")
             if a > 3:
-                d.text((xj, 800), short, font=F("SemiBold", 22), fill=(*col, a), anchor="mm")
+                fsz = 22
+                while F("SemiBold", fsz).getlength(short) > 196 and fsz > 13:   # длинные названия — мельче
+                    fsz -= 1
+                d.text((xj, 800), short, font=F("SemiBold", fsz), fill=(*col, a), anchor="mm")
         fr = compose(fr, lay, glow=1.1)
         # глитч в первые 0.35 с: RGB-сдвиг и смещённые полосы
         g = 1 - clip01(u / 0.35)
