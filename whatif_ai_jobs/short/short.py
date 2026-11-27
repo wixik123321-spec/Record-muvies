@@ -65,6 +65,7 @@ STRESS: dict = {}                    # ударения для озвучки {"
 BADGE = "ЧТО ЕСЛИ?"                  # плашка на первом кадре
 MOOD = "tense"                       # настроение музыки
 ACCENT_LINES: tuple = (0, 10)        # кадры с белым заголовком и красной рамкой (хук и финальный вопрос)
+SPEED = 1.04                         # темп озвучки
 
 _cfg = HERE / "short_config.py"      # свой шортс: LINES, KEY, STRESS, BADGE, MOOD, ACCENT_LINES
 if HERE != CODE and _cfg.exists():
@@ -81,7 +82,7 @@ XF = 0.22
 def voice():
     from shorts_ru import tts
     SR = tts.SR
-    eng = tts.VoskTTS("male_1", 1.04, STRESS)
+    eng = tts.VoskTTS("male_1", SPEED, STRESS)
     oov = sorted({w for t, *_r in LINES for w in eng.audit(t)})
     if oov:
         print("ВНИМАНИЕ: слова без ударения:", ", ".join(oov), flush=True)
